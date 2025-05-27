@@ -1,0 +1,255 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Consultoría IA - LATIAX</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <style>
+        :root {
+            --primary-red: #e63946;
+            --primary-blue: #1d3557;
+            --light-blue: #457b9d;
+            --white: #f1faee;
+            --light-gray: #f8f9fa;
+        }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Botón para volver arriba -->
+    <div class="back-to-top" role="button" tabindex="0" aria-label="Volver al inicio de la página">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Menú lateral -->
+    <div id="mySidebar" class="sidebar" role="navigation" aria-label="Menú principal">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" aria-label="Cerrar menú" role="button" tabindex="0">&times;</a>
+        <a href="index.html#inicio" aria-current="false"><i class="fas fa-home"></i> Inicio</a>
+        <a href="index.html#nosotros" aria-current="false"><i class="fas fa-info-circle"></i> Nosotros</a>
+        <a href="index.html#servicios" aria-current="false"><i class="fas fa-robot"></i> Servicios</a>
+        <a href="index.html#proyectos" aria-current="false"><i class="fas fa-project-diagram"></i> Proyectos</a>
+        <a href="index.html#testimonios" aria-current="false"><i class="fas fa-quote-right"></i> Testimonios</a>
+        <a href="index.html#contacto" aria-current="false"><i class="fas fa-envelope"></i> Contacto</a>
+    </div>
+
+    <!-- Encabezado -->
+    <div class="header">
+        <div class="menu-button" onclick="openNav()" role="button" tabindex="0" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mySidebar">&#9776;</div>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="images/logo_definitivo.png" alt="LATIAX Logo" class="logo-img">
+            </a>
+        </div>
+        <div></div> <!-- Espacio para equilibrar el diseño -->
+    </div>
+
+    <!-- Sección Hero de Consultoría IA -->
+    <section class="hero consulting-hero">
+        <h1>Consultoría en Inteligencia Artificial</h1>
+        <p>Transforma tu negocio con estrategias de IA personalizadas y soluciones innovadoras</p>
+    </section>
+
+    <!-- Introducción -->
+    <section class="about-service">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">¿Qué es la Consultoría en IA?</h2>
+            <div class="about-content animate-on-scroll">
+                <p>
+                    La Consultoría en Inteligencia Artificial es un servicio especializado que ayuda a las empresas 
+                    a identificar oportunidades, desarrollar estrategias e implementar soluciones de IA que generen 
+                    valor real para su negocio. En LATIAX, combinamos experiencia técnica con conocimiento 
+                    profundo del sector para guiar a las empresas en su transformación digital.
+                </p>
+                <p>
+                    Nuestro enfoque se centra en entender las necesidades específicas de cada cliente, 
+                    analizar sus procesos actuales y proponer soluciones de IA que impulsen la innovación, 
+                    la eficiencia y el crecimiento sostenible.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Servicios de Consultoría -->
+    <section class="consulting-services">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Nuestros Servicios de Consultoría</h2>
+            <div class="services-grid">
+                <div class="service-item animate-on-scroll">
+                    <i class="fas fa-search"></i>
+                    <h3>Diagnóstico de Oportunidades</h3>
+                    <p>Análisis completo de procesos y áreas donde la IA puede generar mayor impacto en tu negocio.</p>
+                </div>
+                <div class="service-item animate-on-scroll">
+                    <i class="fas fa-route"></i>
+                    <h3>Estrategia de IA</h3>
+                    <p>Desarrollo de roadmap personalizado para implementación gradual de soluciones de IA.</p>
+                </div>
+                <div class="service-item animate-on-scroll">
+                    <i class="fas fa-tasks"></i>
+                    <h3>Gestión de Proyectos</h3>
+                    <p>Acompañamiento en la implementación y seguimiento de proyectos de IA.</p>
+                </div>
+                <div class="service-item animate-on-scroll">
+                    <i class="fas fa-users"></i>
+                    <h3>Formación y Capacitación</h3>
+                    <p>Programas de formación para equipos en tecnologías y aplicaciones de IA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metodología -->
+    <section class="methodology">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Nuestra Metodología</h2>
+            <div class="methodology-steps">
+                <div class="step animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Análisis Inicial</h3>
+                        <p>Evaluación de procesos, datos y objetivos de negocio para identificar oportunidades de IA.</p>
+                    </div>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Diseño de Estrategia</h3>
+                        <p>Desarrollo de plan detallado con objetivos, KPIs y roadmap de implementación.</p>
+                    </div>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Implementación</h3>
+                        <p>Ejecución del plan con seguimiento continuo y ajustes según resultados.</p>
+                    </div>
+                </div>
+                <div class="step animate-on-scroll">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Optimización</h3>
+                        <p>Mejora continua basada en métricas y feedback de usuarios.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Beneficios de la Consultoría IA</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Ventaja Competitiva</h3>
+                    <p>Diferenciación en el mercado mediante innovación tecnológica.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Optimización de Procesos</h3>
+                    <p>Mejora de eficiencia y reducción de costos operativos.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-lightbulb"></i>
+                    <h3>Innovación Continua</h3>
+                    <p>Desarrollo de nuevas capacidades y oportunidades de negocio.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-users"></i>
+                    <h3>Equipos Preparados</h3>
+                    <p>Capacitación y desarrollo de talento interno en IA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Casos de Éxito -->
+    <section class="success-cases">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Casos de Éxito</h2>
+            <div class="cases-grid">
+                <div class="case-card animate-on-scroll">
+                    <div class="case-header">
+                        <i class="fas fa-store"></i>
+                        <h3>Retail</h3>
+                    </div>
+                    <p>Implementación de estrategia de IA que aumentó ventas en un 40% y optimizó inventario.</p>
+                </div>
+                <div class="case-card animate-on-scroll">
+                    <div class="case-header">
+                        <i class="fas fa-industry"></i>
+                        <h3>Manufactura</h3>
+                    </div>
+                    <p>Reducción de costos operativos en 25% mediante automatización inteligente.</p>
+                </div>
+                <div class="case-card animate-on-scroll">
+                    <div class="case-header">
+                        <i class="fas fa-hospital"></i>
+                        <h3>Salud</h3>
+                    </div>
+                    <p>Mejora de eficiencia en diagnóstico y atención al paciente mediante IA.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="animate-on-scroll">¿Listo para transformar tu negocio con IA?</h2>
+            <p class="animate-on-scroll">Agenda una consulta gratuita con nuestros expertos en IA.</p>
+            <a href="index.html#contacto" class="cta-button animate-on-scroll">Solicitar Consulta</a>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>LATIAX</h3>
+                <div class="footer-logo">
+                    <img src="images/logo-sin-fondo.png" alt="LATIAX Logo" class="footer-logo-img">
+                </div>
+                <p>Implementando soluciones de Inteligencia Artificial para potenciar el crecimiento de las PYMES.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <div class="footer-links">
+                    <a href="index.html#inicio">Inicio</a>
+                    <a href="index.html#nosotros">Nosotros</a>
+                    <a href="index.html#servicios">Servicios</a>
+                    <a href="index.html#proyectos">Proyectos</a>
+                    <a href="index.html#contacto">Contacto</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <div class="footer-links">
+                    <a href="agentes-ia.html">Agentes de IA</a>
+                    <a href="modelos-predictivos.html">Modelos Predictivos</a>
+                    <a href="consultoria-ia.html">Consultoría IA</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-envelope"></i> info@latiax.com</p>
+                <p><i class="fas fa-phone"></i> +34 912 345 678</p>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Innovación 1234, Ciudad Digital</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 LATIAX. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html> 

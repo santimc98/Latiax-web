@@ -1,0 +1,375 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agentes de IA - LATIAX</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <style>
+        :root {
+            --primary-red: #e63946;
+            --primary-blue: #1d3557;
+            --light-blue: #457b9d;
+            --white: #f1faee;
+            --light-gray: #f8f9fa;
+        }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Botón para volver arriba -->
+    <div class="back-to-top" role="button" tabindex="0" aria-label="Volver al inicio de la página">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Menú lateral -->
+    <div id="mySidebar" class="sidebar" role="navigation" aria-label="Menú principal">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" aria-label="Cerrar menú" role="button" tabindex="0">&times;</a>
+        <a href="index.html#inicio" aria-current="false"><i class="fas fa-home"></i> Inicio</a>
+        <a href="index.html#nosotros" aria-current="false"><i class="fas fa-info-circle"></i> Nosotros</a>
+        <a href="index.html#servicios" aria-current="false"><i class="fas fa-robot"></i> Servicios</a>
+        <a href="index.html#proyectos" aria-current="false"><i class="fas fa-project-diagram"></i> Proyectos</a>
+        <a href="index.html#testimonios" aria-current="false"><i class="fas fa-quote-right"></i> Testimonios</a>
+        <a href="index.html#contacto" aria-current="false"><i class="fas fa-envelope"></i> Contacto</a>
+    </div>
+
+    <!-- Encabezado -->
+    <div class="header">
+        <div class="menu-button" onclick="openNav()" role="button" tabindex="0" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mySidebar">&#9776;</div>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="images/logo_definitivo.png" alt="LATIAX Logo" class="logo-img">
+            </a>
+        </div>
+        <div></div> <!-- Espacio para equilibrar el diseño -->
+    </div>
+
+    <!-- Sección Hero de Agentes de IA -->
+    <section class="hero agents-hero">
+        <h1>Agentes de Inteligencia Artificial</h1>
+        <p>Automatización inteligente para revolucionar la productividad de tu empresa</p>
+    </section>
+
+    <!-- Introducción -->
+    <section class="about-service">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">¿Qué son los Agentes de IA?</h2>
+            <div class="about-content animate-on-scroll">
+                <p>
+                    Los Agentes de Inteligencia Artificial son programas autónomos diseñados para realizar tareas específicas 
+                    con mínima supervisión humana. Estos agentes pueden percibir su entorno, tomar decisiones inteligentes 
+                    y ejecutar acciones para alcanzar objetivos definidos, simulando capacidades cognitivas humanas como 
+                    el razonamiento, la planificación y el aprendizaje.
+                </p>
+                <p>
+                    En LATIAX, desarrollamos agentes de IA personalizados que automatizan procesos complejos, 
+                    mejoran la interacción con clientes y potencian la productividad empresarial 
+                    mediante tecnologías avanzadas de procesamiento de lenguaje natural y aprendizaje automático.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Video -->
+    <section class="video-showcase">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Nuestros Agentes en Acción</h2>
+            <div class="video-container animate-on-scroll">
+                <!-- Placeholder para el video futuro -->
+                <div class="video-placeholder">
+                    <i class="fas fa-film"></i>
+                    <h3>Próximamente: Demostración de Agentes de IA</h3>
+                    <p>Estamos preparando un video explicativo donde podrás ver nuestros agentes de IA en funcionamiento.</p>
+                </div>
+                
+                <!-- Cuando tengan el video, reemplazar el placeholder con: -->
+                <!-- <iframe width="100%" height="500" src="URL_DEL_VIDEO" title="Agentes de IA LATIAX" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe> -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Capacidades -->
+    <section class="capabilities">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Capacidades de Nuestros Agentes</h2>
+            <div class="capabilities-grid">
+                <div class="capability-card animate-on-scroll">
+                    <i class="fas fa-comment-dots"></i>
+                    <h3>Conversación Natural</h3>
+                    <p>Interacción fluida con lenguaje humano usando procesamiento avanzado de lenguaje natural (NLP).</p>
+                </div>
+                <div class="capability-card animate-on-scroll">
+                    <i class="fas fa-brain"></i>
+                    <h3>Aprendizaje Continuo</h3>
+                    <p>Mejora constante mediante análisis de interacciones para ofrecer respuestas cada vez más precisas.</p>
+                </div>
+                <div class="capability-card animate-on-scroll">
+                    <i class="fas fa-cogs"></i>
+                    <h3>Automatización Inteligente</h3>
+                    <p>Ejecución de tareas complejas con toma de decisiones basadas en reglas de negocio y aprendizaje automático.</p>
+                </div>
+                <div class="capability-card animate-on-scroll">
+                    <i class="fas fa-database"></i>
+                    <h3>Integración de Sistemas</h3>
+                    <p>Conexión con múltiples fuentes de datos y aplicaciones empresariales para ejecutar acciones en tiempo real.</p>
+                </div>
+                <div class="capability-card animate-on-scroll">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Análisis de Datos</h3>
+                    <p>Procesamiento de grandes volúmenes de información para generar insights y recomendaciones valiosas.</p>
+                </div>
+                <div class="capability-card animate-on-scroll">
+                    <i class="fas fa-random"></i>
+                    <h3>Multimodal</h3>
+                    <p>Capacidad para procesar y generar diferentes tipos de datos: texto, imágenes, audio y documentos estructurados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tipos de Agentes -->
+    <section class="agent-types">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Tipos de Agentes que Desarrollamos</h2>
+            <div class="types-container">
+                <div class="type-card animate-on-scroll">
+                    <div class="type-icon">
+                        <i class="fas fa-headset"></i>
+                    </div>
+                    <div class="type-content">
+                        <h3>Asistentes Virtuales de Atención al Cliente</h3>
+                        <p>Agentes conversacionales que responden consultas, solucionan problemas y mejoran la experiencia del cliente 24/7.</p>
+                        <ul>
+                            <li>Respuesta a preguntas frecuentes</li>
+                            <li>Gestión de incidencias técnicas</li>
+                            <li>Proceso de reservas y pedidos</li>
+                            <li>Encuestas de satisfacción inteligentes</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="type-card animate-on-scroll">
+                    <div class="type-icon">
+                        <i class="fas fa-file-alt"></i>
+                    </div>
+                    <div class="type-content">
+                        <h3>Agentes de Procesamiento Documental</h3>
+                        <p>Automatización de la extracción, clasificación y procesamiento de información de documentos empresariales.</p>
+                        <ul>
+                            <li>Digitalización inteligente de documentos</li>
+                            <li>Extracción de datos de facturas y contratos</li>
+                            <li>Clasificación automática de documentos</li>
+                            <li>Generación de informes a partir de datos no estructurados</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="type-card animate-on-scroll">
+                    <div class="type-icon">
+                        <i class="fas fa-tasks"></i>
+                    </div>
+                    <div class="type-content">
+                        <h3>Agentes de Gestión de Procesos</h3>
+                        <p>Orquestación y optimización de flujos de trabajo complejos entre departamentos y sistemas empresariales.</p>
+                        <ul>
+                            <li>Automatización de procesos administrativos</li>
+                            <li>Coordinación de equipos de trabajo</li>
+                            <li>Monitorización y reporte de KPIs</li>
+                            <li>Alertas proactivas basadas en patrones</li>
+                        </ul>
+                    </div>
+                </div>
+                
+                <div class="type-card animate-on-scroll">
+                    <div class="type-icon">
+                        <i class="fas fa-shopping-cart"></i>
+                    </div>
+                    <div class="type-content">
+                        <h3>Agentes de Ventas y Marketing</h3>
+                        <p>Asistentes digitales que optimizan las estrategias comerciales y mejoran la conversión de leads.</p>
+                        <ul>
+                            <li>Calificación inteligente de leads</li>
+                            <li>Recomendaciones personalizadas de productos</li>
+                            <li>Seguimiento automático de prospectos</li>
+                            <li>Análisis de sentimiento en interacciones comerciales</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Beneficios para tu Empresa</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-clock"></i>
+                    <h3>Disponibilidad 24/7</h3>
+                    <p>Operación ininterrumpida sin limitaciones de horarios laborales o zonas horarias.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-rocket"></i>
+                    <h3>Mayor Productividad</h3>
+                    <p>Automatización de tareas repetitivas liberando tiempo valioso del personal para actividades estratégicas.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-chart-bar"></i>
+                    <h3>Reducción de Costos</h3>
+                    <p>Optimización de recursos humanos y minimización de errores en procesos operativos.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-smile"></i>
+                    <h3>Mejora de Experiencia</h3>
+                    <p>Respuestas inmediatas y personalizadas que aumentan la satisfacción de clientes y empleados.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Proceso de Implementación -->
+    <section class="implementation">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Proceso de Implementación</h2>
+            <div class="implementation-timeline">
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>1. Consultoría Inicial</h3>
+                        <p>Análisis de necesidades, objetivos y oportunidades de automatización en tu empresa.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>2. Diseño de la Solución</h3>
+                        <p>Definición de capacidades, integraciones y flujos de trabajo del agente de IA.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>3. Desarrollo y Entrenamiento</h3>
+                        <p>Construcción del agente e implementación de modelos de ML con datos específicos de tu negocio.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>4. Integración y Pruebas</h3>
+                        <p>Conexión con sistemas empresariales y validación exhaustiva de funcionalidades.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>5. Implementación y Monitorización</h3>
+                        <p>Despliegue en producción y seguimiento continuo del rendimiento.</p>
+                    </div>
+                </div>
+                <div class="timeline-item animate-on-scroll">
+                    <div class="timeline-dot"></div>
+                    <div class="timeline-content">
+                        <h3>6. Mejora Continua</h3>
+                        <p>Optimización constante en base a nuevos datos y feedback de usuarios.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Caso de Éxito -->
+    <section class="success-case">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Caso de Éxito</h2>
+            <div class="case-content animate-on-scroll">
+                <div class="case-image">
+                    <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="Caso de éxito: Asistente Virtual para Retail">
+                </div>
+                <div class="case-text">
+                    <h3>Asistente Virtual para Cadena de Retail</h3>
+                    <p class="case-quote">"La implementación del agente de IA de LATIAX transformó nuestra atención al cliente y aumentó nuestras ventas en un 35%."</p>
+                    <p class="case-description">
+                        Una importante cadena de retail nacional implementó nuestro asistente virtual para dar soporte a clientes 
+                        a través de su web, aplicación móvil y WhatsApp. El agente maneja consultas sobre productos, disponibilidad 
+                        de stock, seguimiento de pedidos y gestión de devoluciones, ofreciendo respuestas personalizadas las 24 horas.
+                    </p>
+                    <div class="case-results">
+                        <div class="result">
+                            <span class="result-number">94%</span>
+                            <span class="result-label">De consultas resueltas automáticamente</span>
+                        </div>
+                        <div class="result">
+                            <span class="result-number">35%</span>
+                            <span class="result-label">Aumento en ventas</span>
+                        </div>
+                        <div class="result">
+                            <span class="result-number">68%</span>
+                            <span class="result-label">Reducción en tiempo de respuesta</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="animate-on-scroll">¿Listo para implementar un Agente de IA en tu empresa?</h2>
+            <p class="animate-on-scroll">Contacta con nuestro equipo para una demostración personalizada de nuestros agentes.</p>
+            <a href="index.html#contacto" class="cta-button animate-on-scroll">Solicitar Demostración</a>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>LATIAX</h3>
+                <div class="footer-logo">
+                    <img src="images/logo_definitivo.png" alt="LATIAX Logo" class="footer-logo-img">
+                </div>
+                <p>Implementando soluciones de Inteligencia Artificial para potenciar el crecimiento de las PYMES.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <div class="footer-links">
+                    <a href="index.html#inicio">Inicio</a>
+                    <a href="index.html#nosotros">Nosotros</a>
+                    <a href="index.html#servicios">Servicios</a>
+                    <a href="index.html#proyectos">Proyectos</a>
+                    <a href="index.html#contacto">Contacto</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <div class="footer-links">
+                    <a href="agentes-ia.html">Agentes de IA</a>
+                    <a href="modelos-predictivos.html">Modelos Predictivos</a>
+                    <a href="#servicios">Automatización</a>
+                    <a href="#servicios">Consultoría IA</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-envelope"></i> info@latiax.com</p>
+                <p><i class="fas fa-phone"></i> +34 912 345 678</p>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Innovación 1234, Ciudad Digital</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 LATIAX. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html> 

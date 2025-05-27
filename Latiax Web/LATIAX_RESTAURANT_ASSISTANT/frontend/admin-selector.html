@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATIAX | Selector de Administración</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .selector-container {
+            max-width: 500px;
+            margin: 100px auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            text-align: center;
+        }
+        
+        .selector-header {
+            margin-bottom: 2rem;
+        }
+        
+        .selector-header h1 {
+            color: #4285F4;
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .selector-header p {
+            color: #666;
+            font-size: 0.9rem;
+        }
+        
+        .selector-options {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+        
+        .option-btn {
+            padding: 1rem;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.2s;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .option-btn i {
+            margin-right: 8px;
+        }
+        
+        .login-btn {
+            background-color: #4285F4;
+            color: white;
+        }
+        
+        .login-btn:hover {
+            background-color: #3a7bc8;
+        }
+        
+        .reset-btn {
+            background-color: #FFA500;
+            color: white;
+        }
+        
+        .reset-btn:hover {
+            background-color: #E69500;
+        }
+        
+        .clear-btn {
+            background-color: #FF6347;
+            color: white;
+        }
+        
+        .clear-btn:hover {
+            background-color: #E65A41;
+        }
+        
+        .home-btn {
+            background-color: #eee;
+            color: #666;
+        }
+        
+        .home-btn:hover {
+            background-color: #ddd;
+        }
+        
+        .option-btn:active {
+            transform: scale(0.98);
+        }
+        
+        .warning {
+            margin-top: 2rem;
+            padding: 1rem;
+            background-color: #fff3cd;
+            border-radius: 4px;
+            color: #856404;
+            font-size: 0.9rem;
+        }
+        
+        @media (max-width: 600px) {
+            .selector-container {
+                margin: 50px auto;
+                padding: 1.5rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="selector-container">
+        <div class="selector-header">
+            <h1>LATIAX Admin</h1>
+            <p>Selecciona una opción para continuar</p>
+        </div>
+        
+        <div class="selector-options">
+            <button id="login-option" class="option-btn login-btn">
+                <i class="fas fa-sign-in-alt"></i> Iniciar sesión normalmente
+            </button>
+            
+            <button id="simple-panel-option" class="option-btn" style="background-color: #4285F4; color: white;">
+                <i class="fas fa-shield-alt"></i> Usar panel simplificado (sin bucles)
+            </button>
+            
+            <button id="reset-option" class="option-btn reset-btn">
+                <i class="fas fa-key"></i> Restablecer contraseña de administrador
+            </button>
+            
+            <button id="clear-option" class="option-btn clear-btn">
+                <i class="fas fa-trash"></i> Limpiar datos y caché
+            </button>
+            
+            <button id="home-option" class="option-btn home-btn">
+                <i class="fas fa-home"></i> Volver a la página principal
+            </button>
+        </div>
+        
+        <div class="warning">
+            <strong>Nota:</strong> Si experimentas un bucle de redirección, usa la opción 
+            "Limpiar datos y caché" antes de intentar iniciar sesión.
+        </div>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Opciones de navegación
+            document.getElementById('login-option').addEventListener('click', function() {
+                window.location.href = 'admin-login.html?bypass=true';
+            });
+            
+            document.getElementById('simple-panel-option').addEventListener('click', function() {
+                window.location.href = 'admin-panel-simple.html';
+            });
+            
+            document.getElementById('reset-option').addEventListener('click', function() {
+                fetch('http://localhost:3000/reset-admin-password')
+                    .then(response => response.json())
+                    .then(data => {
+                        alert(`Contraseña restablecida con éxito.\n\nEmail: ${data.email}\nContraseña: ${data.password}\n\nAhora serás redirigido a la página de inicio de sesión.`);
+                        setTimeout(() => {
+                            window.location.href = 'admin-login.html?bypass=true';
+                        }, 1000);
+                    })
+                    .catch(error => {
+                        alert('Error al restablecer la contraseña: ' + error.message);
+                    });
+            });
+            
+            document.getElementById('clear-option').addEventListener('click', function() {
+                // Limpiar datos de autenticación
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('adminData');
+                
+                // Limpiar sessionStorage
+                sessionStorage.clear();
+                
+                // Limpiar cookies relacionadas (si hay alguna)
+                document.cookie.split(";").forEach(function(c) {
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                });
+                
+                // Informar al usuario
+                alert('Datos de sesión eliminados correctamente.\n\nSi sigues experimentando problemas, realiza estos pasos adicionales:\n\n1. Presiona Ctrl+Shift+Supr\n2. Selecciona "Limpiar datos de navegación"\n3. Marca "Imágenes y archivos en caché"\n4. Haz clic en "Limpiar datos"');
+                
+                // Recargar la página después de limpiar
+                setTimeout(() => {
+                    window.location.href = 'admin-login.html?clear=true';
+                }, 1000);
+            });
+            
+            document.getElementById('home-option').addEventListener('click', function() {
+                window.location.href = './';
+            });
+        });
+    </script>
+</body>
+</html> 

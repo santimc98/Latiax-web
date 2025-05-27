@@ -1,0 +1,822 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATIAX Restaurant Assistant | Solución Inteligente para Restaurantes</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos específicos para esta página */
+        body {
+            font-family: 'Poppins', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f9f9f9;
+            color: #333;
+        }
+        
+        /* Estilos para el menú de navegación */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            padding: 15px 20px;
+        }
+        
+        header nav ul {
+            display: flex;
+            gap: 25px;
+            list-style: none;
+            margin: 0;
+            padding: 0;
+        }
+        
+        header nav ul li a {
+            color: #14213d;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 8px 0;
+            position: relative;
+            transition: color 0.3s;
+        }
+        
+        header nav ul li a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #4cc9f0;
+            transition: width 0.3s;
+        }
+        
+        header nav ul li a:hover {
+            color: #4cc9f0;
+        }
+        
+        header nav ul li a:hover::after {
+            width: 100%;
+        }
+        
+        .hero-section {
+            background: linear-gradient(rgba(20, 33, 61, 0.95), rgba(20, 33, 61, 0.9)),
+                        url('data:image/svg+xml,%3Csvg width="60" height="60" viewBox="0 0 60 60" xmlns="http://www.w3.org/2000/svg"%3E%3Cg fill="%234CC9F0" fill-opacity="0.1" fill-rule="evenodd"%3E%3Cpath d="M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z"/%3E%3C/g%3E%3C/svg%3E');
+            background-size: 80px 80px, cover;
+            background-position: center;
+            color: #fff;
+            padding: 8rem 2rem;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .hero-section::before {
+            content: '';
+            position: absolute;
+            top: -50px;
+            right: -50px;
+            width: 300px;
+            height: 300px;
+            background: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Ccircle cx="50" cy="50" r="40" fill="%234CC9F0" fill-opacity="0.1"/%3E%3C/svg%3E');
+            background-size: contain;
+            animation: float 15s infinite linear;
+            z-index: -1;
+        }
+        
+        .hero-section::after {
+            content: '';
+            position: absolute;
+            bottom: -100px;
+            left: -100px;
+            width: 400px;
+            height: 400px;
+            background: url('data:image/svg+xml,%3Csvg width="100" height="100" viewBox="0 0 100 100" xmlns="http://www.w3.org/2000/svg"%3E%3Ccircle cx="50" cy="50" r="45" stroke="%234CC9F0" stroke-width="5" fill="none" stroke-opacity="0.1"/%3E%3C/svg%3E');
+            background-size: contain;
+            animation: float 20s infinite linear reverse;
+            z-index: -1;
+        }
+        
+        @keyframes float {
+            0% {
+                transform: rotate(0deg);
+            }
+            100% {
+                transform: rotate(360deg);
+            }
+        }
+        
+        .hero-section h1 {
+            font-size: 3.5rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            text-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+        
+        .hero-section p {
+            font-size: 1.4rem;
+            max-width: 800px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.6;
+        }
+        
+        .hero-cta {
+            display: inline-block;
+            background-color: #4cc9f0;
+            color: #14213d;
+            font-weight: 600;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            font-size: 1.2rem;
+            border: 2px solid #4cc9f0;
+            letter-spacing: 0.5px;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+        }
+        
+        .hero-cta:hover {
+            background-color: #fff;
+            color: #14213d;
+            border-color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(76, 201, 240, 0.4);
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 5rem 2rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .feature-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .feature-card h3 {
+            color: #14213d;
+            margin: 1.5rem 0 1rem;
+            font-size: 1.5rem;
+            font-weight: 600;
+        }
+        
+        .feature-card p {
+            color: #555;
+            font-size: 1.05rem;
+            line-height: 1.6;
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            color: #4cc9f0;
+            background: rgba(76, 201, 240, 0.1);
+            width: 80px;
+            height: 80px;
+            margin: 0 auto 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border-radius: 50%;
+        }
+        
+        .use-case-section {
+            background-color: #f8f9fa;
+            padding: 5rem 2rem;
+        }
+        
+        .use-case-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+            margin-top: 3rem;
+        }
+        
+        .use-case-card {
+            background: #fff;
+            border-radius: 15px;
+            padding: 2.5rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border-top: 4px solid #4cc9f0;
+            transition: transform 0.3s ease;
+        }
+        
+        .use-case-card:hover {
+            transform: translateY(-8px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.1);
+        }
+        
+        .use-case-card h3 {
+            color: #14213d;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .use-case-card h3 i {
+            color: #4cc9f0;
+        }
+        
+        .use-case-card p {
+            color: #555;
+            font-size: 1.05rem;
+            line-height: 1.7;
+        }
+        
+        .contact-form {
+            max-width: 650px;
+            margin: 4rem auto 0;
+            padding: 3rem;
+            background: #fff;
+            border-radius: 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
+        }
+        
+        .form-group {
+            margin-bottom: 1.8rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.8rem;
+            color: #333;
+            font-weight: 500;
+        }
+        
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid #e0e0e0;
+            border-radius: 10px;
+            font-family: 'Poppins', sans-serif;
+            font-size: 1rem;
+            transition: border-color 0.3s, box-shadow 0.3s;
+            background-color: #f9f9f9;
+        }
+        
+        .form-group input:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #4cc9f0;
+            box-shadow: 0 0 0 3px rgba(76, 201, 240, 0.2);
+        }
+        
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+        
+        .submit-btn {
+            background-color: #14213d;
+            color: #fff;
+            border: none;
+            padding: 1.2rem 2rem;
+            border-radius: 10px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s, transform 0.3s;
+            font-family: 'Poppins', sans-serif;
+            width: 100%;
+            font-size: 1.1rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .submit-btn:hover {
+            background-color: #0c1529;
+            transform: translateY(-3px);
+        }
+        
+        .demo-showcase {
+            margin-top: 4rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 4rem;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 20px;
+            box-shadow: 0 5px 20px rgba(0,0,0,0.05);
+        }
+        
+        .demo-image {
+            flex: 1;
+            min-width: 300px;
+            max-width: 550px;
+        }
+        
+        .demo-image img {
+            width: 100%;
+            border-radius: 15px;
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+            transition: transform 0.3s;
+            margin-bottom: 20px;
+        }
+        
+        .demo-image img:hover {
+            transform: scale(1.03);
+        }
+        
+        .primary-illustration {
+            display: block;
+            background-color: #fff;
+            padding: 15px;
+        }
+        
+        .secondary-illustration {
+            display: block;
+            margin-top: 20px;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border: 1px solid #eee;
+        }
+        
+        .demo-content {
+            flex: 1;
+            min-width: 300px;
+            max-width: 550px;
+        }
+        
+        .demo-content h2 {
+            color: #14213d;
+            font-size: 2.3rem;
+            margin-bottom: 1.5rem;
+            font-weight: 700;
+            line-height: 1.3;
+        }
+        
+        .demo-content p {
+            color: #555;
+            font-size: 1.1rem;
+            line-height: 1.7;
+            margin-bottom: 1.8rem;
+        }
+        
+        .btn-primary {
+            display: inline-block;
+            background-color: #14213d;
+            color: #fff;
+            padding: 1rem 2rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1.05rem;
+            box-shadow: 0 4px 10px rgba(20, 33, 61, 0.2);
+        }
+        
+        .btn-primary:hover {
+            background-color: #4cc9f0;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(20, 33, 61, 0.15);
+        }
+        
+        .btn-secondary {
+            display: inline-block;
+            background-color: #4cc9f0;
+            color: #14213d;
+            padding: 1.2rem 2.5rem;
+            border-radius: 50px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 15px rgba(76, 201, 240, 0.3);
+            margin-top: 2rem;
+            letter-spacing: 0.5px;
+        }
+        
+        .btn-secondary:hover {
+            background-color: #14213d;
+            color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 10px 20px rgba(76, 201, 240, 0.2);
+        }
+        
+        .section-heading {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-heading h2 {
+            color: #14213d;
+            font-size: 2.5rem;
+            margin-bottom: 1.2rem;
+            font-weight: 700;
+        }
+        
+        .section-heading p {
+            color: #555;
+            max-width: 800px;
+            margin: 0 auto;
+            font-size: 1.2rem;
+            line-height: 1.7;
+        }
+        
+        .cta-section {
+            background: linear-gradient(135deg, #14213d, #1c2e52);
+            padding: 6rem 2rem;
+            color: #fff;
+            text-align: center;
+        }
+        
+        .cta-section h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            max-width: 800px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .cta-section p {
+            font-size: 1.2rem;
+            margin-bottom: 2.5rem;
+            max-width: 700px;
+            margin-left: auto;
+            margin-right: auto;
+            opacity: 0.9;
+        }
+        
+        .cta-button {
+            display: inline-block;
+            background-color: #4cc9f0;
+            color: #14213d;
+            font-weight: 600;
+            padding: 1.2rem 3rem;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: all 0.3s;
+            font-size: 1.2rem;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+            letter-spacing: 0.5px;
+        }
+        
+        .cta-button:hover {
+            background-color: #fff;
+            transform: translateY(-5px);
+            box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+        }
+        
+        /* Responsive */
+        @media (max-width: 992px) {
+            .hero-section h1 {
+                font-size: 2.8rem;
+            }
+            
+            .hero-section p {
+                font-size: 1.2rem;
+            }
+            
+            .feature-grid, .use-case-grid {
+                grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            }
+            
+            .section-heading h2, .cta-section h2, .demo-content h2 {
+                font-size: 2.2rem;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            .hero-section h1 {
+                font-size: 2.2rem;
+            }
+            
+            .hero-section p {
+                font-size: 1.1rem;
+            }
+            
+            .demo-content, .demo-image {
+                max-width: 100%;
+            }
+            
+            .hero-cta, .btn-secondary, .cta-button {
+                padding: 1rem 2rem;
+                font-size: 1rem;
+            }
+            
+            .feature-card, .use-case-card {
+                padding: 2rem;
+            }
+            
+            .contact-form {
+                padding: 2rem;
+            }
+            
+            .section-heading h2, .cta-section h2 {
+                font-size: 1.8rem;
+            }
+            
+            header nav ul {
+                gap: 15px;
+            }
+            
+            .secondary-illustration {
+                display: none; /* Ocultar la segunda ilustración en dispositivos móviles */
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .hero-section {
+                padding: 6rem 1.5rem;
+            }
+            
+            .container {
+                padding: 3rem 1.5rem;
+            }
+            
+            .hero-section h1 {
+                font-size: 2rem;
+            }
+            
+            header nav ul {
+                gap: 10px;
+            }
+            
+            header nav ul li a {
+                font-size: 0.9rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Cabecera -->
+    <header>
+        <div class="logo">
+            <img src="images/logo_definitivo.png" alt="LATIAX Logo">
+            <span>LATIAX</span>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="index.html#inicio">Inicio</a></li>
+                <li><a href="index.html#nosotros">Nosotros</a></li>
+                <li><a href="index.html#servicios">Servicios</a></li>
+                <li><a href="index.html#proyectos">Proyectos</a></li>
+                <li><a href="index.html#contacto">Contacto</a></li>
+            </ul>
+        </nav>
+        <div class="menu-toggle">
+            <i class="fas fa-bars"></i>
+        </div>
+    </header>
+
+    <!-- Sección hero con CTA -->
+    <section class="hero-section">
+        <h1>LATIAX Restaurant Assistant</h1>
+        <p>Tu nuevo asistente virtual inteligente para gestionar reservas y atender a tus clientes 24/7</p>
+        <a href="./LATIAX_RESTAURANT_ASSISTANT/frontend/latiax-restaurant-assistant.html" class="hero-cta">
+            <i class="fas fa-robot"></i> Probar Demo
+        </a>
+    </section>
+
+    <!-- Demostración visual -->
+    <section class="container">
+        <div class="demo-showcase">
+            <div class="demo-content">
+                <h2>Revoluciona la experiencia de tu restaurante</h2>
+                <p>
+                    LATIAX Restaurant Assistant utiliza inteligencia artificial avanzada para convertirse
+                    en el recepcionista virtual perfecto para tu negocio. Gestiona reservas, responde preguntas
+                    sobre tu menú y horarios, y ofrece una atención impecable sin necesidad de intervención humana.
+                </p>
+                <p>
+                    Con tecnología de procesamiento del lenguaje natural, nuestro asistente mantiene conversaciones 
+                    fluidas tanto por texto como por voz, brindando la información exacta que tus clientes necesitan.
+                </p>
+                <a href="./LATIAX_RESTAURANT_ASSISTANT/frontend/latiax-restaurant-assistant.html" class="btn-primary">
+                    Interactúa con el asistente
+                </a>
+            </div>
+            <div class="demo-image">
+                <img src="images/restaurant-assistant/assistant-demo.svg" 
+                     alt="Asistente virtual de restaurante" class="primary-illustration">
+                <img src="images/restaurant-assistant/restaurant-ai.svg" 
+                     alt="Restaurante con inteligencia artificial" class="secondary-illustration">
+            </div>
+        </div>
+    </section>
+
+    <!-- Características del Asistente -->
+    <section class="features-section">
+        <div class="container">
+            <h2 class="section-title">Características Principales</h2>
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-utensils"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Gestión de Reservas</h3>
+                        <p>Sistema inteligente para gestionar reservas de manera eficiente, reduciendo errores y maximizando la ocupación.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-robot"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Asistente Virtual</h3>
+                        <p>Asistente virtual que responde consultas sobre el menú, disponibilidad y promociones de forma natural.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-microphone-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Reconocimiento de Voz</h3>
+                        <p>Interactúa con los clientes mediante voz, ofreciendo una experiencia fluida y accesible.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-brain"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>IA Avanzada</h3>
+                        <p>Utiliza modelos de lenguaje de última generación para entender el contexto y ofrecer respuestas precisas.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-chart-line"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Análisis de Datos</h3>
+                        <p>Recopila y analiza datos de reservas y consultas para mejorar la toma de decisiones del negocio.</p>
+                    </div>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">
+                        <i class="fas fa-mobile-alt"></i>
+                    </div>
+                    <div class="feature-content">
+                        <h3>Multicanal</h3>
+                        <p>Disponible a través de web, teléfono y aplicaciones móviles para una integración completa.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Casos de Uso -->
+    <section class="use-case-section">
+        <div class="container">
+            <div class="section-heading">
+                <h2>¿Es LATIAX Restaurant Assistant para mi negocio?</h2>
+                <p>Descubre cómo nuestro asistente puede adaptarse a las necesidades específicas de tu restaurante</p>
+            </div>
+            
+            <div class="use-case-grid">
+                <div class="use-case-card">
+                    <h3><i class="fas fa-store"></i> Restaurantes Concurridos</h3>
+                    <p>Si tu restaurante recibe un alto volumen de reservas o llamadas, nuestro asistente puede gestionar múltiples consultas simultáneamente, liberando a tu personal para que se centre en ofrecer una experiencia excepcional a los clientes presentes.</p>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3><i class="fas fa-book-open"></i> Locales con Carta Amplia</h3>
+                    <p>Para restaurantes con menús extensos o especializados, el asistente puede responder preguntas detalladas sobre platos, ingredientes, alérgenos y maridajes, proporcionando información precisa y consistente.</p>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3><i class="fas fa-coffee"></i> Negocios Pequeños</h3>
+                    <p>Si no puedes permitirte tener personal dedicado a la recepción todo el día, LATIAX Restaurant Assistant trabaja 24/7 gestionando reservas y consultas, ayudándote a competir con establecimientos más grandes.</p>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3><i class="fas fa-globe"></i> Restaurantes Turísticos</h3>
+                    <p>Para establecimientos en zonas turísticas, nuestro asistente multilingüe puede comunicarse con clientes internacionales en su idioma, eliminando barreras de comunicación y mejorando la experiencia del visitante.</p>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3><i class="fas fa-truck"></i> Servicio de Delivery</h3>
+                    <p>Si ofreces servicio a domicilio, el asistente puede gestionar pedidos, proporcionar información sobre tiempos de entrega y facilitar el seguimiento, optimizando este canal de venta.</p>
+                </div>
+                
+                <div class="use-case-card">
+                    <h3><i class="fas fa-calendar-alt"></i> Eventos y Catering</h3>
+                    <p>Para negocios que organizan eventos o servicios de catering, nuestro asistente puede gestionar consultas específicas, verificar disponibilidad y coordinar los detalles iniciales antes de que tu equipo tome el relevo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Formulario de Contacto -->
+    <section class="container">
+        <div class="section-heading">
+            <h2>¿Interesado en LATIAX Restaurant Assistant?</h2>
+            <p>Solicita información personalizada y descubre cómo podemos adaptar nuestro asistente a las necesidades específicas de tu restaurante</p>
+        </div>
+        
+        <div class="contact-form">
+            <form action="mailto:info@latiax.es" method="post" enctype="text/plain">
+                <div class="form-group">
+                    <label for="nombre">Nombre completo</label>
+                    <input type="text" id="nombre" name="nombre" placeholder="Tu nombre" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="email">Correo electrónico</label>
+                    <input type="email" id="email" name="email" placeholder="tu@email.com" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="telefono">Teléfono (opcional)</label>
+                    <input type="tel" id="telefono" name="telefono" placeholder="Tu número de contacto">
+                </div>
+                
+                <div class="form-group">
+                    <label for="restaurante">Nombre del restaurante</label>
+                    <input type="text" id="restaurante" name="restaurante" placeholder="Nombre de tu negocio">
+                </div>
+                
+                <div class="form-group">
+                    <label for="mensaje">¿Cómo te gustaría utilizar LATIAX Assistant?</label>
+                    <textarea id="mensaje" name="mensaje" placeholder="Cuéntanos tus necesidades específicas, número de mesas, especialidad gastronómica..."></textarea>
+                </div>
+                
+                <button type="submit" class="submit-btn">Solicitar información <i class="fas fa-arrow-right"></i></button>
+            </form>
+        </div>
+        
+        <div style="text-align: center; margin-top: 3rem;">
+            <a href="./LATIAX_RESTAURANT_ASSISTANT/frontend/latiax-restaurant-assistant.html" class="btn-secondary">
+                <i class="fas fa-robot"></i> O prueba la demo ahora
+            </a>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="animate-on-scroll">¿Listo para revolucionar la atención en tu restaurante?</h2>
+            <p class="animate-on-scroll">Contacta con nuestro equipo para una evaluación gratuita de tus necesidades</p>
+            <a href="./LATIAX_RESTAURANT_ASSISTANT/frontend/latiax-restaurant-assistant.html" class="cta-button animate-on-scroll">Probar Demo Ahora</a>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>LATIAX</h3>
+                <div class="footer-logo">
+                    <img src="images/logo_definitivo.png" alt="LATIAX Logo" class="footer-logo-img">
+                </div>
+                <p>Implementando soluciones de Inteligencia Artificial para potenciar el crecimiento de las PYMES.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <div class="footer-links">
+                    <a href="index.html#inicio">Inicio</a>
+                    <a href="index.html#nosotros">Nosotros</a>
+                    <a href="index.html#servicios">Servicios</a>
+                    <a href="index.html#proyectos">Proyectos</a>
+                    <a href="index.html#contacto">Contacto</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <div class="footer-links">
+                    <a href="agentes-ia.html">Agentes de IA</a>
+                    <a href="modelos-predictivos.html">Modelos Predictivos</a>
+                    <a href="consultoria-ia.html">Consultoría IA</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-envelope"></i> info@latiax.es</p>
+                <p><i class="fas fa-phone"></i> +34 623 46 05 03</p>
+                <p><i class="fas fa-map-marker-alt"></i> Granada, España</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 LATIAX. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html> 

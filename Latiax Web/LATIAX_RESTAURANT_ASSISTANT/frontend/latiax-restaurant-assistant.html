@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATIAX Asistente de Restaurante | Sistema Profesional</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Sentry Browser SDK para monitoreo de errores -->
+    <script src="https://browser.sentry-cdn.com/7.103.0/bundle.min.js" crossorigin="anonymous"></script>
+    <script>
+        Sentry.init({
+            dsn: "https://examplePublicKey@o0.ingest.sentry.io/0", // Reemplazar con tu DSN real
+            // Modo demo: deshabilitamos integraciones que causan errores
+            integrations: [],
+            // Performance Monitoring
+            tracesSampleRate: 0.0, // Deshabilitado en modo demo
+            // Session Replay
+            replaysSessionSampleRate: 0.0, // Deshabilitado en modo demo
+            replaysOnErrorSampleRate: 0.0, // Deshabilitado en modo demo
+        });
+    </script>
+    
+    <!-- Google Analytics (GA4) -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-XXXXXXXXXX'); // Reemplazar con tu ID de GA4 real
+    </script>
+</head>
+<body>
+    <header class="main-header">
+        <div class="logo-container">
+            <img src="https://img.icons8.com/color/48/000000/restaurant.png" alt="Logo restaurante">
+            <div class="header-text">
+                <h1>LATIAX Asistente</h1>
+                <p>Sistema Profesional de Gestión</p>
+            </div>
+        </div>
+        <!-- Botón hamburguesa para móvil -->
+        <button id="mobileMenuBtn" class="mobile-menu-btn">
+            <i class="fas fa-bars"></i>
+        </button>
+        <nav class="main-nav" id="mainNav">
+            <ul>
+                <li><a href="#" class="active"><i class="fas fa-comment-dots"></i> Chat</a></li>
+                <li><a href="#reservas"><i class="fas fa-calendar-alt"></i> Reservas</a></li>
+                <li><a href="#panel"><i class="fas fa-chart-bar"></i> Panel</a></li>
+                <li><a href="#config"><i class="fas fa-cog"></i> Configuración</a></li>
+                <li><a href="admin-selector.html"><i class="fas fa-lock"></i> Admin</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <div class="main-container">
+        <section id="chat-section" class="section-container active-section">
+            <!-- Chat Container -->
+            <div class="chat-container">
+                <div class="chat-header">
+                    <img src="https://img.icons8.com/color/48/000000/restaurant.png" alt="Logo restaurante">
+                    <div class="header-text">
+                        <h1>Asistente Virtual</h1>
+                        <p>Restaurante El Faro</p>
+                    </div>
+                    <button id="resetChatButton" class="reset-button" title="Reiniciar conversación">
+                        <i class="fas fa-redo-alt"></i>
+                    </button>
+                </div>
+                <div id="chatMessages" class="chat-messages">
+                    <div class="message bot-message">
+                        <i class="fas fa-robot bot-icon"></i>
+                        <div class="message-content">
+                            <p>¡Hola! Soy LATIAX, tu asistente virtual del Restaurante El Faro. ¿En qué puedo ayudarte hoy?</p>
+                            <span class="message-time">Ahora</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="chat-input">
+        <input type="text" id="userInput" placeholder="Haz una pregunta sobre el restaurante...">
+                    <button id="sendButton" onclick="sendMessage()">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Sugerencias rápidas -->
+            <div class="quick-suggestions">
+                <h3>Sugerencias rápidas:</h3>
+                <div class="suggestions-container">
+                    <button class="suggestion-btn" onclick="suggestQuestion('¿Cuál es el horario?')">
+                        <i class="fas fa-clock"></i> Horario
+                    </button>
+                    <button class="suggestion-btn" onclick="suggestQuestion('¿Qué platos recomiendan?')">
+                        <i class="fas fa-utensils"></i> Recomendaciones
+                    </button>
+                    <button class="suggestion-btn" onclick="suggestQuestion('Quiero hacer una reserva')">
+                        <i class="fas fa-calendar-check"></i> Reservar
+                    </button>
+                    <button class="suggestion-btn" onclick="suggestQuestion('¿Tienen opciones vegetarianas?')">
+                        <i class="fas fa-seedling"></i> Menú vegetariano
+                    </button>
+                </div>
+            </div>
+        </section>
+
+        <section id="reservas-section" class="section-container">
+            <!-- Reservas Container -->
+            <div class="reservas-container">
+                <div class="reservas-header">
+                    <i class="fas fa-calendar-alt"></i>
+                    <div class="header-text">
+                        <h1>Gestión de Reservas</h1>
+                        <p>Restaurante El Faro</p>
+                    </div>
+                </div>
+
+                <div class="tabs-container">
+                    <div class="tab active" data-tab="consultar">Consultar</div>
+                    <div class="tab" data-tab="nueva">Nueva Reserva</div>
+                    <div class="tab" data-tab="modificar">Modificar</div>
+                </div>
+
+                <!-- Tab content -->
+                <div class="tab-content">
+                    <!-- Consultar Reservas -->
+                    <div id="consultar" class="tab-pane active">
+                        <h3><i class="fas fa-search"></i> Consultar reservas</h3>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="fechaConsulta" class="styled-input">
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-clock"></i>
+                                <input type="time" id="horaConsulta" class="styled-input">
+                            </div>
+                            <button onclick="consultarReservas()" class="styled-button primary-button">
+                                <i class="fas fa-search"></i> Consultar
+                            </button>
+                        </div>
+                        <div id="resultadoConsulta" class="resultado-container">
+                            <div class="placeholder-text">Los resultados de la consulta aparecerán aquí</div>
+                        </div>
+                    </div>
+
+                    <!-- Nueva Reserva -->
+                    <div id="nueva" class="tab-pane">
+                        <h3><i class="fas fa-plus-circle"></i> Nueva reserva</h3>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <i class="fas fa-user"></i>
+                                <input type="text" id="nombre" placeholder="Nombre del cliente" class="styled-input">
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-phone"></i>
+                                <input type="text" id="telefono" placeholder="Teléfono de contacto" class="styled-input">
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-calendar"></i>
+                                <input type="date" id="fecha" class="styled-input">
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-clock"></i>
+                                <input type="time" id="hora" class="styled-input">
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-users"></i>
+                                <input type="number" id="mesas" placeholder="Número de mesas" min="1" max="10" class="styled-input">
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-sticky-note"></i>
+                                <textarea id="notas" placeholder="Notas adicionales (alergias, preferencias...)" class="styled-input textarea"></textarea>
+                            </div>
+                            <button onclick="guardarReserva()" class="styled-button primary-button">
+                                <i class="fas fa-save"></i> Confirmar Reserva
+                            </button>
+                        </div>
+                        <div id="estadoReserva" class="resultado-container">
+                            <div class="placeholder-text">El estado de la reserva aparecerá aquí</div>
+                        </div>
+                    </div>
+
+                    <!-- Modificar Reserva -->
+                    <div id="modificar" class="tab-pane">
+                        <h3><i class="fas fa-edit"></i> Modificar reserva</h3>
+                        <div class="form-group">
+                            <div class="input-group">
+                                <i class="fas fa-search"></i>
+                                <input type="text" id="idReserva" placeholder="ID de reserva" class="styled-input">
+                            </div>
+                            <button onclick="buscarReserva()" class="styled-button">
+                                <i class="fas fa-search"></i> Buscar
+                            </button>
+                        </div>
+                        <div id="detalleReserva" class="resultado-container">
+                            <div class="placeholder-text">Busque una reserva para modificar</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <footer class="main-footer">
+        <div class="footer-content">
+            <p>© 2025 LATIAX - Sistema Profesional de Gestión para Restaurantes</p>
+            <div class="footer-links">
+                <a href="#">Política de Privacidad</a>
+                <a href="#">Términos de Uso</a>
+                <a href="#">Contacto</a>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Botón Flotante para Asistente de Voz -->
+    <button id="voiceFAB" class="voice-fab" title="Hablar con el Asistente de Voz">
+        <i class="fas fa-headset"></i>
+    </button>
+
+    <!-- Modal del Asistente de Voz -->
+    <div id="voiceModal" class="voice-modal">
+        <div class="voice-modal-content">
+            <button id="voiceCloseButton" class="voice-modal-close">&times;</button>
+            <h2>Asistente de Voz</h2>
+            <div id="voiceTranscript" class="voice-transcript">
+                <p class="voice-bot-message">Hola, ¿cómo puedo ayudarte?</p>
+            </div>
+            <div class="voice-modal-controls">
+                <select id="languageSelector" class="voice-language-selector">
+                    <option value="es-ES">Español</option>
+                    <option value="en-US">English</option>
+                </select>
+                <button id="micButton" class="voice-mic-button">
+                    <i class="fas fa-microphone"></i>
+                </button>
+                <span id="voiceStatus" class="voice-modal-status">Listo</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/reservas.js"></script>
+    <script src="js/voice.js"></script>
+    <script>
+        // Navegación en pestañas
+        document.querySelectorAll('.tab').forEach(tab => {
+            tab.addEventListener('click', function() {
+                // Quitar clase active de todas las pestañas
+                document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                // Añadir clase active a la pestaña actual
+                this.classList.add('active');
+                
+                // Mostrar el contenido correspondiente
+                const tabId = this.getAttribute('data-tab');
+                document.querySelectorAll('.tab-pane').forEach(pane => {
+                    pane.classList.remove('active');
+                });
+                document.getElementById(tabId).classList.add('active');
+            });
+        });
+
+        // Función para las sugerencias rápidas
+        function suggestQuestion(question) {
+            document.getElementById('userInput').value = question;
+            sendMessage();
+        }
+
+        // Inicializar fecha actual en los inputs
+        window.addEventListener('DOMContentLoaded', (event) => {
+            const today = new Date().toISOString().split('T')[0];
+            document.getElementById('fechaConsulta').value = today;
+            document.getElementById('fecha').value = today;
+        });
+    </script>
+
+    <!-- Demo Telefónica -->
+    <a href="phone-demo.html" target="_blank" style="position: fixed; bottom: 100px; right: 25px; background: #ffc107; color: black; padding: 10px 15px; border-radius: 5px; text-decoration: none; font-weight: bold; z-index: 999;">
+        <i class="fas fa-phone-volume"></i> Demo Telefónica
+    </a>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', function() {
+                navigator.serviceWorker.register('service-worker.js')
+                .then(function(registration) {
+                    console.log('Service Worker registrado con éxito con alcance: ', registration.scope);
+                })
+                .catch(function(error) {
+                    console.log('Registro de Service Worker fallido: ', error);
+                });
+            });
+        }
+    </script>
+</body>
+</html>

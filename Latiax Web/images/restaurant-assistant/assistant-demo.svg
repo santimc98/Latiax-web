@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="800px" height="600px" viewBox="0 0 800 600" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <title>LATIAX Restaurant Assistant</title>
+    <defs>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="gradientBg">
+            <stop stop-color="#14213D" offset="0%"></stop>
+            <stop stop-color="#1C2E52" offset="100%"></stop>
+        </linearGradient>
+        <linearGradient x1="0%" y1="0%" x2="100%" y2="100%" id="gradientAccent">
+            <stop stop-color="#4CC9F0" offset="0%"></stop>
+            <stop stop-color="#5CE1E6" offset="100%"></stop>
+        </linearGradient>
+    </defs>
+    <g id="Restaurant-Assistant" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <!-- Background -->
+        <rect id="Background" fill="#F8F9FA" x="0" y="0" width="800" height="600" rx="20"></rect>
+        
+        <!-- Restaurant Table -->
+        <rect id="Table" fill="#8B4513" x="180" y="400" width="440" height="30" rx="5"></rect>
+        <rect id="TableLeg1" fill="#8B4513" x="240" y="430" width="30" height="70" rx="2"></rect>
+        <rect id="TableLeg2" fill="#8B4513" x="540" y="430" width="30" height="70" rx="2"></rect>
+        
+        <!-- Phone with Assistant Interface -->
+        <rect id="Phone" fill="#14213D" x="300" y="180" width="200" height="350" rx="20"></rect>
+        <rect id="Screen" fill="white" x="310" y="200" width="180" height="300" rx="5"></rect>
+        
+        <!-- Chat Interface -->
+        <rect id="Header" fill="url(#gradientBg)" x="310" y="200" width="180" height="40" rx="5"></rect>
+        <text font-family="Arial, sans-serif" font-size="14" font-weight="bold" fill="white" x="340" y="225">LATIAX Assistant</text>
+        
+        <!-- Chat Bubbles -->
+        <rect id="BubbleUser1" fill="#E1F5FE" x="370" y="260" width="110" height="40" rx="15"></rect>
+        <rect id="BubbleBot1" fill="#F1F8E9" x="320" y="310" width="110" height="40" rx="15"></rect>
+        <rect id="BubbleUser2" fill="#E1F5FE" x="370" y="360" width="110" height="40" rx="15"></rect>
+        <rect id="BubbleBot2" fill="#F1F8E9" x="320" y="410" width="140" height="40" rx="15"></rect>
+        
+        <!-- Robot Assistant -->
+        <circle id="RobotHead" fill="url(#gradientBg)" cx="170" cy="250" r="60"></circle>
+        <circle id="RobotEye1" fill="url(#gradientAccent)" cx="150" cy="240" r="10"></circle>
+        <circle id="RobotEye2" fill="url(#gradientAccent)" cx="190" cy="240" r="10"></circle>
+        <rect id="RobotBody" fill="url(#gradientBg)" x="130" y="320" width="80" height="100" rx="15"></rect>
+        <rect id="RobotArm" fill="url(#gradientBg)" x="210" y="340" width="70" height="15" rx="5"></rect>
+        <circle id="RobotHand" fill="url(#gradientBg)" cx="280" cy="347" r="15"></circle>
+        
+        <!-- Food Items -->
+        <circle id="Plate1" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2" cx="600" cy="250" r="40"></circle>
+        <circle id="Plate2" fill="#FFFFFF" stroke="#E0E0E0" stroke-width="2" cx="650" cy="320" r="30"></circle>
+        <rect id="Menu" fill="#F5F5F5" stroke="#E0E0E0" stroke-width="2" x="580" y="380" width="80" height="120" rx="5"></rect>
+        
+        <!-- Digital Elements -->
+        <circle id="CircleElement1" fill="url(#gradientAccent)" opacity="0.7" cx="100" cy="100" r="30"></circle>
+        <circle id="CircleElement2" fill="url(#gradientAccent)" opacity="0.5" cx="700" cy="150" r="20"></circle>
+        <circle id="CircleElement3" fill="url(#gradientAccent)" opacity="0.3" cx="650" cy="80" r="15"></circle>
+        
+        <!-- Connection Lines -->
+        <path d="M230,250 C280,230 280,260 300,260" stroke="url(#gradientAccent)" stroke-width="3" stroke-dasharray="5,5"></path>
+        <path d="M210,347 C240,347 270,347 300,347" stroke="url(#gradientAccent)" stroke-width="3" stroke-dasharray="5,5"></path>
+        
+        <!-- Info Text -->
+        <text font-family="Arial, sans-serif" font-size="10" fill="#555555" x="330" y="275">¿Mesa para 4?</text>
+        <text font-family="Arial, sans-serif" font-size="10" fill="#555555" x="330" y="325">¡Claro! ¿A qué hora?</text>
+        <text font-family="Arial, sans-serif" font-size="10" fill="#555555" x="380" y="375">A las 20:30</text>
+        <text font-family="Arial, sans-serif" font-size="10" fill="#555555" x="330" y="425">¡Reserva confirmada!</text>
+    </g>
+</svg> 

@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATIAX | Demo Llamada Telefónica</title>
+    <link rel="stylesheet" href="css/main.css"> <!-- Reutilizar estilos principales -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* Estilos específicos para la demo */
+        body {
+            background-color: #e9ecef;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            font-family: 'Poppins', sans-serif;
+        }
+        .phone-demo-container {
+            background-color: #fff;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+            padding: 30px;
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+        .phone-demo-container h1 {
+            color: #333;
+            margin-bottom: 25px;
+        }
+        .caller-info {
+            margin-bottom: 20px;
+        }
+        .caller-number {
+            font-size: 1.5em;
+            font-weight: 500;
+            color: #555;
+        }
+        .call-status {
+            font-size: 1em;
+            color: #666;
+            margin-top: 5px;
+            min-height: 20px; /* Espacio para estado */
+        }
+        .call-actions button {
+            padding: 12px 25px;
+            border: none;
+            border-radius: 25px;
+            font-size: 1em;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 10px 5px;
+        }
+        .answer-btn {
+            background-color: #28a745;
+            color: white;
+        }
+        .answer-btn:hover {
+            background-color: #218838;
+        }
+        .hangup-btn {
+            background-color: #dc3545;
+            color: white;
+        }
+        .hangup-btn:hover {
+            background-color: #c82333;
+        }
+        .conversation-view {
+            display: none; /* Oculto hasta responder */
+            margin-top: 20px;
+            border-top: 1px solid #eee;
+            padding-top: 20px;
+        }
+        .transcript-area {
+            height: 200px;
+            overflow-y: auto;
+            border: 1px solid #ddd;
+            border-radius: 5px;
+            padding: 10px;
+            margin-bottom: 15px;
+            text-align: left;
+            background-color: #f8f9fa;
+        }
+        .transcript-area p {
+             margin: 0 0 8px 0;
+             padding: 6px 10px;
+             border-radius: 10px;
+             max-width: 85%;
+             font-size: 0.9em;
+        }
+        .user-speech {
+            background-color: #e1f5fe;
+            color: #01579b;
+            margin-left: auto;
+            text-align: right;
+            border-bottom-right-radius: 3px;
+        }
+        .bot-speech {
+            background-color: #f1f8e9;
+            color: #33691e;
+            margin-right: auto;
+            text-align: left;
+            border-bottom-left-radius: 3px;
+        }
+        .controls-area {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+        }
+        .controls-area select {
+             padding: 8px 10px;
+             border: 1px solid #ccc;
+             border-radius: 4px;
+             flex-shrink: 0; /* Evitar que se encoja mucho */
+        }
+        .mic-btn {
+            background-color: #007bff;
+            color: white;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            font-size: 1.1em;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+        }
+        .mic-btn.active {
+             background-color: #dc3545; /* Rojo cuando está activo/escuchando */
+        }
+        .mic-btn:hover {
+            background-color: #0056b3;
+        }
+        .mic-btn.active:hover {
+            background-color: #c82333;
+        }
+    </style>
+</head>
+<body>
+    <div class="phone-demo-container">
+        <h1>Demo Llamada Telefónica</h1>
+        
+        <div class="caller-info">
+            <div class="caller-number">+34 910 123 456</div> <!-- Número inventado -->
+            <div id="callStatus" class="call-status">Llamada entrante...</div>
+        </div>
+
+        <div id="initialActions" class="call-actions">
+            <button id="answerButton" class="answer-btn">
+                <i class="fas fa-phone"></i> Responder
+            </button>
+        </div>
+
+        <div id="conversationView" class="conversation-view">
+            <div id="transcriptArea" class="transcript-area">
+                <!-- La conversación aparecerá aquí -->
+            </div>
+            <div class="controls-area">
+                <select id="phoneLanguageSelector">
+                    <option value="es-ES">Español</option>
+                    <option value="en-US">English</option>
+                </select>
+                 <span id="phoneMicStatus" class="call-status" style="flex-grow: 1; text-align: center;">Conectado</span> <!-- Estado del microfono -->
+                <button id="phoneMicButton" class="mic-btn" title="Hablar">
+                    <i class="fas fa-microphone"></i>
+                </button>
+            </div>
+             <div class="call-actions" style="margin-top: 20px;">
+                 <button id="hangupButton" class="hangup-btn">
+                     <i class="fas fa-phone-slash"></i> Colgar
+                 </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/config.js"></script>
+    <script src="js/chat.js"></script>
+    <script src="js/phone-demo.js"></script>
+
+</body>
+</html> 

@@ -1,0 +1,352 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modelos Predictivos - LATIAX</title>
+    <link rel="icon" href="images/logo.svg" type="image/svg+xml">
+    <style>
+        :root {
+            --primary-red: #e63946;
+            --primary-blue: #1d3557;
+            --light-blue: #457b9d;
+            --white: #f1faee;
+            --light-gray: #f8f9fa;
+        }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Botón para volver arriba -->
+    <div class="back-to-top" role="button" tabindex="0" aria-label="Volver al inicio de la página">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Menú lateral -->
+    <div id="mySidebar" class="sidebar" role="navigation" aria-label="Menú principal">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" aria-label="Cerrar menú" role="button" tabindex="0">&times;</a>
+        <a href="index.html#inicio" aria-current="false"><i class="fas fa-home"></i> Inicio</a>
+        <a href="index.html#nosotros" aria-current="false"><i class="fas fa-info-circle"></i> Nosotros</a>
+        <a href="index.html#servicios" aria-current="false"><i class="fas fa-robot"></i> Servicios</a>
+        <a href="index.html#proyectos" aria-current="false"><i class="fas fa-project-diagram"></i> Proyectos</a>
+        <a href="index.html#testimonios" aria-current="false"><i class="fas fa-quote-right"></i> Testimonios</a>
+        <a href="index.html#contacto" aria-current="false"><i class="fas fa-envelope"></i> Contacto</a>
+    </div>
+
+    <!-- Encabezado -->
+    <div class="header">
+        <div class="menu-button" onclick="openNav()" role="button" tabindex="0" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mySidebar">&#9776;</div>
+        <div class="logo-container">
+            <a href="index.html">
+                <img src="images/logo_definitivo.png" alt="LATIAX Logo" class="logo-img">
+            </a>
+        </div>
+        <div></div> <!-- Espacio para equilibrar el diseño -->
+    </div>
+
+    <!-- Sección Hero de Modelos Predictivos -->
+    <section class="hero predictive-hero">
+        <h1>Modelos Predictivos</h1>
+        <p>Transformamos datos en decisiones empresariales estratégicas</p>
+    </section>
+
+    <!-- Introducción -->
+    <section class="about-service">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">¿Qué son los Modelos Predictivos?</h2>
+            <div class="about-content animate-on-scroll">
+                <p>
+                    Los modelos predictivos son herramientas analíticas avanzadas que utilizan datos históricos y actuales para 
+                    identificar patrones y predecir resultados futuros con un alto nivel de precisión. En LATIAX, desarrollamos 
+                    modelos predictivos personalizados que permiten a las empresas anticiparse a cambios en el mercado, 
+                    optimizar sus operaciones y tomar decisiones basadas en datos.
+                </p>
+                <p>
+                    Nuestros modelos predictivos combinan algoritmos de aprendizaje automático, estadística avanzada y 
+                    conocimiento del sector para ofrecer soluciones que realmente impactan en los resultados de negocio.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Beneficios -->
+    <section class="benefits">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Beneficios de Implementar Modelos Predictivos</h2>
+            <div class="benefits-grid">
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-chart-pie"></i>
+                    <h3>Toma de Decisiones Informada</h3>
+                    <p>Reemplaza la intuición por decisiones basadas en datos precisos y tendencias comprobadas.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-search-dollar"></i>
+                    <h3>Identificación de Oportunidades</h3>
+                    <p>Descubre nuevas oportunidades de mercado y nichos rentables antes que la competencia.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-exclamation-triangle"></i>
+                    <h3>Mitigación de Riesgos</h3>
+                    <p>Anticipa problemas potenciales y desarrolla estrategias preventivas para minimizar riesgos.</p>
+                </div>
+                <div class="benefit-card animate-on-scroll">
+                    <i class="fas fa-robot"></i>
+                    <h3>Automatización Inteligente</h3>
+                    <p>Combina predicciones con sistemas automatizados para optimizar procesos en tiempo real.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Casos de Uso -->
+    <section class="use-cases">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Casos de Uso por Industria</h2>
+            <div class="use-cases-tabs">
+                <div class="tab-buttons">
+                    <button class="tab-button active" data-tab="retail">Retail</button>
+                    <button class="tab-button" data-tab="finance">Finanzas</button>
+                    <button class="tab-button" data-tab="healthcare">Salud</button>
+                    <button class="tab-button" data-tab="manufacturing">Manufactura</button>
+                </div>
+                <div class="tab-content">
+                    <div class="tab-pane active" id="retail">
+                        <h3>Retail y E-commerce</h3>
+                        <ul>
+                            <li><strong>Previsión de demanda:</strong> Optimización de inventario basada en patrones de compra históricos y estacionalidad.</li>
+                            <li><strong>Recomendaciones personalizadas:</strong> Sistemas que aumentan las ventas cruzadas y el valor del cliente.</li>
+                            <li><strong>Optimización de precios:</strong> Ajuste dinámico de precios según demanda, competencia y comportamiento del mercado.</li>
+                            <li><strong>Análisis de abandono de carrito:</strong> Identificación de patrones para mejorar tasas de conversión.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="finance">
+                        <h3>Servicios Financieros</h3>
+                        <ul>
+                            <li><strong>Detección de fraude:</strong> Identificación en tiempo real de transacciones sospechosas.</li>
+                            <li><strong>Evaluación de riesgos crediticios:</strong> Modelos para determinar la probabilidad de impago.</li>
+                            <li><strong>Gestión de inversiones:</strong> Análisis predictivo para optimizar carteras de inversión.</li>
+                            <li><strong>Previsión de flujos de caja:</strong> Anticipación de necesidades de liquidez empresarial.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="healthcare">
+                        <h3>Sector Salud</h3>
+                        <ul>
+                            <li><strong>Diagnóstico predictivo:</strong> Identificación temprana de condiciones médicas basada en datos de pacientes.</li>
+                            <li><strong>Gestión de recursos hospitalarios:</strong> Previsión de ingresos y optimización de personal.</li>
+                            <li><strong>Medicina personalizada:</strong> Tratamientos adaptados según respuestas previas y genética.</li>
+                            <li><strong>Epidemiología:</strong> Modelos de propagación de enfermedades para anticipar brotes.</li>
+                        </ul>
+                    </div>
+                    <div class="tab-pane" id="manufacturing">
+                        <h3>Manufactura e Industria</h3>
+                        <ul>
+                            <li><strong>Mantenimiento predictivo:</strong> Anticipación de fallos en maquinaria antes de que ocurran.</li>
+                            <li><strong>Optimización de cadena de suministro:</strong> Previsión de necesidades y gestión de proveedores.</li>
+                            <li><strong>Control de calidad:</strong> Detección temprana de defectos mediante análisis de patrones.</li>
+                            <li><strong>Eficiencia energética:</strong> Optimización del consumo basada en patrones de producción.</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Tecnologías -->
+    <section class="technologies">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Tecnologías que Utilizamos</h2>
+            <div class="tech-grid">
+                <div class="tech-card animate-on-scroll">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/c/c3/Python-logo-notext.svg" alt="Python">
+                    <h3>Python</h3>
+                    <p>Utilizamos Python como lenguaje principal para el desarrollo de modelos predictivos.</p>
+                </div>
+                <div class="tech-card animate-on-scroll">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/0/05/Scikit_learn_logo_small.svg" alt="Scikit-learn">
+                    <h3>Scikit-learn</h3>
+                    <p>Biblioteca de aprendizaje automático para modelos de clasificación, regresión y clustering.</p>
+                </div>
+                <div class="tech-card animate-on-scroll">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/2/2d/Tensorflow_logo.svg" alt="TensorFlow">
+                    <h3>TensorFlow</h3>
+                    <p>Framework de aprendizaje profundo para redes neuronales complejas y procesamiento de datos.</p>
+                </div>
+                <div class="tech-card animate-on-scroll">
+                    <img src="https://upload.wikimedia.org/wikipedia/commons/9/93/Amazon_Web_Services_Logo.svg" alt="AWS">
+                    <h3>AWS</h3>
+                    <p>Infraestructura en la nube para el despliegue y escalado de modelos predictivos.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Metodología -->
+    <section class="methodology">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Nuestra Metodología</h2>
+            <div class="methodology-steps">
+                <div class="method-step animate-on-scroll">
+                    <div class="step-number">1</div>
+                    <div class="step-content">
+                        <h3>Análisis de Requerimientos</h3>
+                        <p>Entendemos a fondo los objetivos, procesos y necesidades específicas de tu negocio.</p>
+                    </div>
+                </div>
+                <div class="method-step animate-on-scroll">
+                    <div class="step-number">2</div>
+                    <div class="step-content">
+                        <h3>Recopilación y Preparación de Datos</h3>
+                        <p>Identificamos fuentes de datos relevantes, realizamos limpieza y transformación para su uso óptimo.</p>
+                    </div>
+                </div>
+                <div class="method-step animate-on-scroll">
+                    <div class="step-number">3</div>
+                    <div class="step-content">
+                        <h3>Selección y Desarrollo de Modelos</h3>
+                        <p>Seleccionamos los algoritmos más adecuados y desarrollamos modelos personalizados para tu caso de uso.</p>
+                    </div>
+                </div>
+                <div class="method-step animate-on-scroll">
+                    <div class="step-number">4</div>
+                    <div class="step-content">
+                        <h3>Evaluación y Validación</h3>
+                        <p>Realizamos pruebas exhaustivas para asegurar la precisión y fiabilidad de las predicciones.</p>
+                    </div>
+                </div>
+                <div class="method-step animate-on-scroll">
+                    <div class="step-number">5</div>
+                    <div class="step-content">
+                        <h3>Implementación y Despliegue</h3>
+                        <p>Integramos los modelos en tus sistemas existentes o creamos nuevas interfaces según necesidad.</p>
+                    </div>
+                </div>
+                <div class="method-step animate-on-scroll">
+                    <div class="step-number">6</div>
+                    <div class="step-content">
+                        <h3>Monitorización y Mejora Continua</h3>
+                        <p>Realizamos seguimiento constante del rendimiento y refinamos los modelos periódicamente.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Estudios de Caso -->
+    <section class="case-studies">
+        <div class="container">
+            <h2 class="section-title animate-on-scroll">Estudios de Caso</h2>
+            <div class="case-studies-container">
+                <div class="case-study-card animate-on-scroll">
+                    <div class="case-study-content">
+                        <h3>Cadena de Restaurantes Nacional</h3>
+                        <p class="case-study-subtitle">Predicción de demanda con 92% de precisión</p>
+                        <p class="case-study-description">
+                            Desarrollamos un sistema predictivo que analiza patrones históricos, eventos locales, 
+                            clima y tendencias sociales para optimizar la gestión de inventario y personal. 
+                            El resultado: reducción del 30% en desperdicio de alimentos y mejora del 15% en 
+                            satisfacción del cliente gracias a la disponibilidad de productos.
+                        </p>
+                        <div class="case-study-results">
+                            <div class="result">
+                                <span class="result-number">92%</span>
+                                <span class="result-label">Precisión</span>
+                            </div>
+                            <div class="result">
+                                <span class="result-number">30%</span>
+                                <span class="result-label">Reducción de desperdicio</span>
+                            </div>
+                            <div class="result">
+                                <span class="result-number">15%</span>
+                                <span class="result-label">Mejora en satisfacción</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="case-study-card animate-on-scroll">
+                    <div class="case-study-content">
+                        <h3>Empresa de Logística</h3>
+                        <p class="case-study-subtitle">Optimización de rutas y mantenimiento predictivo</p>
+                        <p class="case-study-description">
+                            Implementamos un sistema dual que predice fallos en vehículos y optimiza rutas en tiempo real 
+                            según condiciones de tráfico, clima y prioridad de entregas. La empresa redujo costos operativos 
+                            en un 22% y mejoró los tiempos de entrega en un 18%.
+                        </p>
+                        <div class="case-study-results">
+                            <div class="result">
+                                <span class="result-number">22%</span>
+                                <span class="result-label">Reducción de costos</span>
+                            </div>
+                            <div class="result">
+                                <span class="result-number">18%</span>
+                                <span class="result-label">Mejora en tiempos</span>
+                            </div>
+                            <div class="result">
+                                <span class="result-number">65%</span>
+                                <span class="result-label">Menos paradas imprevistas</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA -->
+    <section class="cta-section">
+        <div class="container">
+            <h2 class="animate-on-scroll">¿Listo para transformar tu negocio con modelos predictivos?</h2>
+            <p class="animate-on-scroll">Contacta con nuestro equipo para una evaluación gratuita de tus necesidades.</p>
+            <a href="index.html#contacto" class="cta-button animate-on-scroll">Solicitar Consulta</a>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>LATIAX</h3>
+                <div class="footer-logo">
+                    <img src="images/logo_definitivo.png" alt="LATIAX Logo" class="footer-logo-img">
+                </div>
+                <p>Implementando soluciones de Inteligencia Artificial para potenciar el crecimiento de las PYMES.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <div class="footer-links">
+                    <a href="index.html#inicio">Inicio</a>
+                    <a href="index.html#nosotros">Nosotros</a>
+                    <a href="index.html#servicios">Servicios</a>
+                    <a href="index.html#proyectos">Proyectos</a>
+                    <a href="index.html#contacto">Contacto</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <div class="footer-links">
+                    <a href="#servicios">Agentes de IA</a>
+                    <a href="modelos-predictivos.html">Modelos Predictivos</a>
+                    <a href="#servicios">Automatización</a>
+                    <a href="#servicios">Consultoría IA</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-envelope"></i> info@latiax.com</p>
+                <p><i class="fas fa-phone"></i> +34 912 345 678</p>
+                <p><i class="fas fa-map-marker-alt"></i> Av. Innovación 1234, Ciudad Digital</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 LATIAX. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html> 

@@ -1,0 +1,294 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATIAX - Agentes de IA para PYMES</title>
+    <link rel="icon" href="images/favicon.ico" type="image/x-icon">
+    <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+    <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+    <link rel="icon" type="image/png" sizes="96x96" href="images/favicon-96x96.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/favicon-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="images/favicon-512x512.png">
+    <link rel="icon" type="image/png" sizes="192x192" href="images/android-chrome-192x192.png">
+    <link rel="icon" type="image/png" sizes="512x512" href="images/android-chrome-512x512.png">
+    
+    <!-- Apple Touch -->
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+    <meta name="apple-mobile-web-app-title" content="LATIAX">
+    
+    <!-- Manifest -->
+    <link rel="manifest" href="images/site.webmanifest">
+    
+    <style>
+        :root {
+            --primary-red: #e63946;
+            --primary-blue: #1d3557;
+            --light-blue: #457b9d;
+            --white: #f1faee;
+            --light-gray: #f8f9fa;
+        }
+    </style>
+    <link rel="stylesheet" href="css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <meta name="description" content="LATIAX - Implementando soluciones de Inteligencia Artificial para PYMES. Agentes de IA y Machine Learning personalizados.">
+</head>
+<body>
+    <!-- Loader -->
+    <div class="loader-container">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Botón para volver arriba -->
+    <div class="back-to-top" role="button" tabindex="0" aria-label="Volver al inicio de la página">
+        <i class="fas fa-arrow-up"></i>
+    </div>
+    
+    <!-- Menú lateral -->
+    <div id="mySidebar" class="sidebar" role="navigation" aria-label="Menú principal">
+        <a href="javascript:void(0)" class="closebtn" onclick="closeNav()" aria-label="Cerrar menú" role="button" tabindex="0">&times;</a>
+        <a href="#inicio" aria-current="false"><i class="fas fa-home"></i> Inicio</a>
+        <a href="#nosotros" aria-current="false"><i class="fas fa-info-circle"></i> Nosotros</a>
+        <a href="#servicios" aria-current="false"><i class="fas fa-robot"></i> Servicios</a>
+        <a href="#proyectos" aria-current="false"><i class="fas fa-project-diagram"></i> Proyectos</a>
+        <a href="#testimonios" aria-current="false"><i class="fas fa-quote-right"></i> Testimonios</a>
+        <a href="#contacto" aria-current="false"><i class="fas fa-envelope"></i> Contacto</a>
+    </div>
+
+    <!-- Encabezado -->
+    <div class="header">
+        <div class="menu-button" onclick="openNav()" role="button" tabindex="0" aria-label="Abrir menú de navegación" aria-expanded="false" aria-controls="mySidebar">&#9776;</div>
+        <div class="logo-container">
+            <img src="images/logo_definitivo.png" alt="LATIAX Logo" class="logo-img">
+        </div>
+        <div></div> <!-- Espacio para equilibrar el diseño -->
+    </div>
+
+    <!-- Sección Hero -->
+    <section class="hero" id="inicio" data-section="hero-main">
+        <h1>Evoluciona con Inteligencia Artificial</h1>
+        <p>
+            En LATIAX desarrollamos e implementamos 
+            <strong>Agentes de IA</strong> 
+            y 
+            <strong>Machine Learning</strong> 
+            personalizados para impulsar la productividad y competitividad de las empresas.
+        </p>
+        <a href="#contacto" class="cta-button">Solicita un análisis</a>
+    </section>
+
+    <!-- Sección Sobre Nosotros -->
+    <section class="about" id="nosotros">
+        <h2 class="section-title animate-on-scroll">Sobre LATIAX</h2>
+        <p class="animate-on-scroll">
+            Somos una empresa joven e innovadora especializada en la implementación de soluciones de Inteligencia Artificial para PYMES. 
+            Nuestro objetivo es democratizar el acceso a tecnologías avanzadas, permitiendo que empresas de todos los tamaños 
+            aprovechen el poder de la IA para crecer y optimizar sus operaciones.
+        </p>
+        <p class="animate-on-scroll">
+            Con un equipo multidisciplinario de expertos en desarrollo de software, ciencia de datos e inteligencia artificial, 
+            ofrecemos soluciones a medida que se adaptan perfectamente a las necesidades específicas de cada cliente.
+        </p>
+    </section>
+
+    <!-- Sección Servicios -->
+    <section class="services" id="servicios">
+        <h2 class="section-title animate-on-scroll">Nuestros Servicios</h2>
+        <div class="services-container">
+            <div class="service-card animate-on-scroll">
+                <a href="agentes-ia.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-robot"></i>
+                    <h3>Agentes de IA</h3>
+                    <p>Asistentes virtuales inteligentes que automatizan tareas repetitivas y mejoran la atención al cliente, disponibles 24/7.</p>
+                </a>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <a href="modelos-predictivos.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-chart-line"></i>
+                    <h3>Modelos Predictivos</h3>
+                    <p>Análisis de datos avanzado para anticipar tendencias del mercado y tomar decisiones estratégicas más informadas.</p>
+                </a>
+            </div>
+            <div class="service-card animate-on-scroll">
+                <a href="consultoria-ia.html" style="text-decoration: none; color: inherit;">
+                    <i class="fas fa-brain"></i>
+                    <h3>Consultoría IA</h3>
+                    <p>Asesoramiento experto sobre cómo implementar inteligencia artificial para resolver problemas específicos de su negocio.</p>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Proyectos -->
+    <section class="projects" id="proyectos">
+        <h2 class="section-title animate-on-scroll">Nuestros Proyectos</h2>
+        <div class="projects-container">
+            <div class="project-card animate-on-scroll">
+                <a href="latiax-restaurant-assistant-product.html" target="_blank" style="text-decoration: none; color: inherit;">
+                <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=774&q=80" alt="Latiax Restaurant Assistant" class="project-img">
+                <div class="project-overlay">
+                    <h3 class="project-title">Latiax Restaurant Assistant</h3>
+                    <p class="project-description">Sistema profesional de gestión y asistente virtual que optimiza operaciones y mejora la experiencia del cliente en restaurantes.</p>
+                </div>
+                </a>
+            </div>
+            <div class="project-card animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1556155092-490a1ba16284?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="Proyecto 1" class="project-img">
+                <div class="project-overlay">
+                    <h3 class="project-title">Asistente Virtual para Retail</h3>
+                    <p class="project-description">Implementación de un asistente virtual que optimizó la atención al cliente y las ventas en un 35%.</p>
+                </div>
+            </div>
+            <div class="project-card animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1581090464777-f3220bbe1b8b?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=387&q=80" alt="Proyecto 2" class="project-img">
+                <div class="project-overlay">
+                    <h3 class="project-title">Predicción de Demanda</h3>
+                    <p class="project-description">Sistema de predicción de demanda para una cadena de restaurantes con precisión del 92%.</p>
+                </div>
+            </div>
+            <div class="project-card animate-on-scroll">
+                <img src="https://images.unsplash.com/photo-1581089781785-603411fa81e5?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=870&q=80" alt="Proyecto 3" class="project-img">
+                <div class="project-overlay">
+                    <h3 class="project-title">Automatización de Procesos</h3>
+                    <p class="project-description">Automatización de procesos administrativos que redujo costos en un 40% para una inmobiliaria.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Testimonios -->
+    <section class="testimonials" id="testimonios">
+        <h2 class="section-title animate-on-scroll">Lo que dicen nuestros clientes</h2>
+        <div class="testimonial-container" role="tablist" aria-label="Testimonios de clientes">
+            <div class="testimonial-card active" role="tabpanel" aria-hidden="false">
+                <p class="testimonial-text">"LATIAX transformó nuestra operación con su solución de IA. La implementación fue rápida y los resultados superaron nuestras expectativas. Nuestra productividad ha aumentado significativamente."</p>
+                <img src="https://randomuser.me/api/portraits/women/32.jpg" alt="María González" class="testimonial-avatar">
+                <h4 class="testimonial-name">María González</h4>
+                <p class="testimonial-position">Gerente de Operaciones, TechSolutions</p>
+            </div>
+            <div class="testimonial-card" role="tabpanel" aria-hidden="true">
+                <p class="testimonial-text">"El asistente virtual que desarrollaron para nuestra empresa ha mejorado drásticamente nuestra atención al cliente. Ahora podemos atender consultas 24/7 y nuestros clientes están encantados."</p>
+                <img src="https://randomuser.me/api/portraits/men/45.jpg" alt="Carlos Mendoza" class="testimonial-avatar">
+                <h4 class="testimonial-name">Carlos Mendoza</h4>
+                <p class="testimonial-position">Director de Ventas, InnovateMKT</p>
+            </div>
+            <div class="testimonial-card" role="tabpanel" aria-hidden="true">
+                <p class="testimonial-text">"La consultoría y el sistema de predicción que implementamos con LATIAX nos ha permitido anticiparnos a las tendencias del mercado. Una inversión que se ha amortizado en tiempo récord."</p>
+                <img src="https://randomuser.me/api/portraits/women/68.jpg" alt="Lucía Ramírez" class="testimonial-avatar">
+                <h4 class="testimonial-name">Lucía Ramírez</h4>
+                <p class="testimonial-position">CEO, GrowthRetail</p>
+            </div>
+            <div class="testimonial-dots">
+                <div class="testimonial-dot active" role="tab" aria-selected="true" tabindex="0"></div>
+                <div class="testimonial-dot" role="tab" aria-selected="false" tabindex="0"></div>
+                <div class="testimonial-dot" role="tab" aria-selected="false" tabindex="0"></div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección de Contacto -->
+    <section class="contact" id="contacto" style="position: relative; overflow: visible;">
+        <h2 class="section-title animate-on-scroll">Contáctanos</h2>
+        <div class="contact-container" style="visibility: visible; display: flex;">
+            <div class="contact-info animate-from-left" style="visibility: visible; opacity: 1;">
+                <h3>Información de Contacto</h3>
+                <div class="contact-detail">
+                    <i class="fas fa-map-marker-alt" aria-hidden="true"></i>
+                    <span>Granada, España</span>
+                </div>
+                <div class="contact-detail">
+                    <i class="fas fa-phone" aria-hidden="true"></i>
+                    <span>+34 623 46 05 03</span>
+                </div>
+                <div class="contact-detail">
+                    <i class="fas fa-envelope" aria-hidden="true"></i>
+                    <span>info@latiax.es</span>
+                </div>
+                <div class="contact-detail">
+                    <i class="fas fa-clock" aria-hidden="true"></i>
+                    <span>Lunes a Viernes: 9:00 - 18:00</span>
+                </div>
+            </div>
+            <div class="contact-form animate-from-right" style="visibility: visible; opacity: 1;">
+                <form action="https://formsubmit.co/info@latiax.es" aria-label="Formulario de contacto" id="contactForm" method="POST">
+                    <div class="form-group">
+                      <label for="name">Nombre</label>
+                      <input aria-required="true" class="form-control" id="name" placeholder="Tu nombre" type="text" name="nombre" required>
+                    </div>
+                  
+                    <div class="form-group">
+                      <label for="email">Email</label>
+                      <input aria-required="true" class="form-control" id="email" placeholder="Tu email" type="email" name="email" required>
+                    </div>
+                  
+                    <div class="form-group">
+                      <label for="message">Mensaje</label>
+                      <textarea aria-required="true" class="form-control" id="message" placeholder="¿Cómo podemos ayudarte?" name="mensaje" required></textarea>
+                    </div>
+                  
+                    <button class="submit-btn" type="submit">Enviar Mensaje</button>
+                  
+                    <!-- Campos ocultos para controlar el comportamiento -->
+                    <input type="hidden" name="_next" value="https://www.latiax.es/gracias.html">
+                    <input type="text" name="_honey" style="display:none">
+                    <input type="hidden" name="_captcha" value="false">
+                  </form>                  
+            </div>
+        </div>
+    </section>
+
+    <!-- Sección Redes Sociales -->
+    <section class="social-section">
+        <h2 class="section-title animate-on-scroll">Síguenos en Redes Sociales</h2>
+        <div class="social-icons">
+            <a href="https://www.instagram.com/latiax.es?utm_source=qr&igsh=dmk0MXIwNW05N2ti" target="_blank" class="animate-on-scroll"><i class="fab fa-instagram"></i></a>
+            <a href="#" target="_blank" class="animate-on-scroll"><i class="fab fa-twitter"></i></a>
+            <a href="https://www.linkedin.com/company/latiax-es/" target="_blank" class="animate-on-scroll"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#" target="_blank" class="animate-on-scroll"><i class="fab fa-tiktok"></i></a>
+            <a href="#" target="_blank" class="animate-on-scroll"><i class="fab fa-youtube"></i></a>
+        </div>
+    </section>
+
+    <!-- Pie de página -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-column">
+                <h3>LATIAX</h3>
+                <div class="footer-logo">
+                    <img src="images/logo_definitivo.png" alt="LATIAX Logo" class="footer-logo-img">
+                </div>
+                <p>Implementando soluciones de Inteligencia Artificial para potenciar el crecimiento de las PYMES.</p>
+            </div>
+            <div class="footer-column">
+                <h3>Enlaces Rápidos</h3>
+                <div class="footer-links">
+                    <a href="#inicio">Inicio</a>
+                    <a href="#nosotros">Nosotros</a>
+                    <a href="#servicios">Servicios</a>
+                    <a href="#proyectos">Proyectos</a>
+                    <a href="#contacto">Contacto</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Servicios</h3>
+                <div class="footer-links">
+                    <a href="#servicios">Agentes de IA</a>
+                    <a href="#servicios">Modelos Predictivos</a>
+                    <a href="#servicios">Consultoría IA</a>
+                </div>
+            </div>
+            <div class="footer-column">
+                <h3>Contacto</h3>
+                <p><i class="fas fa-envelope"></i> info@latiax.es</p>
+                <p><i class="fas fa-phone"></i> +34 623 46 05 03</p>
+                <p><i class="fas fa-map-marker-alt"></i> Granada, España</p>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2025 LATIAX. Todos los derechos reservados.</p>
+        </div>
+    </footer>
+
+    <script src="scripts.js"></script>
+</body>
+</html> 

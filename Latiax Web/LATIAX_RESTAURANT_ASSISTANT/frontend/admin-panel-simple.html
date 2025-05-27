@@ -1,0 +1,1517 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATIAX | Panel de Administración</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f5f7fa;
+            margin: 0;
+            padding: 0;
+        }
+        
+        .admin-banner {
+            background-color: #4285F4;
+            color: white;
+            text-align: center;
+            padding: 10px;
+            font-weight: bold;
+        }
+        
+        .admin-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+        
+        .admin-header {
+            background-color: white;
+            padding: 20px;
+            border-radius: 5px;
+            box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+            margin-bottom: 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        
+        .admin-title {
+            display: flex;
+            align-items: center;
+        }
+        
+        .admin-title h1 {
+            color: #333;
+            margin: 0;
+            margin-left: 15px;
+        }
+        
+        .admin-user {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        
+        .admin-user-info p {
+            margin: 0;
+            text-align: right;
+        }
+        
+        .logout-btn {
+            padding: 8px 12px;
+            background-color: #dc3545;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        
+        .tab-container {
+            display: flex;
+            border-bottom: 1px solid #ddd;
+            margin-bottom: 20px;
+        }
+        
+        .tab {
+            padding: 10px 20px;
+            cursor: pointer;
+            background-color: #f1f1f1;
+            margin-right: 5px;
+            border-radius: 5px 5px 0 0;
+        }
+        
+        .tab.active {
+            background-color: #4285F4;
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        
+        table th, table td {
+            padding: 12px 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        
+        table th {
+            background-color: #f8f9fa;
+            font-weight: 600;
+        }
+        
+        .status-badge {
+            padding: 5px 10px;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+        
+        .status-confirmada {
+            background-color: #d4edda;
+            color: #155724;
+        }
+        
+        .status-pendiente {
+            background-color: #fff3cd;
+            color: #856404;
+        }
+        
+        .status-cancelada {
+            background-color: #f8d7da;
+            color: #721c24;
+        }
+        
+        .filters {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+        }
+        
+        .filter-group {
+            display: flex;
+            align-items: center;
+        }
+        
+        .filter-group label {
+            margin-right: 10px;
+            font-weight: 500;
+        }
+        
+        .filter-group input, .filter-group select {
+            padding: 8px 12px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-family: inherit;
+        }
+        
+        .action-btn {
+            padding: 5px 10px;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            margin-right: 5px;
+            font-size: 0.8rem;
+        }
+        
+        .action-btn-view {
+            background-color: #e9ecef;
+            color: #495057;
+        }
+        
+        .action-btn-edit {
+            background-color: #4285F4;
+            color: white;
+        }
+        
+        .action-btn-cancel {
+            background-color: #dc3545;
+            color: white;
+        }
+        
+        .action-btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .empty-state {
+            text-align: center;
+            padding: 40px;
+            color: #6c757d;
+            display: none;
+        }
+        
+        .empty-state i {
+            font-size: 48px;
+            margin-bottom: 15px;
+            opacity: 0.5;
+        }
+        
+        #error-container {
+            background-color: #f8d7da;
+            color: #721c24;
+            padding: 10px;
+            border-radius: 4px;
+            margin-top: 10px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <div class="admin-banner">
+        Panel de Administración
+    </div>
+    
+    <div class="admin-container">
+        <div class="admin-header">
+            <div class="admin-title">
+                <img src="https://img.icons8.com/color/48/000000/restaurant.png" alt="Logo restaurante">
+                <h1>Panel de Administración</h1>
+            </div>
+            <div class="admin-user">
+                <div class="admin-user-info">
+                    <p id="admin-nombre">Administrador</p>
+                    <p id="admin-email">admin@latiax.com</p>
+                </div>
+                <button id="logout-btn" class="logout-btn">
+                    <i class="fas fa-sign-out-alt"></i> Cerrar sesión
+                </button>
+            </div>
+        </div>
+        
+        <div id="error-container"></div>
+        <div id="mensaje-container" style="display: none; padding: 10px; border-radius: 4px; margin-top: 10px;"></div>
+        
+        <div class="tab-container">
+            <div class="tab active" data-tab="reservas">Reservas</div>
+            <div class="tab" data-tab="menu">Menú</div>
+            <div class="tab" data-tab="info">Información</div>
+        </div>
+        
+        <div id="reservas" class="tab-pane active">
+            <h2>Gestión de Reservas</h2>
+            
+            <div class="filters">
+                <div class="filter-group">
+                    <label for="fecha-filtro">Fecha:</label>
+                    <input type="date" id="fecha-filtro">
+                </div>
+                <div class="filter-group">
+                    <label for="hora-filtro">Hora:</label>
+                    <input type="time" id="hora-filtro">
+                </div>
+                <div class="filter-group">
+                    <label for="estado-filtro">Estado:</label>
+                    <select id="estado-filtro">
+                        <option value="">Todos</option>
+                        <option value="confirmada">Confirmada</option>
+                        <option value="pendiente">Pendiente</option>
+                        <option value="cancelada">Cancelada</option>
+                    </select>
+                </div>
+                <button id="filtrar-btn" class="action-btn action-btn-edit">
+                    <i class="fas fa-search"></i> Filtrar
+                </button>
+                <button id="limpiar-filtros-btn" class="action-btn action-btn-view">
+                    <i class="fas fa-times"></i> Limpiar filtros
+                </button>
+            </div>
+            
+            <table>
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Cliente</th>
+                        <th>Fecha</th>
+                        <th>Hora</th>
+                        <th>Mesas</th>
+                        <th>Estado</th>
+                        <th>Acciones</th>
+                    </tr>
+                </thead>
+                <tbody id="reservas-tbody">
+                    <!-- Las reservas se cargarán aquí -->
+                </tbody>
+            </table>
+            
+            <div id="empty-state" class="empty-state">
+                <i class="fas fa-calendar-day"></i>
+                <p>No hay reservas que coincidan con los filtros seleccionados.</p>
+            </div>
+        </div>
+        
+        <div id="menu" class="tab-pane">
+            <h2>Gestión del Menú</h2>
+            
+            <div class="menu-container" style="display: flex; gap: 20px;">
+                <!-- Columna de categorías -->
+                <div class="categorias-container" style="flex: 1;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3>Categorías</h3>
+                        <button id="nueva-categoria-btn" class="action-btn action-btn-edit">
+                            <i class="fas fa-plus"></i> Nueva Categoría
+                        </button>
+                    </div>
+                    
+                    <div id="empty-categorias" style="display: none;" class="empty-message">
+                        <i class="fas fa-info-circle"></i> No hay categorías disponibles.
+                    </div>
+                    
+                    <div id="categorias-lista" class="categorias-lista">
+                        <!-- Las categorías se cargarán aquí dinámicamente -->
+                    </div>
+                    
+                    <!-- Formulario para crear/editar categoría -->
+                    <div id="categoria-form-container" style="background-color: #f8f9fa; border-radius: 5px; padding: 15px; display: none;">
+                        <h4 id="categoria-form-title">Nueva Categoría</h4>
+                        <form id="categoria-form">
+                            <input type="hidden" id="categoria-id">
+                            <div style="margin-bottom: 15px;">
+                                <label for="categoria-nombre" style="display: block; margin-bottom: 5px; font-weight: 500;">Nombre:</label>
+                                <input type="text" id="categoria-nombre" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label for="categoria-descripcion" style="display: block; margin-bottom: 5px; font-weight: 500;">Descripción:</label>
+                                <textarea id="categoria-descripcion" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; min-height: 60px;"></textarea>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label for="categoria-orden" style="display: block; margin-bottom: 5px; font-weight: 500;">Orden:</label>
+                                <input type="number" id="categoria-orden" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" min="1" value="1">
+                            </div>
+                            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                                <button type="button" id="categoria-cancelar" class="action-btn action-btn-view">Cancelar</button>
+                                <button type="submit" class="action-btn action-btn-edit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                
+                <!-- Columna de platos -->
+                <div class="platos-container" style="flex: 2;">
+                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px;">
+                        <h3>Platos</h3>
+                        <button id="nuevo-plato-btn" class="action-btn action-btn-edit">
+                            <i class="fas fa-plus"></i> Nuevo Plato
+                        </button>
+                    </div>
+                    
+                    <div class="filters" style="margin-bottom: 15px;">
+                        <div class="filter-group">
+                            <label for="plato-categoria-filtro">Categoría:</label>
+                            <select id="plato-categoria-filtro">
+                                <option value="">Todas las categorías</option>
+                                <!-- Aquí se cargarán las categorías -->
+                            </select>
+                        </div>
+                        <button id="filtrar-platos-btn" class="action-btn action-btn-edit">
+                            <i class="fas fa-filter"></i> Filtrar
+                        </button>
+                    </div>
+                    
+                    <div id="platos-lista" style="background-color: #f8f9fa; border-radius: 5px; padding: 10px;">
+                        <div class="empty-state" id="empty-platos" style="display: none; padding: 20px; text-align: center;">
+                            <i class="fas fa-hamburger" style="font-size: 24px; opacity: 0.5;"></i>
+                            <p>No hay platos en esta categoría.</p>
+                        </div>
+                        <!-- Aquí se cargarán los platos -->
+                        <table id="platos-tabla" style="width: 100%; border-collapse: collapse;">
+                            <thead>
+                                <tr>
+                                    <th>Nombre</th>
+                                    <th>Categoría</th>
+                                    <th>Precio</th>
+                                    <th>Disponible</th>
+                                    <th>Acciones</th>
+                                </tr>
+                            </thead>
+                            <tbody id="platos-tbody">
+                                <!-- Aquí se cargarán los platos -->
+                            </tbody>
+                        </table>
+                    </div>
+                    
+                    <!-- Formulario para crear/editar plato -->
+                    <div id="plato-form-container" style="background-color: #f8f9fa; border-radius: 5px; padding: 15px; margin-top: 20px; display: none;">
+                        <h4 id="plato-form-title">Nuevo Plato</h4>
+                        <form id="plato-form">
+                            <input type="hidden" id="plato-id">
+                            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                                <div style="flex: 2;">
+                                    <label for="plato-nombre" style="display: block; margin-bottom: 5px; font-weight: 500;">Nombre:</label>
+                                    <input type="text" id="plato-nombre" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required>
+                                </div>
+                                <div style="flex: 1;">
+                                    <label for="plato-precio" style="display: block; margin-bottom: 5px; font-weight: 500;">Precio (€):</label>
+                                    <input type="text" id="plato-precio" placeholder="Ej: 13,99" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required>
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label for="plato-descripcion" style="display: block; margin-bottom: 5px; font-weight: 500;">Descripción:</label>
+                                <textarea id="plato-descripcion" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px; min-height: 80px;"></textarea>
+                            </div>
+                            <div style="display: flex; gap: 15px; margin-bottom: 15px;">
+                                <div style="flex: 1;">
+                                    <label for="plato-categoria" style="display: block; margin-bottom: 5px; font-weight: 500;">Categoría:</label>
+                                    <select id="plato-categoria" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" required>
+                                        <!-- Aquí se cargarán las categorías -->
+                                    </select>
+                                </div>
+                                <div style="flex: 1;">
+                                    <label for="plato-orden" style="display: block; margin-bottom: 5px; font-weight: 500;">Orden:</label>
+                                    <input type="number" id="plato-orden" style="width: 100%; padding: 8px; border: 1px solid #ddd; border-radius: 4px;" min="1" value="1">
+                                </div>
+                            </div>
+                            <div style="margin-bottom: 15px;">
+                                <label style="display: flex; align-items: center; cursor: pointer;">
+                                    <input type="checkbox" id="plato-disponible" style="margin-right: 10px;" checked>
+                                    <span>Disponible</span>
+                                </label>
+                            </div>
+                            <div style="display: flex; gap: 10px; justify-content: flex-end;">
+                                <button type="button" id="plato-cancelar" class="action-btn action-btn-view">Cancelar</button>
+                                <button type="submit" class="action-btn action-btn-edit">Guardar</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+        <div id="info" class="tab-pane">
+            <h2>Información del Sistema</h2>
+            
+            <div style="margin-bottom: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 5px;">
+                <h3>Solución para el Bucle de Redirección</h3>
+                <p>Este panel simplificado fue creado para evitar el bucle de redirección entre la página de login y el panel de administración. No verifica el token en el cliente, solo lo hace al realizar acciones específicas con el servidor.</p>
+                
+                <div style="margin-top: 15px; padding: 10px; background-color: #d4edda; color: #155724; border-radius: 4px;">
+                    <strong>Nota:</strong> Si necesitas cerrar sesión, utiliza el botón "Cerrar sesión" en la parte superior derecha.
+                </div>
+            </div>
+            
+            <hr>
+            
+            <div style="margin-top: 20px;">
+                <h3>Herramientas de Administración</h3>
+                
+                <div style="margin-bottom: 15px;">
+                    <button id="reset-admin-btn" class="action-btn action-btn-edit">
+                        Restablecer contraseña de administrador
+                    </button>
+                    <div id="reset-result" style="margin-top: 10px; display: none;"></div>
+                </div>
+                
+                <div>
+                    <button id="check-server-btn" class="action-btn action-btn-edit">
+                        Verificar estado del servidor
+                    </button>
+                    <div id="server-status" style="margin-top: 10px; display: none;"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <script>
+        let categoriasCargadas = [];
+
+        document.addEventListener('DOMContentLoaded', async function() {
+            console.log('DOM cargado. Asignando listeners...');
+
+            if (!verificarAutenticacion()) return; 
+            
+            try {
+                await cargarCategorias(); 
+                await cargarPlatos();     
+                await cargarReservas();   
+            } catch (error) {
+                console.error("Error durante la carga inicial:", error);
+                mostrarMensaje("Error al cargar datos iniciales: " + error.message, true);
+            }
+            
+            // Configurar navegación entre pestañas
+            document.querySelectorAll('.tab').forEach(tab => {
+                tab.addEventListener('click', function() {
+                    const tabId = this.getAttribute('data-tab');
+                    console.log(`Cambiando a la pestaña: ${tabId}`);
+                    
+                    document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+                    this.classList.add('active');
+                    
+                    document.querySelectorAll('.tab-pane').forEach(pane => {
+                        pane.classList.remove('active');
+                    });
+                    document.getElementById(tabId).classList.add('active');
+                });
+            });
+            
+            const adminData = JSON.parse(localStorage.getItem('adminData') || '{}');
+            if (adminData.nombre && adminData.email) {
+                document.getElementById('admin-nombre').textContent = adminData.nombre;
+                document.getElementById('admin-email').textContent = adminData.email;
+            }
+            
+            // Configurar eventos para la gestión de menús
+            try {
+                document.getElementById('nueva-categoria-btn').addEventListener('click', nuevaCategoria);
+                console.log('Listener asignado a #nueva-categoria-btn');
+            } catch (e) { console.error('Error asignando listener a #nueva-categoria-btn:', e); }
+            
+            try {
+                document.getElementById('categoria-cancelar').addEventListener('click', function() {
+                    document.getElementById('categoria-form-container').style.display = 'none';
+                });
+            } catch (e) { console.error('Error asignando listener a #categoria-cancelar:', e); }
+
+            try {
+                document.getElementById('categoria-form').addEventListener('submit', guardarCategoria);
+            } catch (e) { console.error('Error asignando listener a #categoria-form:', e); }
+            
+            try {
+                document.getElementById('nuevo-plato-btn').addEventListener('click', nuevoPlato);
+                 console.log('Listener asignado a #nuevo-plato-btn');
+            } catch (e) { console.error('Error asignando listener a #nuevo-plato-btn:', e); }
+
+            try {
+                document.getElementById('plato-cancelar').addEventListener('click', function() {
+                    document.getElementById('plato-form-container').style.display = 'none';
+                });
+            } catch (e) { console.error('Error asignando listener a #plato-cancelar:', e); }
+
+            try {
+                document.getElementById('plato-form').addEventListener('submit', guardarPlato);
+            } catch (e) { console.error('Error asignando listener a #plato-form:', e); }
+
+            try {
+                document.getElementById('filtrar-platos-btn').addEventListener('click', cargarPlatos);
+            } catch (e) { console.error('Error asignando listener a #filtrar-platos-btn:', e); }
+            
+            // Listener para botón de cerrar sesión
+            try {
+                document.getElementById('logout-btn').addEventListener('click', cerrarSesion);
+            } catch (e) { console.error('Error asignando listener a #logout-btn:', e); }
+            
+            // Configurar botones de acción de reservas
+            try {
+                document.getElementById('filtrar-btn').addEventListener('click', cargarReservas); 
+            } catch (e) { console.error('Error asignando listener a #filtrar-btn:', e); }
+            try {
+                document.getElementById('limpiar-filtros-btn').addEventListener('click', limpiarFiltros); 
+            } catch (e) { console.error('Error asignando listener a #limpiar-filtros-btn:', e); }
+            
+            // Configurar botones de info
+            try {
+                document.getElementById('reset-admin-btn').addEventListener('click', resetearAdmin); 
+            } catch (e) { console.error('Error asignando listener a #reset-admin-btn:', e); }
+            try {
+                document.getElementById('check-server-btn').addEventListener('click', verificarServidor);
+            } catch (e) { console.error('Error asignando listener a #check-server-btn:', e); }
+
+            console.log('Asignación de listeners completada.');
+        });
+        
+        // Función para mostrar mensajes
+        function mostrarMensaje(mensaje, esError = false) {
+            const mensajeContainer = document.getElementById('mensaje-container');
+            const errorContainer = document.getElementById('error-container');
+
+            if (esError) {
+                errorContainer.textContent = mensaje;
+                errorContainer.style.backgroundColor = '#f8d7da';
+                errorContainer.style.color = '#721c24';
+                errorContainer.style.padding = '10px';
+                errorContainer.style.borderRadius = '4px';
+                errorContainer.style.marginTop = '10px';
+                errorContainer.style.display = 'block';
+                mensajeContainer.style.display = 'none';
+                setTimeout(() => {
+                    errorContainer.style.display = 'none';
+                }, 7000);
+            } else {
+                mensajeContainer.textContent = mensaje;
+                mensajeContainer.style.backgroundColor = '#d4edda';
+                mensajeContainer.style.color = '#155724';
+                mensajeContainer.style.padding = '10px';
+                mensajeContainer.style.borderRadius = '4px';
+                mensajeContainer.style.marginTop = '10px';
+                mensajeContainer.style.display = 'block';
+                errorContainer.style.display = 'none';
+                setTimeout(() => {
+                    mensajeContainer.style.display = 'none';
+                }, 4000);
+            }
+        }
+        
+        // Función para verificar autenticación
+        function verificarAutenticacion() {
+            const token = localStorage.getItem('adminToken');
+            if (!token) {
+                alert("No has iniciado sesión. Serás redirigido a la página de login.");
+                window.location.href = 'admin-login.html';
+                return false;
+            }
+            return true;
+        }
+        
+        // Función para cerrar sesión
+        function cerrarSesion() {
+            localStorage.removeItem('adminToken');
+            localStorage.removeItem('adminData');
+            window.location.href = 'admin-login.html';
+        }
+        
+        // --- FUNCIONES DE RESERVAS ---
+        async function cargarReservas() {
+            try {
+                if (!verificarAutenticacion()) return; 
+
+                const fechaFiltro = document.getElementById('fecha-filtro').value;
+                const horaFiltro = document.getElementById('hora-filtro').value;
+                const estadoFiltro = document.getElementById('estado-filtro').value;
+                const tbody = document.getElementById('reservas-tbody');
+                const emptyState = document.getElementById('empty-state');
+
+                tbody.innerHTML = '<tr><td colspan="7">Cargando reservas...</td></tr>';
+                if(emptyState) emptyState.style.display = 'none';
+
+                // Construir URL para la API (sin cambios)
+                const params = new URLSearchParams();
+                if (fechaFiltro) params.append('fecha', fechaFiltro);
+                if (horaFiltro) params.append('hora', horaFiltro);
+                const url = `http://localhost:3000/api/admin/reservas?${params.toString()}`;
+                const token = localStorage.getItem('adminToken');
+
+                // Fetch de reservas (sin cambios)
+                const response = await fetch(url, {
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    cache: 'no-store'
+                });
+                if (!response.ok) { /* ... manejo de errores ... */ 
+                    if (response.status === 401 || response.status === 403) {
+                        alert('Sesión expirada o inválida. Serás redirigido a la página de login.');
+                        cerrarSesion();
+                        return;
+                    }
+                    const data = await response.json().catch(() => ({}));
+                    throw new Error(data.error || data.details || `Error al cargar reservas (${response.status})`);
+                }
+                const data = await response.json();
+                const todasLasReservas = data.reservas || [];
+
+                // --- FILTRADO ADICIONAL POR FECHA/HORA ACTUAL --- 
+                const ahora = new Date(); 
+                // Opcional: Poner a 00:00:00 para comparar solo días? 
+                // ahora.setHours(0, 0, 0, 0); 
+                // --> Por ahora comparamos con la hora exacta
+                
+                const reservasActualesYFuturas = todasLasReservas.filter(reserva => {
+                    // --- Parseo de Fecha/Hora de la Reserva --- 
+                    let fechaHoraReserva = null;
+                    if (reserva.fecha && typeof reserva.fecha === 'string' && reserva.hora && typeof reserva.hora === 'string') {
+                        const partesFecha = reserva.fecha.split('/'); // [DD, MM, YYYY]
+                        const partesHora = reserva.hora.split(':'); // [HH, MM]
+
+                        if (partesFecha.length === 3 && partesHora.length === 2) {
+                            const dia = parseInt(partesFecha[0], 10);
+                            const mes = parseInt(partesFecha[1], 10);
+                            const anio = parseInt(partesFecha[2], 10);
+                            const hora = parseInt(partesHora[0], 10);
+                            const minuto = parseInt(partesHora[1], 10);
+
+                            if (!isNaN(dia) && !isNaN(mes) && !isNaN(anio) && mes >= 1 && mes <= 12 && 
+                                !isNaN(hora) && hora >= 0 && hora <= 23 && 
+                                !isNaN(minuto) && minuto >= 0 && minuto <= 59) 
+                            {
+                                // Crear objeto Date usando UTC para consistencia
+                                fechaHoraReserva = new Date(Date.UTC(anio, mes - 1, dia, hora, minuto, 0)); 
+                            } else {
+                                console.warn(`Componentes de fecha/hora inválidos para reserva ${reserva.id || reserva._id}:`, partesFecha, partesHora);
+                            }
+                        } else {
+                            console.warn(`Formato fecha (DD/MM/YYYY) u hora (HH:MM) inesperado para reserva ${reserva.id || reserva._id}:`, reserva.fecha, reserva.hora);
+                        }
+                    }
+
+                    // Si no se pudo parsear la fecha/hora, excluir la reserva
+                    if (!fechaHoraReserva || isNaN(fechaHoraReserva.getTime())) {
+                         console.warn(`Reserva ${reserva.id || reserva._id} excluida por fecha/hora inválida o faltante.`);
+                         return false; 
+                    }
+                    // ---------------------------------------------
+                    
+                    // Mantener si la fecha/hora de la reserva parseada es >= ahora
+                    return fechaHoraReserva >= ahora; 
+                });
+                console.log(`Total reservas: ${todasLasReservas.length}, Futuras/Actuales: ${reservasActualesYFuturas.length}`);
+
+                // --- Filtrado por ESTADO (aplicado a las reservas futuras/actuales) --- 
+                const reservasFiltradasFinal = estadoFiltro 
+                    ? reservasActualesYFuturas.filter(r => r.estado === estadoFiltro) 
+                    : reservasActualesYFuturas;
+
+                tbody.innerHTML = ''; // Limpiar tabla
+
+                // --- Mostrar las reservas filtradas --- 
+                if (reservasFiltradasFinal.length === 0) {
+                    if(emptyState) emptyState.style.display = 'block';
+                    if (estadoFiltro) {
+                       tbody.innerHTML = `<tr><td colspan="7">No se encontraron reservas futuras/actuales con el estado '${estadoFiltro}'.</td></tr>`;
+                    } else {
+                       tbody.innerHTML = '<tr><td colspan="7">No se encontraron reservas futuras o actuales.</td></tr>';
+                    }
+                    return;
+                }
+
+                reservasFiltradasFinal.forEach(reserva => {
+                    // --- Parsear y Formatear Fecha para MOSTRAR --- 
+                    let fechaParaMostrar = 'Fecha inválida';
+                    if (reserva.fecha && typeof reserva.fecha === 'string') {
+                        const partesFecha = reserva.fecha.split('/');
+                        if (partesFecha.length === 3) {
+                            const dia = parseInt(partesFecha[0], 10);
+                            const mes = parseInt(partesFecha[1], 10);
+                            const anio = parseInt(partesFecha[2], 10);
+                            if (!isNaN(dia) && !isNaN(mes) && !isNaN(anio) && mes >= 1 && mes <= 12) {
+                                const fechaObj = new Date(Date.UTC(anio, mes - 1, dia));
+                                if (!isNaN(fechaObj.getTime())) {
+                                     // Usar toLocaleDateString para formato local corto (ej. 12/4/2025)
+                                    fechaParaMostrar = fechaObj.toLocaleDateString('es-ES', { timeZone: 'UTC' }); 
+                                } else {
+                                     fechaParaMostrar = reserva.fecha + ' (Error Parseo)';
+                                }
+                            } else {
+                                fechaParaMostrar = reserva.fecha + ' (Partes Inválidas)';
+                            }
+                        } else {
+                             fechaParaMostrar = reserva.fecha + ' (Formato Inválido)';
+                        }
+                    }
+                    // ---------------------------------------
+
+                    const tr = document.createElement('tr');
+                    const estadoClass = `status-${reserva.estado || 'pendiente'}`;
+                    const idReserva = reserva.id || reserva._id;
+                    tr.innerHTML = `
+                        <td>${idReserva ? idReserva.substring(0, 8) : 'N/A'}...</td>
+                        <td>${reserva.nombreCliente || 'N/A'}</td>
+                        <td>${fechaParaMostrar}</td> 
+                        <td>${reserva.hora || 'N/A'}</td>
+                        <td>${reserva.numMesas || 'N/A'}</td>
+                        <td><span class="status-badge ${estadoClass}">${reserva.estado || 'pendiente'}</span></td>
+                        <td>
+                            <button class="action-btn action-btn-edit" onclick="editarReserva('${idReserva}')" title="Editar Reserva"><i class="fas fa-edit"></i></button>
+                            ${reserva.estado !== 'cancelada' ? `<button class="action-btn action-btn-cancel" onclick="cancelarReserva('${idReserva}')" title="Cancelar Reserva"><i class="fas fa-times"></i></button>` : ''}
+                        </td>
+                    `;
+                    tbody.appendChild(tr);
+                });
+
+            } catch (error) {
+                // ... (Manejo de errores - SIN CAMBIOS) ...
+            }
+        }
+        
+        function limpiarFiltros() {
+            document.getElementById('fecha-filtro').value = '';
+            document.getElementById('hora-filtro').value = '';
+            document.getElementById('estado-filtro').value = '';
+            cargarReservas(); // Recargar con filtros limpios
+        }
+
+        // Funciones Placeholder para acciones de reserva
+        function editarReserva(id) { 
+            console.log('Editar reserva:', id); 
+            mostrarMensaje('Función editar reserva no implementada completamente.', true);
+            // Aquí iría la lógica para abrir un modal o formulario de edición
+        }
+
+        async function cancelarReserva(id) { 
+            console.log('Cancelar reserva:', id);
+            if (!confirm("¿Está seguro de que desea cancelar esta reserva?")) return;
+
+            try {
+                if (!verificarAutenticacion()) return;
+                const token = localStorage.getItem('adminToken');
+                const response = await fetch(`http://localhost:3000/api/admin/reservas/${id}/cancelar`, {
+                    method: 'POST',
+                    headers: { 'Authorization': `Bearer ${token}` },
+                    cache: 'no-store'
+                });
+
+                if (!response.ok) {
+                    if (response.status === 401 || response.status === 403) {
+                        alert('Sesión expirada o inválida. Serás redirigido a la página de login.');
+                        cerrarSesion();
+                        return;
+                    }
+                    const data = await response.json().catch(() => ({}));
+                    throw new Error(data.error || data.details || `Error al cancelar reserva (${response.status})`);
+                }
+                mostrarMensaje('Reserva cancelada con éxito.', false);
+                cargarReservas(); // Recargar la lista
+            } catch (error) {
+                 console.error('Error al cancelar reserva:', error);
+                 mostrarMensaje(`Error al cancelar reserva: ${error.message}`, true);
+            }
+        }
+        
+        // --- FUNCIONES DE MENÚ ---
+        // Cargar categorías y platos al entrar en la pestaña de menú
+        document.querySelector('.tab[data-tab="menu"]').addEventListener('click', async function() {
+            try {
+                await cargarCategorias();
+                await cargarPlatos();
+            } catch (error) {
+                 console.error("Error al cargar datos del menú:", error);
+                 mostrarMensaje("Error al cargar datos del menú: " + error.message, true);
+            }
+        });
+
+        // Función para cargar categorías
+        async function cargarCategorias() {
+            try {
+                const categoriasLista = document.getElementById('categorias-lista');
+                categoriasLista.innerHTML = '<p>Cargando categorías...</p>';
+                
+                const response = await fetch('/api/menu/categorias', { cache: 'no-store' });
+                
+                if (!response.ok) {
+                    const data = await response.json().catch(() => ({}));
+                    throw new Error(data.error || data.details || `Error al cargar categorías. Estado: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                categoriasCargadas = data.categorias || []; // Actualizar variable global
+                console.log('Categorías cargadas en variable global:', categoriasCargadas.map(c => ({id: c.id || c._id, nombre: c.nombre})));
+                
+                categoriasLista.innerHTML = ''; // Limpiar lista visual
+                
+                const emptyCategoriasElement = document.getElementById('empty-categorias');
+                if (categoriasCargadas.length === 0) {
+                    if(emptyCategoriasElement) emptyCategoriasElement.style.display = 'block';
+                    // return; // No retornar aquí, necesitamos limpiar los selects
+                } else {
+                   if(emptyCategoriasElement) emptyCategoriasElement.style.display = 'none';
+                }
+                
+                // --- Renderizar lista visual de categorías --- 
+                categoriasCargadas.forEach(categoria => {
+                    const categoriaItem = document.createElement('div');
+                    categoriaItem.classList.add('categoria-item');
+                    categoriaItem.style.padding = '10px';
+                    categoriaItem.style.marginBottom = '10px';
+                    categoriaItem.style.borderBottom = '1px solid #ddd';
+                    
+                    categoriaItem.innerHTML = `
+                        <h4 style="margin: 0 0 5px 0;">${categoria.nombre}</h4>
+                        <p style="margin: 0 0 5px 0; color: #666;">${categoria.descripcion || 'Sin descripción'}</p>
+                        <p style="margin: 0 0 10px 0; font-size: 0.8rem;">Orden: ${categoria.orden || 1}</p>
+                        <div style="display: flex; gap: 10px;">
+                            <button class="action-btn action-btn-edit editar-categoria" data-id="${categoria.id || categoria._id}">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="action-btn action-btn-cancel eliminar-categoria" data-id="${categoria.id || categoria._id}">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    `;
+                    categoriasLista.appendChild(categoriaItem);
+                });
+                
+                // Re-asignar listeners para botones de categoría
+                document.querySelectorAll('.editar-categoria').forEach(button => {
+                    button.addEventListener('click', () => editarCategoria(button.getAttribute('data-id')));
+                });
+                document.querySelectorAll('.eliminar-categoria').forEach(button => {
+                    button.addEventListener('click', () => eliminarCategoria(button.getAttribute('data-id')));
+                });
+
+                // --- Rellenar los SELECTS de categoría (Filtro y Formulario) --- 
+                const selectCategoriasFiltro = document.getElementById('plato-categoria-filtro');
+                const selectCategoriasForm = document.getElementById('plato-categoria');
+                
+                // Limpiar ambos selects completamente
+                if (selectCategoriasFiltro) selectCategoriasFiltro.innerHTML = '';
+                if (selectCategoriasForm) selectCategoriasForm.innerHTML = '';
+
+                // Añadir opción por defecto al select de FILTRO
+                if (selectCategoriasFiltro) {
+                    const defaultFiltro = document.createElement('option');
+                    defaultFiltro.value = "";
+                    defaultFiltro.textContent = "Todas las categorías";
+                    selectCategoriasFiltro.appendChild(defaultFiltro);
+                }
+
+                // Añadir opción por defecto al select del FORMULARIO
+                if (selectCategoriasForm) {
+                    const defaultForm = document.createElement('option');
+                    defaultForm.value = "";
+                    defaultForm.textContent = "Seleccionar categoría...";
+                    defaultForm.disabled = true;
+                    defaultForm.selected = true;
+                    selectCategoriasForm.appendChild(defaultForm);
+                }
+
+                // Añadir las categorías reales a AMBOS selects
+                categoriasCargadas.forEach(categoria => {
+                    const option = document.createElement('option');
+                    option.value = categoria.id || categoria._id;
+                    option.textContent = categoria.nombre;
+                    
+                    // Clonar nodo para añadir a ambos selects si existen
+                    if (selectCategoriasFiltro) selectCategoriasFiltro.appendChild(option.cloneNode(true));
+                    if (selectCategoriasForm) selectCategoriasForm.appendChild(option.cloneNode(true));
+                });
+                
+            } catch (error) {
+                console.error('Error fatal al cargar categorías:', error);
+                document.getElementById('categorias-lista').innerHTML = `
+                    <div style="color: #721c24; background-color: #f8d7da; padding: 10px; border-radius: 4px;">
+                        Error al cargar categorías: ${error.message}
+                    </div>
+                `;
+                // Limpiar selects también en caso de error
+                 const selectCategoriasFiltro = document.getElementById('plato-categoria-filtro');
+                 const selectCategoriasForm = document.getElementById('plato-categoria');
+                 if (selectCategoriasFiltro) selectCategoriasFiltro.innerHTML = '<option value="">Error al cargar</option>';
+                 if (selectCategoriasForm) selectCategoriasForm.innerHTML = '<option value="">Error al cargar</option>';
+
+                mostrarMensaje(`Error al cargar categorías: ${error.message}`, true);
+            }
+        }
+        
+        // Función para guardar categoría
+        async function guardarCategoria(event) {
+            event.preventDefault();
+            
+            try {
+                // Verificar autenticación primero
+                if (!verificarAutenticacion()) {
+                    mostrarMensaje('Debes iniciar sesión para realizar esta acción', true);
+                    return;
+                }
+                
+                const categoriaId = document.getElementById('categoria-id').value;
+                const nombre = document.getElementById('categoria-nombre').value;
+                const descripcion = document.getElementById('categoria-descripcion').value;
+                const orden = parseInt(document.getElementById('categoria-orden').value) || 1;
+                
+                if (!nombre) {
+                    throw new Error('El nombre de la categoría es obligatorio');
+                }
+                
+                const categoriaData = {
+                    nombre,
+                    descripcion,
+                    orden
+                };
+                
+                let url, method;
+                
+                if (categoriaId) {
+                    // Actualizar categoría existente
+                    url = `/api/admin/menu/categorias/${categoriaId}`;
+                    method = 'PUT';
+                } else {
+                    // Crear nueva categoría
+                    url = '/api/admin/menu/categorias';
+                    method = 'POST';
+                }
+                
+                // Obtener token de localStorage (si existe)
+                const token = localStorage.getItem('adminToken');
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+                
+                if (token) {
+                    headers['Authorization'] = `Bearer ${token}`;
+                } else {
+                    throw new Error('No tienes permisos para realizar esta acción. Inicia sesión nuevamente.');
+                }
+                
+                console.log('DEBUG - Guardando categoría:', {
+                    url,
+                    method,
+                    categoriaData,
+                    headers: { ...headers, Authorization: token ? 'Bearer [TOKEN OCULTO]' : 'Sin token' }
+                });
+                
+                const response = await fetch(url, {
+                    method,
+                    headers,
+                    body: JSON.stringify(categoriaData),
+                    cache: 'no-store'
+                });
+                
+                const responseData = await response.json();
+                console.log('DEBUG - Respuesta del servidor:', responseData);
+                
+                if (!response.ok) {
+                    if (response.status === 401 || response.status === 403) {
+                        // Si hay error de autenticación, redirigir al login
+                        alert('Sesión expirada o inválida. Serás redirigido a la página de login.');
+                        cerrarSesion();
+                        return;
+                    }
+                    
+                    if (responseData.error) {
+                        throw new Error(responseData.error);
+                    } else if (responseData.details) {
+                        throw new Error(responseData.details);
+                    } else {
+                        throw new Error(`Error al guardar categoría. Estado: ${response.status}`);
+                    }
+                }
+                
+                // Ocultar formulario
+                document.getElementById('categoria-form-container').style.display = 'none';
+                
+                // Recargar categorías
+                await cargarCategorias();
+                
+                // Recargar platos si es necesario
+                await cargarPlatos();
+                
+                // Mostrar mensaje de éxito
+                mostrarMensaje('Categoría guardada correctamente', false);
+                
+            } catch (error) {
+                console.error('Error al guardar categoría:', error);
+                mostrarMensaje('Error al guardar categoría: ' + error.message, true);
+            }
+        }
+        
+        // Función para cargar platos
+        async function cargarPlatos() {
+            try {
+                console.log('Actualizando categorías antes de cargar platos...');
+                await cargarCategorias();
+                console.log('Categorías actualizadas. Total:', categoriasCargadas.length);
+                
+                const platosLista = document.getElementById('platos-lista');
+                if (!platosLista) {
+                    console.warn('No se encontró el elemento platosLista');
+                    return;
+                }
+                
+                platosLista.innerHTML = '<p>Cargando platos...</p>';
+                
+                // Obtener la categoría seleccionada en el filtro (si hay)
+                const categoriaId = document.getElementById('plato-categoria-filtro')?.value || '';
+                const endpoint = categoriaId 
+                    ? `/api/menu/platos?categoriaId=${categoriaId}`
+                    : '/api/menu/platos';
+                    
+                console.log('Cargando platos desde:', endpoint);
+                
+                const response = await fetch(endpoint, { cache: 'no-store' });
+                
+                if (!response.ok) {
+                    throw new Error(`Error al cargar platos. Estado: ${response.status}`);
+                }
+                
+                const data = await response.json();
+                platosCargados = data.platos || [];
+                
+                platosLista.innerHTML = '';
+                
+                // Mostrar mensaje si no hay platos
+                const emptyPlatosElement = document.getElementById('empty-platos');
+                if (platosCargados.length === 0) {
+                    if(emptyPlatosElement) emptyPlatosElement.style.display = 'block';
+                    platosLista.innerHTML = `
+                        <div class="empty-state">
+                            <p>No hay platos en esta categoría</p>
+                        </div>
+                    `;
+                    return;
+                } else {
+                    if(emptyPlatosElement) emptyPlatosElement.style.display = 'none';
+                }
+                
+                // Renderizar platos
+                platosCargados.forEach(plato => {
+                    const platoItem = document.createElement('div');
+                    platoItem.classList.add('plato-item');
+                    
+                    // Encontrar el nombre de la categoría
+                    const categoria = categoriasCargadas.find(c => c.id === plato.categoriaId || c._id === plato.categoriaId);
+                    const categoriaNombre = categoria ? categoria.nombre : 'Categoría desconocida';
+                    
+                    platoItem.innerHTML = `
+                        <div class="plato-image">
+                            <img src="${plato.imagen || 'https://via.placeholder.com/100x100?text=Sin+imagen'}" 
+                                 alt="${plato.nombre}" 
+                                 onerror="this.src='https://via.placeholder.com/100x100?text=Error+imagen'">
+                        </div>
+                        <div class="plato-info">
+                            <h4>${plato.nombre}</h4>
+                            <p>${plato.descripcion || 'Sin descripción'}</p>
+                            <p><strong>Precio:</strong> ${plato.precio ? `$${plato.precio.toFixed(2)}` : 'No definido'}</p>
+                            <p><strong>Categoría:</strong> ${categoriaNombre}</p>
+                            <p><strong>Disponible:</strong> ${plato.disponible ? 'Sí' : 'No'}</p>
+                            <p><strong>Destacado:</strong> ${plato.destacado ? 'Sí' : 'No'}</p>
+                        </div>
+                        <div class="plato-actions">
+                            <button class="action-btn action-btn-edit editar-plato" data-id="${plato.id || plato._id}">
+                                <i class="fas fa-edit"></i> Editar
+                            </button>
+                            <button class="action-btn action-btn-cancel eliminar-plato" data-id="${plato.id || plato._id}">
+                                <i class="fas fa-trash"></i> Eliminar
+                            </button>
+                        </div>
+                    `;
+                    platosLista.appendChild(platoItem);
+                });
+                
+                // Re-asignar listeners para botones
+                document.querySelectorAll('.editar-plato').forEach(button => {
+                    button.addEventListener('click', () => editarPlato(button.getAttribute('data-id')));
+                });
+                document.querySelectorAll('.eliminar-plato').forEach(button => {
+                    button.addEventListener('click', () => eliminarPlato(button.getAttribute('data-id')));
+                });
+            } catch (error) {
+                console.error('Error al cargar platos:', error);
+                document.getElementById('platos-lista').innerHTML = `
+                    <div style="color: #721c24; background-color: #f8d7da; padding: 10px; border-radius: 4px;">
+                        Error al cargar platos: ${error.message}
+                    </div>
+                `;
+                mostrarMensaje(`Error al cargar platos: ${error.message}`, true);
+            }
+        }
+        
+        // Función para guardar plato
+        async function guardarPlato(event) {
+            event.preventDefault();
+
+            try {
+                // Verificar autenticación primero
+                if (!verificarAutenticacion()) {
+                    mostrarMensaje('Debes iniciar sesión para realizar esta acción', true);
+                    return;
+                }
+
+                const platoId = document.getElementById('plato-id').value;
+                const nombre = document.getElementById('plato-nombre').value;
+                const descripcion = document.getElementById('plato-descripcion').value;
+                const precioInput = document.getElementById('plato-precio').value;
+                const precioNormalizado = precioInput.replace(',', '.');
+                const precio = parseFloat(precioNormalizado) || 0;
+                const categoriaIdValue = document.getElementById('plato-categoria').value; // Obtener valor del select
+                const orden = parseInt(document.getElementById('plato-orden').value) || 1;
+                const disponible = document.getElementById('plato-disponible').checked;
+
+                // Validar campos obligatorios en el frontend
+                if (!nombre || !categoriaIdValue || isNaN(precio) || precio < 0) {
+                    mostrarMensaje('Nombre, categoría y un precio válido (ej: 12,50) son obligatorios.', true);
+                    return;
+                }
+
+                // Preparar los datos base del plato - ¡USAR categoriaId!
+                const platoDataBase = {
+                    nombre: nombre.trim(),
+                    descripcion: descripcion.trim(),
+                    precio: Number(precio), 
+                    categoriaId: categoriaIdValue.trim(), // <-- CAMBIO DE NOMBRE DEL CAMPO
+                    orden,
+                    disponible
+                    // Añadir otros campos si el backend los espera directamente aquí
+                    // imagen: ..., ingredientes: ..., alergenos: ..., destacado: ...
+                };
+
+                let url, method;
+                // ¡Enviar siempre formato PLANO!
+                const platoDataToSend = platoDataBase; 
+
+                // Determinar URL y método
+                if (platoId) {
+                    // Actualización (PUT)
+                    url = `http://localhost:3000/api/admin/menu/platos/${platoId}`;
+                    method = 'PUT';
+                } else {
+                    // Creación (POST)
+                    url = 'http://localhost:3000/api/admin/menu/platos';
+                    method = 'POST';
+                }
+
+                const token = localStorage.getItem('adminToken');
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+                // ... (resto de la función: añadir token, fetch, manejo respuesta) ...
+                
+                if (token) {
+                    headers['Authorization'] = `Bearer ${token}`;
+                } else {
+                    throw new Error('No tienes permisos para realizar esta acción.');
+                }
+
+                console.log(`DEBUG - Enviando ${method} a ${url} con datos (PLANOS):`, JSON.stringify(platoDataToSend, null, 2));
+
+                const response = await fetch(url, {
+                    method,
+                    headers,
+                    body: JSON.stringify(platoDataToSend), // Enviar datos planos
+                    cache: 'no-store'
+                });
+
+                const responseData = await response.json();
+                console.log('DEBUG - Respuesta del servidor:', responseData);
+
+                // Manejo de la respuesta
+                if (!response.ok) {
+                    if (response.status === 401 || response.status === 403) {
+                        alert('Sesión expirada o inválida. Serás redirigido a la página de login.');
+                        cerrarSesion();
+                        return;
+                    }
+                    throw new Error(responseData.error || responseData.details || `Error ${response.status}`);
+                }
+
+                // Éxito
+                document.getElementById('plato-form-container').style.display = 'none';
+                await cargarPlatos(); 
+                mostrarMensaje('Plato guardado correctamente', false);
+
+            } catch (error) {
+                console.error('Error al guardar plato:', error);
+                mostrarMensaje('Error al guardar plato: ' + error.message, true);
+            }
+        }
+
+        // Funciones para gestión de menús
+        // Función para editar una categoría existente
+        async function editarCategoria(categoriaId) {
+            try {
+                console.log(`Editando categoría con ID: ${categoriaId}`);
+                
+                // Verificar si tenemos las categorías cargadas
+                if (categoriasCargadas.length === 0) {
+                    console.log("No hay categorías cargadas, cargando categorías primero");
+                    // Cargar las categorías primero
+                    const categoriasResponse = await fetch('http://localhost:3000/api/menu/categorias');
+                    if (!categoriasResponse.ok) {
+                        throw new Error(`Error al cargar categorías. Estado: ${categoriasResponse.status}`);
+                    }
+                    const categoriasData = await categoriasResponse.json();
+                    categoriasCargadas = categoriasData.categorias || [];
+                    console.log(`Categorías cargadas: ${categoriasCargadas.length}`);
+                }
+                
+                // Buscar la categoría en las categorías cargadas
+                const categoriaEncontrada = categoriasCargadas.find(cat => 
+                    cat.id === categoriaId || cat._id === categoriaId
+                );
+                
+                console.log("Categoría encontrada:", categoriaEncontrada);
+                
+                if (!categoriaEncontrada) {
+                    throw new Error(`No se encontró la categoría con ID: ${categoriaId}`);
+                }
+                
+                // Mostrar formulario de edición
+                document.getElementById('categoria-form-title').textContent = 'Editar Categoría';
+                document.getElementById('categoria-nombre').value = categoriaEncontrada.nombre;
+                document.getElementById('categoria-descripcion').value = categoriaEncontrada.descripcion || '';
+                document.getElementById('categoria-id').value = categoriaId;
+                
+                // Mostrar el formulario
+                document.getElementById('categoria-form-container').style.display = 'block';
+                
+                // Hacer scroll al formulario
+                document.getElementById('categoria-form-container').scrollIntoView({ behavior: 'smooth' });
+                
+            } catch (error) {
+                console.error('Error al editar categoría:', error);
+                mostrarMensaje(`Error al editar categoría: ${error.message}`, true);
+            }
+        }
+
+        // Función para eliminar categoría
+        async function eliminarCategoria(categoriaId) {
+            if (!confirm(`¿Está seguro de que desea eliminar la categoría?`)) {
+                return;
+            }
+            
+            try {
+                // Verificar autenticación primero
+                if (!verificarAutenticacion()) {
+                    mostrarMensaje('Debes iniciar sesión para realizar esta acción', true);
+                    return;
+                }
+                
+                // Obtener token de localStorage (si existe)
+                const token = localStorage.getItem('adminToken');
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+                
+                if (token) {
+                    headers['Authorization'] = `Bearer ${token}`;
+                } else {
+                    throw new Error('No tienes permisos para realizar esta acción');
+                }
+                
+                // Eliminar categoría
+                const response = await fetch(`http://localhost:3000/api/admin/menu/categorias/${categoriaId}`, {
+                    method: 'DELETE',
+                    headers: headers,
+                    cache: 'no-store'
+                });
+                
+                if (!response.ok) {
+                    const data = await response.json().catch(() => ({}));
+                    
+                    if (response.status === 401 || response.status === 403) {
+                        alert('Sesión expirada o inválida. Serás redirigido a la página de login.');
+                        cerrarSesion();
+                        return;
+                    }
+                    
+                    throw new Error(data.error || data.details || `Error al eliminar categoría. Estado: ${response.status}`);
+                }
+                
+                // Recargar categorías
+                await cargarCategorias();
+                
+                // Recargar platos también, ya que podrían haberse afectado
+                await cargarPlatos();
+                
+                // Mostrar mensaje de éxito
+                mostrarMensaje('Categoría eliminada correctamente', false);
+                
+            } catch (error) {
+                console.error('Error al eliminar categoría:', error);
+                mostrarMensaje('Error al eliminar categoría: ' + error.message, true);
+            }
+        }
+
+        // Función para editar plato
+        async function editarPlato(platoId) {
+            try {
+                // Verificar autenticación primero
+                if (!verificarAutenticacion()) {
+                    mostrarMensaje('Debes iniciar sesión para realizar esta acción', true);
+                    return;
+                }
+                
+                // Cargar datos del plato
+                const response = await fetch(`http://localhost:3000/api/menu/platos/${platoId}`, {
+                    cache: 'no-store'
+                });
+                
+                if (!response.ok) {
+                    throw new Error('Error al cargar datos del plato');
+                }
+                
+                const data = await response.json();
+                const plato = data.plato;
+                
+                if (!plato) {
+                    throw new Error('Plato no encontrado');
+                }
+                
+                // Cargar datos en el formulario
+                document.getElementById('plato-form-title').textContent = 'Editar Plato';
+                document.getElementById('plato-id').value = platoId;
+                document.getElementById('plato-nombre').value = plato.nombre || '';
+                document.getElementById('plato-descripcion').value = plato.descripcion || '';
+                document.getElementById('plato-precio').value = plato.precio || '';
+                
+                // Si el plato tiene categoría, seleccionarla en el desplegable
+                if (plato.categoria && plato.categoria._id) {
+                    document.getElementById('plato-categoria').value = plato.categoria._id;
+                } else if (plato.categoriaId) {
+                    document.getElementById('plato-categoria').value = plato.categoriaId;
+                }
+                
+                document.getElementById('plato-orden').value = plato.orden || 1;
+                document.getElementById('plato-disponible').checked = plato.disponible !== false;
+                
+                // Mostrar formulario
+                document.getElementById('plato-form-container').style.display = 'block';
+                
+            } catch (error) {
+                console.error('Error al editar plato:', error);
+                mostrarMensaje('Error al editar plato: ' + error.message, true);
+            }
+        }
+
+        // Función para eliminar plato
+        async function eliminarPlato(platoId) {
+            if (!confirm(`¿Está seguro de que desea eliminar el plato?`)) {
+                return;
+            }
+            
+            try {
+                // Verificar autenticación primero
+                if (!verificarAutenticacion()) {
+                    mostrarMensaje('Debes iniciar sesión para realizar esta acción', true);
+                    return;
+                }
+                
+                // Obtener token de localStorage (si existe)
+                const token = localStorage.getItem('adminToken');
+                const headers = {
+                    'Content-Type': 'application/json'
+                };
+                
+                if (token) {
+                    headers['Authorization'] = `Bearer ${token}`;
+                } else {
+                    throw new Error('No tienes permisos para realizar esta acción');
+                }
+                
+                // Eliminar plato
+                const response = await fetch(`http://localhost:3000/api/admin/menu/platos/${platoId}`, {
+                    method: 'DELETE',
+                    headers: headers,
+                    cache: 'no-store'
+                });
+                
+                if (!response.ok) {
+                    const data = await response.json().catch(() => ({}));
+                    
+                    if (response.status === 401 || response.status === 403) {
+                        alert('Sesión expirada o inválida. Serás redirigido a la página de login.');
+                        cerrarSesion();
+                        return;
+                    }
+                    
+                    throw new Error(data.error || data.details || `Error al eliminar plato. Estado: ${response.status}`);
+                }
+                
+                // Recargar platos
+                await cargarPlatos();
+                
+                // Mostrar mensaje de éxito
+                mostrarMensaje('Plato eliminado correctamente', false);
+                
+            } catch (error) {
+                console.error('Error al eliminar plato:', error);
+                mostrarMensaje('Error al eliminar plato: ' + error.message, true);
+            }
+        }
+        
+        // Función para mostrar formulario de nueva categoría
+        function nuevaCategoria() {
+            console.log('Click en #nueva-categoria-btn detectado');
+            // Verificar autenticación primero
+            if (!verificarAutenticacion()) {
+                mostrarMensaje('Debes iniciar sesión para añadir una categoría', true);
+                return;
+            }
+
+            // Limpiar formulario
+            document.getElementById('categoria-form-title').textContent = 'Nueva Categoría';
+            document.getElementById('categoria-id').value = '';
+            document.getElementById('categoria-nombre').value = '';
+            document.getElementById('categoria-descripcion').value = '';
+            document.getElementById('categoria-orden').value = '1';
+            
+            // Mostrar formulario
+            console.log('Mostrando formulario de categoría...');
+            document.getElementById('categoria-form-container').style.display = 'block';
+            document.getElementById('categoria-form-container').scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+        }
+        
+        // Función para mostrar formulario de nuevo plato
+        function nuevoPlato() {
+            console.log('Click en #nuevo-plato-btn detectado');
+             // Verificar autenticación primero
+            if (!verificarAutenticacion()) {
+                mostrarMensaje('Debes iniciar sesión para añadir un plato', true);
+                return;
+            }
+
+            // Limpiar formulario
+            document.getElementById('plato-form-title').textContent = 'Nuevo Plato';
+            document.getElementById('plato-id').value = '';
+            document.getElementById('plato-nombre').value = '';
+            document.getElementById('plato-descripcion').value = '';
+            document.getElementById('plato-precio').value = '';
+            document.getElementById('plato-orden').value = '1';
+            document.getElementById('plato-disponible').checked = true;
+            
+            // Asegurarse de que hay categorías disponibles (usando la variable global)
+            console.log(`Comprobando categorías cargadas: ${categoriasCargadas.length}`);
+            if (categoriasCargadas.length === 0) { 
+                mostrarMensaje('Debe crear al menos una categoría antes de añadir platos', true);
+                return;
+            }
+            
+            // Mostrar formulario
+            console.log('Mostrando formulario de plato...');
+            document.getElementById('plato-form-container').style.display = 'block';
+            document.getElementById('plato-form-container').scrollIntoView({ behavior: 'smooth', block: 'nearest' }); 
+        }
+
+        // --- FUNCIONES DE INFORMACIÓN / DEBUG (Asumo que existen) ---
+        function resetearAdmin() { 
+             console.log('Resetear Admin');
+             mostrarMensaje('Función no implementada.', true); 
+        }
+        function verificarServidor() { 
+             console.log('Verificar Servidor');
+             mostrarMensaje('Función no implementada.', true); 
+        }
+    </script>
+</body>
+</html> 

@@ -1,0 +1,327 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LATIAX | Acceso Administrador</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        .login-container {
+            max-width: 400px;
+            margin: 100px auto;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        
+        .login-header {
+            text-align: center;
+            margin-bottom: 2rem;
+        }
+        
+        .login-header h1 {
+            color: var(--primary-color);
+            font-size: 1.8rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .login-header p {
+            color: var(--light-text);
+            font-size: 0.9rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+        }
+        
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 1rem;
+        }
+        
+        .form-group input:focus {
+            border-color: var(--primary-color);
+            outline: none;
+        }
+        
+        .login-btn {
+            width: 100%;
+            padding: 12px;
+            background-color: var(--primary-color);
+            color: white;
+            border: none;
+            border-radius: 4px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+        
+        .login-btn:hover {
+            background-color: #3a7bc8;
+        }
+        
+        .error-message {
+            color: var(--error-color);
+            margin-top: 1rem;
+            padding: 0.5rem;
+            border-radius: 4px;
+            background-color: rgba(237, 106, 90, 0.1);
+            display: none;
+        }
+        
+        .back-link {
+            display: block;
+            text-align: center;
+            margin-top: 1.5rem;
+            color: var(--light-text);
+            text-decoration: none;
+        }
+        
+        .back-link i {
+            margin-right: 5px;
+        }
+        
+        .back-link:hover {
+            color: var(--primary-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="login-container">
+        <div class="login-header">
+            <h1>LATIAX Admin</h1>
+            <p>Acceso al panel de administración</p>
+        </div>
+        
+        <form id="login-form">
+            <div class="form-group">
+                <label for="email">Correo electrónico</label>
+                <input type="email" id="email" name="email" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Contraseña</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <button type="submit" class="login-btn">Iniciar sesión</button>
+            
+            <div id="error-message" class="error-message">
+                Usuario o contraseña incorrectos
+            </div>
+        </form>
+        
+        <div style="margin-top: 20px; padding: 15px; background-color: #f8f9fa; border-radius: 5px; text-align: center;">
+            <p style="margin-bottom: 10px; color: #721c24;"><strong>¿Problemas con el inicio de sesión?</strong></p>
+            <a href="admin-panel-simple.html" style="display: inline-block; padding: 8px 15px; background-color: #4285F4; color: white; text-decoration: none; border-radius: 4px; font-weight: 500;">
+                <i class="fas fa-shield-alt"></i> Usar panel simplificado (sin bucles)
+            </a>
+        </div>
+        
+        <a href="./" class="back-link">
+            <i class="fas fa-arrow-left"></i> Volver al inicio
+        </a>
+    </div>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Limpiar cualquier estado de bucle anterior al cargar la página
+            sessionStorage.removeItem('loopDetected');
+            
+            // Verificar si hay un parámetro de bypass en la URL
+            const urlParams = new URLSearchParams(window.location.search);
+            const bypassAuth = urlParams.get('bypass') === 'true';
+            const forceClear = urlParams.get('clear') === 'true';
+            const forceNoRedirect = urlParams.get('no_redirect') === 'true';
+            
+            // Si se solicita limpieza forzada, limpiar todos los datos de autenticación
+            if (forceClear) {
+                console.log("Limpieza forzada de datos de autenticación");
+                localStorage.removeItem('adminToken');
+                localStorage.removeItem('adminData');
+                sessionStorage.clear();
+                
+                // Limpiar cookies relacionadas
+                document.cookie.split(";").forEach(function(c) {
+                    document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+                });
+                
+                // Si no estamos en modo no_redirect, recargar sin parámetros
+                if (!forceNoRedirect) {
+                    window.location.href = '/admin-login.html?no_redirect=true';
+                    return;
+                }
+            }
+            
+            // Añadir botón para acceder al panel de emergencia
+            const loginContainer = document.querySelector('.login-container');
+            const emergencyLink = document.createElement('a');
+            emergencyLink.href = 'admin-selector.html';
+            emergencyLink.className = 'back-link';
+            emergencyLink.style.marginTop = '10px';
+            emergencyLink.style.color = '#dc3545';
+            emergencyLink.innerHTML = '<i class="fas fa-exclamation-triangle"></i> Volver al selector de administración';
+            loginContainer.appendChild(emergencyLink);
+            
+            // Manejar envío del formulario
+            const loginForm = document.getElementById('login-form');
+            const errorMessage = document.getElementById('error-message');
+            
+            // Si hay un error en la URL, mostrarlo
+            if (urlParams.get('error')) {
+                errorMessage.textContent = decodeURIComponent(urlParams.get('error'));
+                errorMessage.style.display = 'block';
+                
+                // Añadir enlaces para solucionar el problema
+                const helpLinks = document.createElement('div');
+                helpLinks.innerHTML = `
+                    <div style="margin-top: 15px; font-size: 14px;">
+                        <a href="admin-selector.html" style="display: block; margin-bottom: 10px; color: #4285F4;">Ir al panel de selección</a>
+                        <a href="admin-login.html?clear=true&no_redirect=true" style="display: block; margin-bottom: 10px; color: #dc3545;">Limpiar datos y reintentar</a>
+                        <a href="admin-panel-simple.html" style="display: block; margin-bottom: 10px; color: #ffc107;">Usar panel simplificado</a>
+                    </div>
+                `;
+                errorMessage.appendChild(helpLinks);
+            }
+            
+            // Función para verificar sesión actual
+            async function verificarSesion() {
+                // Si hay un parámetro de bypass o no_redirect, no verificar sesión
+                if (bypassAuth || forceNoRedirect) {
+                    console.log("Bypass de verificación de sesión activado o redirección desactivada");
+                    return;
+                }
+                
+                const token = localStorage.getItem('adminToken');
+                
+                if (!token) {
+                    console.log("No hay token, permaneciendo en login");
+                    return;
+                }
+                
+                try {
+                    console.log("Verificando token existente...");
+                    const response = await fetch('http://localhost:3000/api/auth/session', {
+                        headers: {
+                            'Authorization': `Bearer ${token}`,
+                            'Cache-Control': 'no-cache, no-store',
+                            'Pragma': 'no-cache'
+                        },
+                        // Añadir un parámetro de tiempo para evitar caché
+                        cache: 'no-store'
+                    });
+                    
+                    const data = await response.json();
+                    
+                    if (response.ok && data.authenticated) {
+                        console.log("Sesión válida, redirigiendo al panel");
+                        // Redirigir con parámetros anti-bucle
+                        const redirectURL = 'admin-panel-simple.html?bypass=true&auth_time=' + Date.now();
+                        console.log("Redirigiendo a:", redirectURL);
+                        window.location.href = redirectURL;
+                    } else {
+                        console.log("Sesión inválida:", data);
+                        // No redireccionar, solo limpiar datos inválidos
+                        localStorage.removeItem('adminToken');
+                        localStorage.removeItem('adminData');
+                    }
+                } catch (error) {
+                    console.error("Error verificando sesión:", error);
+                    // Mostrar error en caso de problemas de conexión
+                    mostrarError("Error de conexión: No se pudo verificar la sesión. Verifica que el servidor esté en ejecución.");
+                }
+            }
+            
+            // Función para mostrar errores
+            function mostrarError(mensaje) {
+                errorMessage.textContent = mensaje;
+                errorMessage.style.display = 'block';
+                
+                // Añadir enlaces para solucionar el problema
+                const helpLinks = document.createElement('div');
+                helpLinks.innerHTML = `
+                    <div style="margin-top: 15px; font-size: 14px;">
+                        <a href="admin-selector.html" style="display: block; margin-bottom: 10px; color: #4285F4;">Ir al panel de selección</a>
+                        <a href="admin-login.html?clear=true&no_redirect=true" style="display: block; margin-bottom: 10px; color: #dc3545;">Limpiar datos y reintentar</a>
+                        <a href="admin-panel-simple.html" style="display: block; margin-bottom: 10px; color: #ffc107;">Usar panel simplificado</a>
+                    </div>
+                `;
+                errorMessage.appendChild(helpLinks);
+            }
+            
+            // Verificar sesión al cargar, con un pequeño retardo para evitar competencia
+            setTimeout(verificarSesion, 100);
+            
+            loginForm.addEventListener('submit', async function(e) {
+                e.preventDefault();
+                
+                const email = document.getElementById('email').value;
+                const password = document.getElementById('password').value;
+                
+                try {
+                    console.log('Intentando iniciar sesión con:', email);
+                    // Ocultar mensaje de error previo
+                    errorMessage.style.display = 'none';
+                    
+                    const response = await fetch('http://localhost:3000/api/auth/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                            'Cache-Control': 'no-cache, no-store',
+                            'Pragma': 'no-cache'
+                        },
+                        body: JSON.stringify({ email, password }),
+                        cache: 'no-store'
+                    });
+                    
+                    const data = await response.json();
+                    console.log('Respuesta del servidor:', response.status, data);
+                    
+                    if (response.ok) {
+                        console.log('Login exitoso, guardando token y datos');
+                        // Limpiar cualquier dato antiguo primero
+                        localStorage.removeItem('adminToken');
+                        localStorage.removeItem('adminData');
+                        
+                        // Guardar token en localStorage con un pequeño retardo
+                        setTimeout(() => {
+                            localStorage.setItem('adminToken', data.usuario.token);
+                            localStorage.setItem('adminData', JSON.stringify({
+                                email: data.usuario.email,
+                                nombre: data.usuario.nombre,
+                                uid: data.usuario.uid
+                            }));
+                            
+                            console.log('Datos guardados, redirigiendo al panel de administración');
+                            // Redirigir con bypass para evitar bucles de verificación y parámetro de tiempo
+                            const redirectURL = 'admin-panel-simple.html?bypass=true&auth_time=' + Date.now();
+                            console.log("Redirigiendo a:", redirectURL);
+                            window.location.href = redirectURL;
+                        }, 100);
+                    } else {
+                        // Mostrar mensaje de error
+                        console.error('Error en login:', data.error);
+                        mostrarError(data.error || 'Error al iniciar sesión');
+                    }
+                } catch (error) {
+                    console.error('Error de conexión:', error);
+                    mostrarError('Error al conectar con el servidor. Verifica que el servidor esté en ejecución.');
+                }
+            });
+        });
+    </script>
+</body>
+</html> 

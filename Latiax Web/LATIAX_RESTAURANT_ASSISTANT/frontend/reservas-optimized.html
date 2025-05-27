@@ -1,0 +1,422 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reservas - Latiax Restaurant Assistant</title>
+    <!-- Metadatos para SEO y rendering -->
+    <meta name="description" content="Reserva tu mesa en nuestro restaurante de forma fácil y rápida con el asistente de Latiax">
+    <meta name="theme-color" content="#50B83C">
+    
+    <!-- Precarga de recursos críticos -->
+    <link rel="preload" href="css/optimized.css" as="style">
+    <link rel="preload" href="js/asset-loader.js" as="script">
+    <link rel="preload" href="img/logo.png" as="image">
+    <link rel="preload" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" as="style">
+    
+    <!-- Estilos críticos inline para primera carga (CSS mínimo) -->
+    <style>
+        /* Estilos mínimos para la carga inicial */
+        :root {
+            --primary-color: #4A90E2;
+            --secondary-color: #50B83C;
+            --light-bg: #F8F9FA;
+            --container-bg: #FFFFFF;
+            --text-color: #333333;
+        }
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: sans-serif;
+            background-color: var(--light-bg);
+            color: var(--text-color);
+        }
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background-color: var(--light-bg);
+            z-index: 9999;
+            transition: opacity 0.5s ease;
+        }
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 5px solid rgba(80, 184, 60, 0.2);
+            border-radius: 50%;
+            border-top: 5px solid var(--secondary-color);
+            animation: spin 1s linear infinite;
+        }
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+        header {
+            background-color: var(--container-bg);
+            padding: 10px 20px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        .content-placeholder {
+            min-height: 100vh;
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+    </style>
+    
+    <!-- Carga de CSS optimizado -->
+    <link rel="stylesheet" href="css/optimized.css">
+    
+    <!-- Carga condicional de fuentes -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Carga diferida de Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" 
+          media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    </noscript>
+    
+    <!-- Cargar main.css de forma no bloqueante -->
+    <link rel="stylesheet" href="css/main.css" media="print" onload="this.media='all'">
+    <noscript>
+        <link rel="stylesheet" href="css/main.css">
+    </noscript>
+</head>
+<body data-page="reservas">
+    <!-- Pantalla de carga -->
+    <div class="loading-screen" id="loading-screen">
+        <div class="loading-spinner"></div>
+    </div>
+    
+    <!-- Contenido principal con placeholder -->
+    <div class="content-placeholder" id="content-container">
+        <header class="main-header">
+            <div class="logo-container">
+                <!-- Imagen con carga optimizada -->
+                <img data-src="img/logo.png" alt="Latiax Logo" width="40" height="40" class="lazy-image">
+                <div class="header-text">
+                    <h1>Latiax Restaurant Assistant</h1>
+                    <p>Tu asistente inteligente para reservas y consultas</p>
+                </div>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+            <nav class="main-nav">
+                <ul>
+                    <li><a href="index.html"><i class="fas fa-comment"></i> Chat</a></li>
+                    <li><a href="reservas.html" class="active"><i class="fas fa-calendar-alt"></i> Reservas</a></li>
+                    <li><a href="menu.html"><i class="fas fa-utensils"></i> Menú</a></li>
+                    <li><a href="contacto.html"><i class="fas fa-envelope"></i> Contacto</a></li>
+                    <li><a href="sobre-nosotros.html"><i class="fas fa-info-circle"></i> Sobre Nosotros</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div class="main-container">
+            <div class="reservas-container">
+                <div class="reservas-header">
+                    <i class="fas fa-calendar-alt"></i>
+                    <h2>Reservas</h2>
+                </div>
+                
+                <div class="tabs-container">
+                    <div class="tab active" data-tab="nueva">Nueva Reserva</div>
+                    <div class="tab" data-tab="consultar">Consultar Reserva</div>
+                </div>
+                
+                <div class="tab-content">
+                    <div class="tab-pane active" id="nueva">
+                        <!-- Formulario de escritorio (vista normal) -->
+                        <form class="desktop-form" id="reserva-form">
+                            <div class="form-group">
+                                <h3>Selecciona una fecha y hora</h3>
+                                
+                                <!-- Calendario táctil mejorado -->
+                                <div class="calendar-container">
+                                    <div class="calendar-header">
+                                        <button class="calendar-nav-btn calendar-prev-month">
+                                            <i class="fas fa-chevron-left"></i>
+                                        </button>
+                                        <div class="calendar-title">Cargando...</div>
+                                        <button class="calendar-nav-btn calendar-next-month">
+                                            <i class="fas fa-chevron-right"></i>
+                                        </button>
+                                    </div>
+                                    <div class="calendar-weekdays">
+                                        <div class="calendar-day-name">L</div>
+                                        <div class="calendar-day-name">M</div>
+                                        <div class="calendar-day-name">X</div>
+                                        <div class="calendar-day-name">J</div>
+                                        <div class="calendar-day-name">V</div>
+                                        <div class="calendar-day-name">S</div>
+                                        <div class="calendar-day-name">D</div>
+                                    </div>
+                                    <div class="calendar-dates">
+                                        <!-- Se rellena con JavaScript -->
+                                    </div>
+                                </div>
+                                
+                                <!-- Fecha seleccionada (visual) -->
+                                <div class="selected-date-display">Selecciona una fecha en el calendario</div>
+                                
+                                <!-- Input oculto para la fecha -->
+                                <input type="hidden" name="fecha" required>
+                                
+                                <div class="input-group">
+                                    <i class="fas fa-clock"></i>
+                                    <select class="styled-input" name="hora" required>
+                                        <option value="">Selecciona una hora</option>
+                                        <option value="12:00">12:00</option>
+                                        <option value="12:30">12:30</option>
+                                        <option value="13:00">13:00</option>
+                                        <option value="13:30">13:30</option>
+                                        <option value="14:00">14:00</option>
+                                        <option value="14:30">14:30</option>
+                                        <option value="15:00">15:00</option>
+                                        <option value="20:00">20:00</option>
+                                        <option value="20:30">20:30</option>
+                                        <option value="21:00">21:00</option>
+                                        <option value="21:30">21:30</option>
+                                        <option value="22:00">22:00</option>
+                                        <option value="22:30">22:30</option>
+                                    </select>
+                                </div>
+                                
+                                <div class="input-group">
+                                    <i class="fas fa-users"></i>
+                                    <select class="styled-input" name="comensales" required>
+                                        <option value="">Número de comensales</option>
+                                        <option value="1">1 persona</option>
+                                        <option value="2">2 personas</option>
+                                        <option value="3">3 personas</option>
+                                        <option value="4">4 personas</option>
+                                        <option value="5">5 personas</option>
+                                        <option value="6">6 personas</option>
+                                        <option value="7">7 personas</option>
+                                        <option value="8">8 personas</option>
+                                        <option value="9">9 personas</option>
+                                        <option value="10">10 personas</option>
+                                        <option value="mas">Más de 10 personas</option>
+                                    </select>
+                                </div>
+                                
+                                <h3>Información de contacto</h3>
+                                
+                                <div class="input-group">
+                                    <i class="fas fa-user"></i>
+                                    <input type="text" class="styled-input" name="nombre" placeholder="Nombre y apellidos" required>
+                                </div>
+                                
+                                <div class="input-group">
+                                    <i class="fas fa-envelope"></i>
+                                    <input type="email" class="styled-input" name="email" placeholder="Email" required>
+                                </div>
+                                
+                                <div class="input-group">
+                                    <i class="fas fa-phone"></i>
+                                    <input type="tel" class="styled-input" name="telefono" placeholder="Teléfono" required>
+                                </div>
+                                
+                                <div class="input-group">
+                                    <i class="fas fa-comment"></i>
+                                    <textarea class="styled-input textarea" name="observaciones" placeholder="Observaciones o peticiones especiales"></textarea>
+                                </div>
+                                
+                                <button type="submit" class="styled-button primary-button btn-with-loader">
+                                    <i class="fas fa-check"></i> Confirmar Reserva
+                                </button>
+                            </div>
+                        </form>
+                        
+                        <!-- Formulario móvil por pasos (cargado bajo demanda) -->
+                        <div class="mobile-step-form" id="mobile-form-container">
+                            <!-- Se cargará dinámicamente para móviles -->
+                        </div>
+                        
+                        <div id="resultado-reserva" class="resultado-container">
+                            <p class="placeholder-text">Aquí aparecerá el resultado de tu reserva</p>
+                        </div>
+                    </div>
+                    
+                    <div class="tab-pane" id="consultar">
+                        <div class="form-group">
+                            <div class="input-group">
+                                <i class="fas fa-envelope"></i>
+                                <input type="email" class="styled-input" name="email-consulta" placeholder="Introduce tu email" required>
+                            </div>
+                            <div class="input-group">
+                                <i class="fas fa-key"></i>
+                                <input type="text" class="styled-input" name="codigo-reserva" placeholder="Código de reserva" required>
+                            </div>
+                            <button class="styled-button primary-button btn-with-loader">
+                                <i class="fas fa-search"></i> Consultar Reserva
+                            </button>
+                        </div>
+                        
+                        <div id="resultado-consulta" class="resultado-container">
+                            <p class="placeholder-text">Aquí aparecerá el resultado de tu consulta</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+    <!-- Componentes adicionales que se cargarán dinámicamente -->
+    <template id="footer-template">
+        <footer class="main-footer">
+            <div class="footer-content">
+                <div>© 2023 Latiax Restaurant Assistant. Todos los derechos reservados.</div>
+                <div class="footer-links">
+                    <a href="privacidad.html">Política de Privacidad</a>
+                    <a href="terminos.html">Términos de Uso</a>
+                    <a href="contacto.html">Contacto</a>
+                </div>
+            </div>
+        </footer>
+    </template>
+    
+    <template id="voice-assistant-template">
+        <button class="voice-fab" id="voice-assistant-btn">
+            <i class="fas fa-microphone"></i>
+        </button>
+        
+        <div id="voice-modal" class="voice-modal">
+            <div class="voice-modal-content">
+                <button class="voice-modal-close">&times;</button>
+                <h2>Asistente de Voz</h2>
+                <div class="voice-transcript"></div>
+                <div class="voice-modal-controls">
+                    <select class="voice-language-selector">
+                        <option value="es-ES">Español (España)</option>
+                        <option value="es-MX">Español (México)</option>
+                        <option value="en-US">English (US)</option>
+                    </select>
+                    <button class="voice-mic-button">
+                        <i class="fas fa-microphone"></i>
+                    </button>
+                    <div class="voice-modal-status">Presiona el micrófono para hablar</div>
+                </div>
+            </div>
+        </div>
+    </template>
+    
+    <!-- Scripts esenciales para la carga -->
+    <script>
+        // Función para ocultar pantalla de carga
+        function hideLoadingScreen() {
+            const loadingScreen = document.getElementById('loading-screen');
+            const contentContainer = document.getElementById('content-container');
+            
+            if (loadingScreen && contentContainer) {
+                // Mostrar contenido
+                contentContainer.style.opacity = '1';
+                
+                // Ocultar pantalla de carga
+                loadingScreen.style.opacity = '0';
+                setTimeout(() => {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }
+        }
+        
+        // Cargar plantillas dinámicamente
+        function loadTemplates() {
+            // Mostrar footer
+            const footerTemplate = document.getElementById('footer-template');
+            if (footerTemplate && footerTemplate.content) {
+                document.body.appendChild(
+                    document.importNode(footerTemplate.content, true)
+                );
+            }
+            
+            // Mostrar asistente de voz
+            const voiceTemplate = document.getElementById('voice-assistant-template');
+            if (voiceTemplate && voiceTemplate.content) {
+                document.body.appendChild(
+                    document.importNode(voiceTemplate.content, true)
+                );
+            }
+        }
+        
+        // Cargar formulario móvil si es necesario
+        function loadMobileForm() {
+            if (window.innerWidth <= 768) {
+                fetch('templates/mobile-form.html')
+                    .then(response => response.text())
+                    .then(html => {
+                        const container = document.getElementById('mobile-form-container');
+                        if (container) {
+                            container.innerHTML = html;
+                        }
+                    })
+                    .catch(error => {
+                        console.error('Error loading mobile form:', error);
+                    });
+            }
+        }
+        
+        // Detectar carga inicial
+        window.addEventListener('DOMContentLoaded', function() {
+            // Cargar las imágenes
+            document.querySelectorAll('.lazy-image').forEach(img => {
+                const src = img.getAttribute('data-src');
+                if (src) {
+                    img.src = src;
+                    img.removeAttribute('data-src');
+                }
+            });
+            
+            // Cargar plantillas
+            loadTemplates();
+            
+            // Cargar formulario móvil
+            loadMobileForm();
+            
+            // Configurar eventos para imágenes cargadas
+            const pendingImages = document.querySelectorAll('img');
+            let loadedCount = 0;
+            
+            function checkAllImagesLoaded() {
+                loadedCount++;
+                if (loadedCount >= pendingImages.length) {
+                    // Todas las imágenes cargadas, ocultar pantalla de carga
+                    hideLoadingScreen();
+                }
+            }
+            
+            // Verificar imágenes
+            pendingImages.forEach(img => {
+                if (img.complete) {
+                    checkAllImagesLoaded();
+                } else {
+                    img.addEventListener('load', checkAllImagesLoaded);
+                    img.addEventListener('error', checkAllImagesLoaded);
+                }
+            });
+            
+            // Si no hay imágenes, ocultar de todas formas después de un tiempo
+            if (pendingImages.length === 0) {
+                setTimeout(hideLoadingScreen, 300);
+            } else {
+                // Forzar carga después de 2 segundos en cualquier caso
+                setTimeout(hideLoadingScreen, 2000);
+            }
+        });
+    </script>
+    
+    <!-- Cargador de Assets optimizado -->
+    <script src="js/asset-loader.js"></script>
+    
+    <!-- Cargar scripts no críticos de forma diferida -->
+    <script defer src="js/image-optimizer.js"></script>
+</body>
+</html> 

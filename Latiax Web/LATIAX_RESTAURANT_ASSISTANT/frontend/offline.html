@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sin conexión - Latiax Restaurant</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f8f9fa;
+            color: #333;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            text-align: center;
+        }
+        .container {
+            max-width: 90%;
+            width: 500px;
+            padding: 2rem;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        .logo {
+            width: 120px;
+            height: auto;
+            margin-bottom: 1.5rem;
+        }
+        h1 {
+            color: #e74c3c;
+            margin-bottom: 1rem;
+            font-size: 2rem;
+        }
+        p {
+            font-size: 1.1rem;
+            line-height: 1.6;
+            margin-bottom: 1.5rem;
+            color: #555;
+        }
+        .button {
+            display: inline-block;
+            padding: 0.8rem 1.5rem;
+            background-color: #e74c3c;
+            color: white;
+            text-decoration: none;
+            border-radius: 4px;
+            font-weight: 600;
+            transition: background-color 0.3s;
+        }
+        .button:hover {
+            background-color: #c0392b;
+        }
+        .icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+        .info {
+            margin-top: 2rem;
+            padding-top: 1rem;
+            border-top: 1px solid #eee;
+            font-size: 0.9rem;
+            color: #777;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="icon">📡</div>
+        <h1>Sin conexión</h1>
+        <p>No pudimos conectar con el servidor de Latiax Restaurant. Parece que no tienes conexión a internet en este momento.</p>
+        <p>Algunas funciones están disponibles sin conexión, pero para la experiencia completa necesitas conectarte a internet.</p>
+        
+        <a href="/" class="button">Intentar nuevamente</a>
+        
+        <div class="info">
+            <p>Si el problema persiste, puedes contactarnos al teléfono 555-123-4567 o enviarnos un correo a info@latiaxrestaurant.com cuando recuperes la conexión.</p>
+        </div>
+    </div>
+
+    <script>
+        // Comprobar la conexión periódicamente
+        function checkConnection() {
+            if (navigator.onLine) {
+                const timestamp = new Date().getTime();
+                // Añadir parámetro de timestamp para evitar caché
+                window.location.href = '/?refresh=' + timestamp;
+            }
+        }
+
+        // Comprobar cada 5 segundos
+        setInterval(checkConnection, 5000);
+
+        // También comprobar cuando el usuario vuelve a tener conexión
+        window.addEventListener('online', function() {
+            window.location.reload();
+        });
+
+        // Cuando se hace clic en el botón "Intentar nuevamente"
+        document.querySelector('.button').addEventListener('click', function(e) {
+            e.preventDefault();
+            window.location.reload();
+        });
+    </script>
+</body>
+</html> 

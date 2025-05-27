@@ -1,0 +1,86 @@
+/* Variables y configuración base */
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: #50B83C;
+    --accent-color: #F5A623;
+    --text-color: #333333;
+    --light-text: #888888;
+    --lightest-text: #DDDDDD;
+    --dark-bg: #1E1E1E;
+    --light-bg: #F8F9FA;
+    --container-bg: #FFFFFF;
+    --error-color: #ED6A5A;
+    --success-color: #50B83C;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    
+    /* Voice assistant */
+    --voice-primary-color: #6a1b9a;
+    --voice-primary-hover: #8e24aa;
+    --voice-secondary-color: #007bff;
+    --voice-secondary-hover: #0056b3;
+    --voice-mic-active-color: #dc3545;
+    --voice-mic-active-hover: #c82333;
+    --voice-bg-color: #fff;
+    --voice-text-color: #333;
+    --voice-transcript-bg: #f8f9fa;
+    --voice-user-msg-bg: #e1f5fe;
+    --voice-user-msg-text: #01579b;
+    --voice-bot-msg-bg: #f1f8e9;
+    --voice-bot-msg-text: #33691e;
+    --voice-border-color: #eee;
+    --voice-shadow-color: rgba(0, 0, 0, 0.15);
+    
+    /* Animaciones compartidas */
+    --animation-duration-short: 0.2s;
+    --animation-duration-medium: 0.3s;
+    --animation-duration-long: 0.5s;
+    --animation-timing-function: cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+/* Reset básico */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+/* Animaciones compartidas */
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse {
+    0% { box-shadow: 0 0 0 0 rgba(106, 27, 154, 0.5); }
+    70% { box-shadow: 0 0 0 10px rgba(106, 27, 154, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(106, 27, 154, 0); }
+}
+
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+/* Clases de utilidad */
+.shake { animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both; }
+.invisible { display: none !important; }
+.flex { display: flex; }
+.flex-column { flex-direction: column; }
+.flex-center { align-items: center; justify-content: center; }
+.text-center { text-align: center; }
+.relative { position: relative; }
+.mb-1 { margin-bottom: 0.5rem; }
+.mb-2 { margin-bottom: 1rem; }
+.mb-3 { margin-bottom: 1.5rem; }
+.mt-1 { margin-top: 0.5rem; }
+.mt-2 { margin-top: 1rem; }
+.mt-3 { margin-top: 1.5rem; } 

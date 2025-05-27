@@ -1,0 +1,185 @@
+<form id="mobile-reserva-form">
+    <!-- Indicadores de paso -->
+    <div class="step-indicator"></div>
+    
+    <!-- Paso 1: Fecha -->
+    <div class="form-step">
+        <div class="form-step-title">¿Qué día te gustaría reservar?</div>
+        <div class="form-step-content">
+            <!-- Calendario mini para móvil -->
+            <div class="calendar-container">
+                <div class="calendar-header">
+                    <button class="calendar-nav-btn calendar-prev-month">
+                        <i class="fas fa-chevron-left"></i>
+                    </button>
+                    <div class="calendar-title">Cargando...</div>
+                    <button class="calendar-nav-btn calendar-next-month">
+                        <i class="fas fa-chevron-right"></i>
+                    </button>
+                </div>
+                <div class="calendar-weekdays">
+                    <div class="calendar-day-name">L</div>
+                    <div class="calendar-day-name">M</div>
+                    <div class="calendar-day-name">X</div>
+                    <div class="calendar-day-name">J</div>
+                    <div class="calendar-day-name">V</div>
+                    <div class="calendar-day-name">S</div>
+                    <div class="calendar-day-name">D</div>
+                </div>
+                <div class="calendar-dates">
+                    <!-- Generado por JS -->
+                </div>
+            </div>
+            
+            <!-- Fecha seleccionada (visual) -->
+            <div class="selected-date-display">Selecciona una fecha</div>
+            
+            <!-- Input oculto para fecha -->
+            <input type="hidden" name="fecha" required>
+        </div>
+        <div class="form-step-footer">
+            <div></div> <!-- Espacio para el botón de atrás -->
+            <button class="step-next-btn">
+                <span>Siguiente</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Paso 2: Hora -->
+    <div class="form-step">
+        <div class="form-step-title">¿A qué hora quieres reservar?</div>
+        <div class="form-step-content">
+            <div class="input-group">
+                <i class="fas fa-clock"></i>
+                <select class="styled-input" name="hora" required>
+                    <option value="">Selecciona una hora</option>
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+                    <option value="14:00">14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="20:00">20:00</option>
+                    <option value="20:30">20:30</option>
+                    <option value="21:00">21:00</option>
+                    <option value="21:30">21:30</option>
+                    <option value="22:00">22:00</option>
+                    <option value="22:30">22:30</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-step-footer">
+            <button class="step-back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Atrás</span>
+            </button>
+            <button class="step-next-btn">
+                <span>Siguiente</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Paso 3: Comensales -->
+    <div class="form-step">
+        <div class="form-step-title">¿Cuántas personas seréis?</div>
+        <div class="form-step-content">
+            <div class="input-group">
+                <i class="fas fa-users"></i>
+                <select class="styled-input" name="comensales" required>
+                    <option value="">Número de comensales</option>
+                    <option value="1">1 persona</option>
+                    <option value="2">2 personas</option>
+                    <option value="3">3 personas</option>
+                    <option value="4">4 personas</option>
+                    <option value="5">5 personas</option>
+                    <option value="6">6 personas</option>
+                    <option value="7">7 personas</option>
+                    <option value="8">8 personas</option>
+                    <option value="9">9 personas</option>
+                    <option value="10">10 personas</option>
+                    <option value="mas">Más de 10 personas</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-step-footer">
+            <button class="step-back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Atrás</span>
+            </button>
+            <button class="step-next-btn">
+                <span>Siguiente</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Paso 4: Datos personales -->
+    <div class="form-step">
+        <div class="form-step-title">Introduce tus datos de contacto</div>
+        <div class="form-step-content">
+            <div class="input-group">
+                <i class="fas fa-user"></i>
+                <input type="text" class="styled-input" name="nombre" placeholder="Nombre y apellidos" required>
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-envelope"></i>
+                <input type="email" class="styled-input" name="email" placeholder="Email" required>
+            </div>
+            
+            <div class="input-group">
+                <i class="fas fa-phone"></i>
+                <input type="tel" class="styled-input" name="telefono" placeholder="Teléfono" required>
+            </div>
+        </div>
+        <div class="form-step-footer">
+            <button class="step-back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Atrás</span>
+            </button>
+            <button class="step-next-btn">
+                <span>Siguiente</span>
+                <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </div>
+    
+    <!-- Paso 5: Observaciones y confirmar -->
+    <div class="form-step">
+        <div class="form-step-title">¿Tienes alguna petición especial?</div>
+        <div class="form-step-content">
+            <div class="input-group">
+                <i class="fas fa-comment"></i>
+                <textarea class="styled-input textarea" name="observaciones" placeholder="Observaciones o peticiones especiales"></textarea>
+            </div>
+            
+            <div class="reservation-summary">
+                <h4>Resumen de tu reserva:</h4>
+                <div class="summary-item">
+                    <strong>Fecha:</strong> <span class="summary-fecha">-</span>
+                </div>
+                <div class="summary-item">
+                    <strong>Hora:</strong> <span class="summary-hora">-</span>
+                </div>
+                <div class="summary-item">
+                    <strong>Comensales:</strong> <span class="summary-comensales">-</span>
+                </div>
+                <div class="summary-item">
+                    <strong>Nombre:</strong> <span class="summary-nombre">-</span>
+                </div>
+            </div>
+        </div>
+        <div class="form-step-footer">
+            <button class="step-back-btn">
+                <i class="fas fa-arrow-left"></i>
+                <span>Atrás</span>
+            </button>
+            <button type="submit" class="styled-button primary-button btn-with-loader">
+                <span class="btn-text">Confirmar Reserva</span>
+            </button>
+        </div>
+    </div>
+</form> 

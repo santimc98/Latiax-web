@@ -1,0 +1,1502 @@
+/* Estilos base */
+:root {
+    --primary-color: #4A90E2;
+    --secondary-color: #50B83C;
+    --accent-color: #F5A623;
+    --text-color: #333333;
+    --light-text: #888888;
+    --lightest-text: #DDDDDD;
+    --dark-bg: #1E1E1E;
+    --light-bg: #F8F9FA;
+    --container-bg: #FFFFFF;
+    --error-color: #ED6A5A;
+    --success-color: #50B83C;
+    --border-radius: 8px;
+    --box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    --transition: all 0.3s ease;
+    --voice-primary-color: #6a1b9a; /* Morado principal (ej. botón FAB) */
+    --voice-primary-hover: #8e24aa;
+    --voice-secondary-color: #007bff; /* Azul para botones Mic */
+    --voice-secondary-hover: #0056b3;
+    --voice-mic-active-color: #dc3545; /* Rojo para Mic activo */
+    --voice-mic-active-hover: #c82333;
+    --voice-bg-color: #fff; /* Fondo del modal */
+    --voice-text-color: #333;
+    --voice-transcript-bg: #f8f9fa;
+    --voice-user-msg-bg: #e1f5fe;
+    --voice-user-msg-text: #01579b;
+    --voice-bot-msg-bg: #f1f8e9;
+    --voice-bot-msg-text: #33691e;
+    --voice-border-color: #eee;
+    --voice-shadow-color: rgba(0, 0, 0, 0.15);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    background-color: var(--light-bg);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Encabezado principal */
+.main-header {
+    background-color: var(--container-bg);
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: var(--box-shadow);
+    position: sticky;
+    top: 0;
+    z-index: 100;
+}
+
+.logo-container {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-container img {
+    width: 40px;
+    height: 40px;
+}
+
+.header-text h1 {
+    font-size: 1.5rem;
+    color: var(--primary-color);
+}
+
+.header-text p {
+    font-size: 0.8rem;
+    color: var(--light-text);
+}
+
+.main-nav ul {
+    display: flex;
+    gap: 20px;
+    list-style: none;
+}
+
+.main-nav a {
+    text-decoration: none;
+    color: var(--text-color);
+    font-weight: 500;
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    transition: var(--transition);
+}
+
+.main-nav a:hover {
+    background-color: var(--lightest-text);
+}
+
+.main-nav a.active {
+    color: var(--primary-color);
+    border-bottom: 2px solid var(--primary-color);
+}
+
+.main-nav a i {
+    margin-right: 5px;
+}
+
+/* Contenedor principal */
+.main-container {
+    max-width: 1200px;
+    margin: 20px auto;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 0 20px;
+}
+
+.section-container {
+    display: none;
+}
+
+.section-container.active-section {
+    display: block;
+}
+
+/* Chat Container */
+.chat-container {
+    background-color: var(--container-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.chat-header {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.chat-header img {
+    width: 40px;
+    height: 40px;
+}
+
+/* Estilos para el botón de reinicio */
+.reset-button {
+    margin-left: auto;
+    background-color: rgba(255, 255, 255, 0.2);
+    border: none;
+    color: white;
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.reset-button:hover {
+    background-color: rgba(255, 255, 255, 0.3);
+    transform: rotate(30deg);
+}
+
+.reset-button i {
+    font-size: 16px;
+}
+
+.chat-messages {
+    height: 400px;
+    overflow-y: auto;
+    padding: 15px;
+}
+
+.message {
+    display: flex;
+    margin-bottom: 15px;
+    align-items: flex-start;
+}
+
+.user-message {
+    flex-direction: row-reverse;
+}
+
+.bot-icon {
+    background-color: var(--primary-color);
+    color: white;
+    padding: 10px;
+    border-radius: 50%;
+    margin-right: 10px;
+}
+
+.message-content {
+    background-color: #f1f1f1;
+    padding: 10px 15px;
+    border-radius: 15px;
+    max-width: 70%;
+    position: relative;
+}
+
+.user-message .message-content {
+    background-color: var(--primary-color);
+    color: white;
+    margin-right: 10px;
+}
+
+.message-time {
+    font-size: 0.7rem;
+    color: var(--light-text);
+    text-align: right;
+    display: block;
+    margin-top: 5px;
+}
+
+.chat-input {
+    display: flex;
+    padding: 15px;
+    border-top: 1px solid #eee;
+}
+
+.chat-input input {
+    flex-grow: 1;
+    padding: 10px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+}
+
+.chat-input input:focus {
+    border-color: var(--primary-color);
+}
+
+.chat-input button {
+    background-color: var(--primary-color);
+    color: white;
+    border: none;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: var(--transition);
+}
+
+.chat-input button:hover {
+    background-color: #3a7dce;
+}
+
+/* Sugerencias rápidas */
+.quick-suggestions {
+    background-color: var(--container-bg);
+    border-radius: var(--border-radius);
+    padding: 15px;
+    margin-top: 20px;
+    box-shadow: var(--box-shadow);
+}
+
+.quick-suggestions h3 {
+    margin-bottom: 15px;
+    font-size: 1rem;
+    color: var(--text-color);
+}
+
+.suggestions-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+}
+
+.suggestion-btn {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 0.9rem;
+    transition: var(--transition);
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.suggestion-btn:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Reservas Container */
+.reservas-container {
+    background-color: var(--container-bg);
+    border-radius: var(--border-radius);
+    box-shadow: var(--box-shadow);
+    width: 100%;
+    margin: 0 auto;
+    overflow: hidden;
+}
+
+.reservas-header {
+    background-color: var(--secondary-color);
+    color: white;
+    padding: 15px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.reservas-header i {
+    font-size: 24px;
+}
+
+/* Tabs */
+.tabs-container {
+    display: flex;
+    border-bottom: 1px solid #eee;
+}
+
+.tab {
+    padding: 10px 20px;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    transition: var(--transition);
+}
+
+.tab.active {
+    color: var(--secondary-color);
+}
+
+.tab.active::after {
+    content: '';
+    position: absolute;
+    bottom: -1px;
+    left: 0;
+    width: 100%;
+    height: 2px;
+    background-color: var(--secondary-color);
+}
+
+.tab-content {
+    padding: 20px;
+}
+
+.tab-pane {
+    display: none;
+}
+
+.tab-pane.active {
+    display: block;
+}
+
+/* Formularios */
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin-top: 15px;
+}
+
+.input-group {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    background-color: #f8f9fa;
+    padding: 5px 10px;
+    border-radius: var(--border-radius);
+    border: 1px solid #eee;
+}
+
+.input-group i {
+    color: var(--light-text);
+    min-width: 20px;
+    text-align: center;
+}
+
+.styled-input {
+    border: none;
+    background: transparent;
+    padding: 8px 0;
+    width: 100%;
+    outline: none;
+}
+
+.textarea {
+    height: 80px;
+    resize: vertical;
+}
+
+.styled-button {
+    background-color: #f1f1f1;
+    color: var(--text-color);
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+    transition: var(--transition);
+}
+
+.styled-button:hover {
+    background-color: #e1e1e1;
+}
+
+.primary-button {
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.primary-button:hover {
+    background-color: #429032;
+}
+
+/* Resultados */
+.resultado-container {
+    margin-top: 20px;
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+    padding: 15px;
+    min-height: 100px;
+    white-space: pre-wrap;
+}
+
+.placeholder-text {
+    color: var(--light-text);
+    text-align: center;
+    padding: 20px 0;
+}
+
+/* Footer */
+.main-footer {
+    background-color: var(--container-bg);
+    padding: 20px;
+    box-shadow: 0 -2px 5px rgba(0, 0, 0, 0.05);
+    margin-top: 40px;
+}
+
+.footer-content {
+    max-width: 1200px;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 15px;
+}
+
+.footer-links {
+    display: flex;
+    gap: 20px;
+}
+
+.footer-links a {
+    color: var(--light-text);
+    text-decoration: none;
+    transition: var(--transition);
+}
+
+.footer-links a:hover {
+    color: var(--primary-color);
+}
+
+/* Mensajes de estado */
+.success-message {
+    color: var(--success-color);
+    background-color: rgba(80, 184, 60, 0.1);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-top: 10px;
+}
+
+.error-message {
+    color: var(--error-color);
+    background-color: rgba(237, 106, 90, 0.1);
+    padding: 10px;
+    border-radius: var(--border-radius);
+    margin-top: 10px;
+}
+
+/* Responsive */
+@media (max-width: 1024px) {
+    /* Ajustes para tablets grandes y laptops pequeñas */
+    .main-container {
+        padding: 0 15px;
+    }
+    
+    .chat-container, .reservas-container {
+        max-width: 95%;
+    }
+    
+    .quick-suggestions {
+        padding: 10px;
+    }
+    
+    .suggestions-container {
+        justify-content: center;
+    }
+}
+
+@media (max-width: 768px) {
+    /* Ajustes para tablets */
+    .main-header {
+        flex-direction: column;
+        padding: 10px;
+    }
+    
+    .main-nav ul {
+        margin-top: 15px;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 10px;
+    }
+    
+    .main-nav a {
+        font-size: 0.9rem;
+        padding: 5px 8px;
+    }
+    
+    .chat-messages {
+        height: 300px;
+    }
+    
+    .message-content {
+        max-width: 80%;
+    }
+    
+    .input-group {
+        flex-direction: column;
+        align-items: flex-start;
+        margin-bottom: 15px;
+    }
+    
+    .styled-input {
+        width: 100%;
+    }
+    
+    .footer-content {
+        flex-direction: column;
+        text-align: center;
+    }
+    
+    .footer-links {
+        margin-top: 10px;
+        justify-content: center;
+    }
+    
+    /* Ajustes para el modal de voz */
+    .voice-modal-content {
+        width: 95%;
+        padding: 20px;
+        max-height: 90vh;
+    }
+    
+    .voice-transcript {
+        min-height: 150px;
+    }
+    
+    /* Estilos para menú hamburguesa en móvil */
+    .mobile-menu-btn {
+        display: block;
+        position: absolute;
+        top: 15px;
+        right: 15px;
+    }
+    
+    .main-nav {
+        width: 100%;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+    }
+    
+    .main-nav.mobile-active {
+        max-height: 300px;
+    }
+    
+    .main-nav ul {
+        flex-direction: column;
+        align-items: center;
+        gap: 10px;
+        padding: 10px 0;
+    }
+    
+    .main-nav ul li {
+        width: 100%;
+        text-align: center;
+    }
+    
+    .main-nav a {
+        display: block;
+        padding: 8px 0;
+        width: 100%;
+    }
+}
+
+@media (max-width: 576px) {
+    /* Ajustes para móviles */
+    .logo-container {
+        flex-direction: column;
+        text-align: center;
+        gap: 5px;
+    }
+    
+    .header-text h1 {
+        font-size: 1.2rem;
+    }
+    
+    .header-text p {
+        font-size: 0.7rem;
+    }
+    
+    .main-nav ul {
+        gap: 5px;
+    }
+    
+    .main-nav a {
+        font-size: 0.8rem;
+        padding: 4px 6px;
+    }
+    
+    .main-nav a i {
+        margin-right: 2px;
+    }
+    
+    .chat-header {
+        padding: 10px;
+    }
+    
+    .chat-messages {
+        height: 250px;
+        padding: 10px;
+    }
+    
+    .message {
+        margin-bottom: 10px;
+    }
+    
+    .bot-icon {
+        font-size: 0.8rem;
+        padding: 8px;
+    }
+    
+    .message-content {
+        max-width: 85%;
+        padding: 8px 12px;
+        font-size: 0.9rem;
+    }
+    
+    .chat-input {
+        padding: 10px;
+    }
+    
+    .chat-input input {
+        padding: 8px 12px;
+    }
+    
+    .tabs-container {
+        flex-direction: column;
+    }
+    
+    .tab {
+        padding: 8px 15px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    .tab.active::after {
+        display: none;
+    }
+    
+    /* Demo telefónica ajustada */
+    a[href="phone-demo.html"] {
+        bottom: 90px;
+        right: 15px;
+        padding: 8px 12px;
+        font-size: 0.8rem;
+    }
+    
+    /* Ajustes para el asistente de voz - OPTIMIZADO */
+    .voice-fab {
+        width: 60px;
+        height: 60px;
+        font-size: 22px;
+        bottom: 20px;
+        right: 20px;
+    }
+    
+    .voice-modal-content {
+        padding: 12px;
+        border-radius: 8px;
+        max-height: 85vh;
+        width: 92%;
+    }
+    
+    .voice-modal h2 {
+        font-size: 1.3rem;
+        margin-bottom: 12px;
+    }
+    
+    .voice-transcript {
+        min-height: 130px;
+        max-height: 40vh;
+        padding: 10px;
+    }
+    
+    .voice-transcript p {
+        font-size: 1rem;
+        padding: 10px 12px;
+        margin-bottom: 8px;
+    }
+    
+    .voice-modal-controls {
+        flex-wrap: wrap;
+        justify-content: space-around;
+        gap: 10px;
+        padding-top: 15px;
+    }
+    
+    .voice-language-selector {
+        order: 3;
+        width: 100%;
+        padding: 10px;
+        font-size: 1rem;
+    }
+    
+    .voice-mic-button {
+        order: 1;
+        width: 70px;  /* AUMENTADO */
+        height: 70px; /* AUMENTADO */
+        font-size: 24px; /* AUMENTADO */
+    }
+    
+    .voice-modal-status {
+        order: 2;
+        text-align: center;
+        width: 100%;
+        margin-top: 8px;
+        font-size: 1rem;
+    }
+    
+    .voice-modal-close {
+        top: 8px;
+        right: 12px;
+        font-size: 24px;
+    }
+}
+
+@media (max-width: 320px) {
+    /* Ajustes para móviles pequeños */
+    .main-nav a {
+        padding: 3px 5px;
+        font-size: 0.75rem;
+    }
+    
+    .main-nav a i {
+        font-size: 0.8rem;
+    }
+    
+    .header-text h1 {
+        font-size: 1rem;
+    }
+    
+    .chat-messages {
+        height: 220px;
+    }
+    
+    .message-content {
+        max-width: 90%;
+        font-size: 0.85rem;
+    }
+    
+    .quick-suggestions {
+        padding: 8px;
+    }
+    
+    .suggestion-btn {
+        font-size: 0.7rem;
+        padding: 5px 8px;
+    }
+    
+    /* Ajustes para el asistente de voz en pantallas muy pequeñas - OPTIMIZADO */
+    .voice-fab {
+        width: 55px;
+        height: 55px;
+        font-size: 20px;
+    }
+    
+    .voice-modal-content {
+        padding: 10px;
+        max-width: 95%;
+    }
+    
+    .voice-modal h2 {
+        font-size: 1.2rem;
+        margin-bottom: 10px;
+    }
+    
+    .voice-mic-button {
+        width: 65px;
+        height: 65px;
+        font-size: 22px;
+    }
+    
+    .voice-transcript {
+        min-height: 110px;
+        max-height: 35vh;
+    }
+    
+    .voice-transcript p {
+        font-size: 0.95rem;
+        padding: 8px 10px;
+    }
+    
+    .voice-modal-status {
+        font-size: 0.9rem;
+    }
+    
+    .voice-language-selector {
+        padding: 8px;
+        font-size: 0.9rem;
+    }
+}
+
+/* --- Estilos Botón Flotante Asistente de Voz --- */
+.voice-fab {
+    position: fixed;
+    bottom: 25px;
+    right: 25px;
+    background-color: var(--voice-primary-color);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    font-size: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    z-index: 1000; /* Asegura que esté encima de otros elementos */
+    animation: pulse 2s infinite; /* Animación sutil de pulso */
+}
+
+.voice-fab:hover {
+    background-color: var(--voice-primary-hover);
+    transform: scale(1.05);
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.3);
+}
+
+.voice-fab:active {
+    transform: scale(0.95);
+}
+
+/* Animación de pulso para el botón de voz */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(106, 27, 154, 0.5);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(106, 27, 154, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(106, 27, 154, 0);
+    }
+}
+
+/* --- Fin Estilos Botón Flotante --- */
+
+/* --- Estilos Modal Asistente de Voz (Refinados) --- */
+.voice-modal {
+    display: none; /* Oculto por defecto */
+    position: fixed;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6); /* Fondo un poco más oscuro */
+    z-index: 1050; /* Encima del FAB */
+    align-items: center;
+    justify-content: center;
+}
+
+.voice-modal-content {
+    background-color: var(--voice-bg-color);
+    padding: 30px; /* Un poco más de padding */
+    border-radius: 10px; /* Bordes más redondeados */
+    box-shadow: 0 8px 25px var(--voice-shadow-color);
+    width: 90%;
+    max-width: 500px;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    max-height: 80vh; /* Limitar altura */
+}
+
+.voice-modal-close {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 28px;
+    font-weight: bold;
+    color: #999; /* Un poco más oscuro */
+    background: none;
+    border: none;
+    cursor: pointer;
+    line-height: 1;
+}
+
+.voice-modal-close:hover,
+.voice-modal-close:focus {
+    color: var(--voice-text-color);
+    text-decoration: none;
+}
+
+.voice-modal h2 {
+    margin-top: 0;
+    margin-bottom: 25px; /* Más espacio debajo del título */
+    text-align: center;
+    color: var(--voice-text-color);
+    font-weight: 600; /* Ligeramente más grueso */
+}
+
+.voice-transcript {
+    flex-grow: 1; /* Ocupa el espacio disponible */
+    overflow-y: auto; /* Scroll si el contenido es largo */
+    margin-bottom: 25px; /* Más espacio */
+    border: 1px solid var(--voice-border-color);
+    padding: 15px;
+    min-height: 180px; /* Un poco más alto */
+    background-color: var(--voice-transcript-bg);
+    border-radius: 6px;
+}
+
+.voice-transcript p {
+    margin: 0 0 10px 0;
+    padding: 10px 15px; /* Más padding interno */
+    border-radius: 18px; /* Más redondeado */
+    max-width: 85%; /* Un poco más ancho */
+    line-height: 1.4;
+    font-size: 1rem; /* Ajustado para mejorar legibilidad */
+}
+
+.voice-user-message {
+    background-color: var(--voice-user-msg-bg);
+    color: var(--voice-user-msg-text);
+    margin-left: auto; /* Alineado a la derecha */
+    text-align: right;
+    border-bottom-right-radius: 6px;
+    font-weight: 500; /* Ligeramente más destacado */
+}
+
+.voice-bot-message {
+    background-color: var(--voice-bot-msg-bg);
+    color: var(--voice-bot-msg-text);
+    text-align: left;
+    border-bottom-left-radius: 4px;
+}
+
+.voice-system-message {
+    background-color: #f0f0f0;
+    color: #666;
+    font-size: 0.85em;
+    padding: 4px 10px;
+    text-align: center;
+    font-style: italic;
+    margin: 5px 15%;
+    border-radius: 10px;
+}
+
+.voice-listening-indicator {
+    background-color: #e8f5e9;
+    border-left: 3px solid #9c27b0;
+    color: #9c27b0;
+    animation: pulse-text 1.5s infinite;
+}
+
+@keyframes pulse-text {
+    0% { opacity: 0.7; }
+    50% { opacity: 1; }
+    100% { opacity: 0.7; }
+}
+
+.voice-modal-controls {
+    display: flex;
+    align-items: center;
+    justify-content: space-between; /* Ajusta según necesidad */
+    gap: 15px;
+    padding-top: 20px;
+    border-top: 1px solid var(--voice-border-color);
+}
+
+.voice-language-selector {
+    padding: 9px 12px; /* Ajustar padding */
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    background-color: #fff;
+    cursor: pointer;
+    font-size: 1rem; /* Mejor legibilidad */
+}
+
+.voice-mic-button {
+    background-color: var(--voice-secondary-color); /* Usar variable */
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 60px; /* Aumentado para mejor interacción táctil */
+    height: 60px; /* Aumentado para mejor interacción táctil */
+    font-size: 22px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Sombra para destacar */
+}
+
+.voice-mic-button.active {
+    background-color: var(--voice-mic-active-color);
+    transform: scale(1.05); /* Destacar cuando está activo */
+}
+
+.voice-mic-button.active.continuous {
+    background-color: #9c27b0; /* Color púrpura para modo continuo */
+    animation: pulse 1.5s infinite;
+}
+
+.voice-mic-button:hover {
+    background-color: var(--voice-secondary-hover);
+}
+
+.voice-mic-button.active:hover {
+    background-color: var(--voice-mic-active-hover);
+}
+
+.voice-mic-button:active {
+    transform: scale(0.95);
+}
+
+/* Definir animación de pulso si no existe */
+@keyframes pulse {
+    0% {
+        box-shadow: 0 0 0 0 rgba(156, 39, 176, 0.7);
+    }
+    70% {
+        box-shadow: 0 0 0 10px rgba(156, 39, 176, 0);
+    }
+    100% {
+        box-shadow: 0 0 0 0 rgba(156, 39, 176, 0);
+    }
+}
+
+.voice-modal-status {
+    font-size: 0.95rem; /* Mejor legibilidad */
+    color: #444; /* Un poco más oscuro para mejor contraste */
+    flex-grow: 1; /* Ocupa espacio restante */
+    text-align: right;
+    font-weight: 500; /* Semi-bold para destacar estado */
+}
+
+/* Clase para mostrar el modal */
+.voice-modal.show {
+    display: flex;
+    opacity: 1;
+    pointer-events: auto;
+}
+/* --- Fin Estilos Modal --- */
+
+/* Estilos para menú hamburguesa en móvil */
+.mobile-menu-btn {
+    display: none;
+    background: none;
+    border: none;
+    color: var(--primary-color);
+    font-size: 1.5rem;
+    cursor: pointer;
+    padding: 5px;
+    transition: var(--transition);
+}
+
+.mobile-menu-btn:hover {
+    color: var(--secondary-color);
+}
+
+/* --- Estilos Calendario Mejorado --- */
+.calendar-container {
+    margin: 20px 0;
+    border-radius: var(--border-radius);
+    overflow: hidden;
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+    background-color: white;
+}
+
+.calendar-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 15px;
+    background-color: var(--secondary-color);
+    color: white;
+}
+
+.calendar-title {
+    font-weight: 600;
+    font-size: 1.1rem;
+}
+
+.calendar-nav {
+    display: flex;
+    gap: 15px;
+}
+
+.calendar-nav-btn {
+    background: none;
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.calendar-nav-btn:hover {
+    background-color: rgba(255, 255, 255, 0.2);
+}
+
+.calendar-weekdays {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    text-align: center;
+    font-weight: 500;
+    color: var(--light-text);
+    border-bottom: 1px solid #eee;
+}
+
+.calendar-day-name {
+    padding: 10px;
+}
+
+.calendar-dates {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 1px;
+    background-color: #f8f9fa;
+}
+
+.calendar-date {
+    aspect-ratio: 1/1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    font-weight: 500;
+    position: relative;
+    background-color: white;
+    transition: background-color 0.2s ease, transform 0.1s ease;
+}
+
+.calendar-date:hover {
+    background-color: #f0f0f0;
+}
+
+.calendar-date.selected {
+    background-color: var(--secondary-color);
+    color: white;
+    transform: scale(0.9);
+    border-radius: 50%;
+}
+
+.calendar-date.today {
+    color: var(--secondary-color);
+    font-weight: 700;
+}
+
+.calendar-date.disabled {
+    color: #ddd;
+    cursor: not-allowed;
+}
+
+.calendar-date-info {
+    position: absolute;
+    bottom: 4px;
+    width: 100%;
+    text-align: center;
+    font-size: 0.7rem;
+    color: var(--light-text);
+}
+
+.calendar-date.busy::after {
+    content: "";
+    position: absolute;
+    bottom: 7px;
+    width: 4px;
+    height: 4px;
+    background-color: var(--error-color);
+    border-radius: 50%;
+}
+
+/* --- Estilos Formulario Simplificado para Móvil --- */
+.step-form-container {
+    display: flex;
+    flex-direction: column;
+}
+
+.form-step {
+    display: none;
+    animation: fadeIn 0.3s ease forwards;
+}
+
+.form-step.active {
+    display: block;
+}
+
+.form-step-title {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 15px;
+    color: var(--secondary-color);
+}
+
+.form-step-content {
+    margin-bottom: 25px;
+}
+
+.form-step-footer {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 15px;
+}
+
+.step-back-btn {
+    background-color: #f1f1f1;
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.step-next-btn {
+    background-color: var(--secondary-color);
+    color: white;
+    border: none;
+    padding: 10px 15px;
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    gap: 5px;
+}
+
+.step-indicator {
+    display: flex;
+    justify-content: center;
+    gap: 8px;
+    margin: 20px 0;
+}
+
+.step-dot {
+    width: 10px;
+    height: 10px;
+    background-color: #ddd;
+    border-radius: 50%;
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+.step-dot.active {
+    background-color: var(--secondary-color);
+    transform: scale(1.2);
+}
+
+/* --- Indicadores de Carga --- */
+.loading-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(255, 255, 255, 0.8);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    border-radius: var(--border-radius);
+}
+
+.loading-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+.loading-spinner {
+    width: 40px;
+    height: 40px;
+    border: 4px solid rgba(80, 184, 60, 0.1);
+    border-radius: 50%;
+    border-top: 4px solid var(--secondary-color);
+    animation: spin 1s linear infinite;
+}
+
+.loading-text {
+    margin-top: 10px;
+    color: var(--text-color);
+    font-weight: 500;
+    text-align: center;
+}
+
+.btn-with-loader {
+    position: relative;
+    overflow: hidden;
+}
+
+.btn-loader {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: inherit;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.2s ease, visibility 0.2s ease;
+}
+
+.btn-with-loader.loading .btn-text {
+    opacity: 0;
+}
+
+.btn-with-loader.loading .btn-loader {
+    opacity: 1;
+    visibility: visible;
+}
+
+.btn-spinner {
+    width: 18px;
+    height: 18px;
+    border: 3px solid rgba(255, 255, 255, 0.3);
+    border-radius: 50%;
+    border-top: 3px solid white;
+    animation: spin 0.8s linear infinite;
+}
+
+@keyframes spin {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+/* Ajustes responsive para reservas */
+@media (max-width: 768px) {
+    .calendar-weekdays .calendar-day-name {
+        font-size: 0.8rem;
+        padding: 8px 5px;
+    }
+    
+    .calendar-date {
+        font-size: 0.9rem;
+    }
+    
+    .desktop-form {
+        display: none;
+    }
+    
+    .mobile-step-form {
+        display: block;
+    }
+    
+    .reservas-container {
+        padding-bottom: 20px;
+    }
+    
+    .form-step-title {
+        text-align: center;
+    }
+}
+
+/* --- Estilos Resumen de Reserva --- */
+.reservation-summary {
+    margin-top: 25px;
+    background-color: rgba(80, 184, 60, 0.05);
+    border: 1px solid rgba(80, 184, 60, 0.2);
+    border-radius: var(--border-radius);
+    padding: 15px;
+}
+
+.reservation-summary h4 {
+    margin-bottom: 12px;
+    font-size: 1rem;
+    color: var(--secondary-color);
+    font-weight: 600;
+}
+
+.summary-item {
+    margin-bottom: 8px;
+    padding-bottom: 8px;
+    border-bottom: 1px dashed rgba(80, 184, 60, 0.1);
+    display: flex;
+    justify-content: space-between;
+}
+
+.summary-item:last-child {
+    margin-bottom: 0;
+    padding-bottom: 0;
+    border-bottom: none;
+}
+
+.summary-item strong {
+    font-weight: 500;
+    color: var(--text-color);
+}
+
+/* Estilos adicionales para formulario de reservas */
+.selected-date-display {
+    text-align: center;
+    margin: 12px 0;
+    padding: 10px;
+    font-weight: 500;
+    color: var(--secondary-color);
+    background-color: #f8f9fa;
+    border-radius: var(--border-radius);
+}
+
+/* Estados del calendario */
+.calendar-date.unavailable {
+    background-color: #fff5f5;
+    color: #e57373;
+    text-decoration: line-through;
+}
+
+.calendar-date.available {
+    background-color: #f1f8e9;
+}
+
+.calendar-date.limited {
+    position: relative;
+}
+
+.calendar-date.limited::before {
+    content: "!";
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    width: 12px;
+    height: 12px;
+    line-height: 12px;
+    text-align: center;
+    font-size: 8px;
+    border-radius: 50%;
+    background-color: var(--accent-color);
+    color: white;
+    font-weight: bold;
+}
+
+/* --- Animaciones --- */
+@keyframes shake {
+    0%, 100% { transform: translateX(0); }
+    10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+    20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+.shake {
+    animation: shake 0.5s cubic-bezier(.36,.07,.19,.97) both;
+}
+
+/* --- Estilos adicionales para campos con error --- */
+.input-group.error {
+    border-color: var(--error-color);
+    box-shadow: 0 0 0 1px var(--error-color);
+}
+
+.input-group input.error,
+.input-group select.error,
+.input-group textarea.error {
+    border-color: var(--error-color);
+}
