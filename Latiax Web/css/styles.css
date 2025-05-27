@@ -1,7 +1,18 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@600;700&family=Roboto:wght@400;700&display=swap');
+
 :root {
-    --primary-red: #e63946;
+    --primary-red: #d62828; /* Adjusted from #e63946 */
+    --primary-red-rgb: 214, 40, 40;
+    --primary-red-dark: #b02020;
+    --primary-red-light: #e05050;
     --primary-blue: #1d3557;
-    --light-blue: #457b9d;
+    --primary-blue-rgb: 29, 53, 87;
+    --primary-blue-dark: #13233a;
+    --primary-blue-dark-rgb: 19, 35, 58;
+    --primary-blue-light: #2a4a78;
+    --light-blue: #457b9d; /* Existing, kept for broader blue palette */
+    --accent-gold: #dda15e; /* New accent color */
+    --accent-gold-rgb: 221, 161, 94;
     --white: #f1faee;
     --light-gray: #f8f9fa;
     --dark-gray: #333;
@@ -11,14 +22,32 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Roboto', sans-serif; /* Default font for all elements */
     scroll-behavior: smooth;
 }
 
 body {
     background-color: var(--white);
-    color: var(--primary-blue);
+    color: var(--primary-blue); /* Default text color for body */
     overflow-x: hidden;
+    font-size: 16px; /* Base font size */
+    line-height: 1.6; /* Base line height for readability */
+    font-weight: 400; /* Default to Roboto regular */
+}
+
+h1, h2, h3, h4, h5, h6 {
+    font-family: 'Poppins', sans-serif; /* Heading font */
+    font-weight: 700; /* Default heading weight */
+    line-height: 1.3; /* Default heading line height */
+    color: var(--primary-blue); /* Default heading color */
+}
+
+/* Ensure paragraph elements also default to Roboto and have appropriate styling */
+p {
+    font-family: 'Roboto', sans-serif;
+    font-weight: 400;
+    line-height: 1.6;
+    color: var(--dark-gray); /* Common practice for paragraph text color */
 }
 
 /* Barra lateral */
@@ -34,12 +63,15 @@ body {
     transition: 0.5s;
     padding-top: 60px;
     box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    font-family: 'Roboto', sans-serif; /* Ensure sidebar itself uses body font */
 }
 
 .sidebar a {
     padding: 15px 25px;
     text-decoration: none;
-    font-size: 18px;
+    font-family: 'Poppins', sans-serif; /* Menu item font */
+    font-weight: 600;
+    font-size: 17px;
     color: var(--white);
     display: block;
     transition: 0.3s;
@@ -120,8 +152,9 @@ body {
 
 /* Mantemos los estilos del logo de texto por compatibilidad */
 .logo {
+    font-family: 'Poppins', sans-serif; /* Ensure Poppins for logo */
     font-size: 32px;
-    font-weight: bold;
+    font-weight: 700; /* Consistent with h1-h6 */
     letter-spacing: 2px;
     color: var(--white);
     display: none; /* Ocultamos el logo de texto */
@@ -150,19 +183,22 @@ body {
 }
 
 .hero h1 {
-    font-size: 48px;
+    font-size: 44px; /* Adjusted for Poppins */
+    /* font-weight: 700; Inherited from h1-h6 */
     margin-bottom: 20px;
     text-shadow: 2px 2px 8px rgba(0,0,0,0.5);
     animation: fadeInUp 1s ease;
     position: relative;
     z-index: 2;
+    color: var(--white); /* Explicitly ensure hero h1 color */
 }
 
 .hero p {
-    font-size: 20px;
+    font-size: 18px; /* Adjusted for readability */
+    /* font-weight: 400; Inherited from p */
     max-width: 700px;
     margin: 0 auto;
-    line-height: 1.6;
+    line-height: 1.7; /* Slightly increased for better flow */
     animation: fadeInUp 1s ease 0.3s forwards;
     opacity: 0;
     text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
@@ -172,6 +208,7 @@ body {
     padding: 20px;
     border-radius: 10px;
     backdrop-filter: blur(5px);
+    color: var(--white); /* Explicitly ensure hero p color */
 }
 
 .hero::before {
@@ -187,11 +224,8 @@ body {
 
 /* Sección Sobre Nosotros */
 .about {
-    background: linear-gradient(rgba(241, 250, 238, 0.7), rgba(241, 250, 238, 0.7)), url('../images/fondo-sobre-nosotros.jpg?v=3');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    padding: 100px 20px;
+    background: linear-gradient(135deg, var(--light-gray), var(--white));
+    padding: 80px 20px; /* Standardized padding */
     text-align: center;
     position: relative;
 }
@@ -207,9 +241,9 @@ body {
 .about p {
     max-width: 800px;
     margin: 0 auto;
-    line-height: 1.8;
-    font-size: 18px;
-    color: var(--primary-blue);
+    line-height: 1.7; /* Adjusted */
+    font-size: 16px; /* Adjusted */
+    color: var(--dark-gray); /* Consistent with general p styling */
     position: relative;
     z-index: 2;
     background: rgba(241, 250, 238, 0.85);
@@ -222,11 +256,8 @@ body {
 
 /* Sección Servicios */
 .services {
-    padding: 100px 20px;
-    background: linear-gradient(rgba(248, 249, 250, 0.92), rgba(248, 249, 250, 0.92)), url('../images/fondo-servicios.jpg?v=3');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    padding: 80px 20px; /* Standardized padding */
+    background: var(--light-gray); /* Changed from image to solid color */
     position: relative;
 }
 
@@ -236,8 +267,9 @@ body {
     position: relative;
     display: block;
     width: 100%;
-    font-size: 36px;
-    color: var(--primary-blue);
+    font-size: 34px; /* Adjusted for Poppins */
+    /* font-weight: 700; Inherited from h1-h6 */
+    /* color: var(--primary-blue); Inherited from h1-h6 */
 }
 
 .section-title::after {
@@ -262,18 +294,19 @@ body {
 .service-card {
     background-color: white;
     border-radius: 15px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05); /* New shadow */
     padding: 40px 30px;
     width: 300px;
     text-align: center;
-    transition: all 0.4s ease;
+    transition: all 0.3s ease-out; /* Adjusted transition */
     position: relative;
     overflow: hidden;
     border-bottom: 4px solid transparent;
 }
 
 .service-card:hover {
-    transform: translateY(-15px);
+    transform: translateY(-10px); /* Adjusted transform */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07), 0 15px 30px rgba(0, 0, 0, 0.07); /* New hover shadow */
     border-bottom: 4px solid var(--primary-red);
 }
 
@@ -284,8 +317,8 @@ body {
     left: 0;
     width: 100%;
     height: 0;
-    background: linear-gradient(to bottom, rgba(230, 57, 70, 0.1), transparent);
-    transition: height 0.4s ease;
+    background: linear-gradient(to bottom, rgba(var(--primary-red-rgb), 0.1), transparent); /* Use new RGB variable */
+    transition: height 0.3s ease-out; /* Adjusted transition */
 }
 
 .service-card:hover::before {
@@ -305,22 +338,21 @@ body {
 
 .service-card h3 {
     margin-bottom: 15px;
-    color: var(--primary-blue);
-    font-size: 22px;
+    /* color: var(--primary-blue); Inherited from h1-h6 */
+    font-size: 20px; /* Adjusted for Poppins */
+    font-weight: 600; /* Poppins semi-bold for less emphasis */
 }
 
 .service-card p {
-    color: #666;
-    line-height: 1.6;
+    color: #666; /* Keep specific paragraph color */
+    /* line-height: 1.6; Inherited from p */
+    font-size: 15px; /* Slightly smaller for card context */
 }
 
 /* Sección Proyectos */
 .projects {
-    padding: 100px 20px;
-    background: linear-gradient(rgba(241, 250, 238, 0.85), rgba(241, 250, 238, 0.85)), url('../images/fondo-proyectos.jpg?v=4');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    padding: 80px 20px; /* Standardized padding */
+    background: var(--white); /* Changed from image to solid color */
     text-align: center;
     position: relative;
 }
@@ -338,15 +370,15 @@ body {
 .project-card {
     border-radius: 15px;
     overflow: hidden;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05); /* New shadow */
     position: relative;
-    transition: all 0.3s ease;
+    transition: all 0.3s ease-out; /* Adjusted transition */
     height: 250px;
 }
 
 .project-card:hover {
-    transform: translateY(-10px);
-    box-shadow: 0 15px 30px rgba(0,0,0,0.2);
+    transform: translateY(-8px); /* Adjusted transform */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07), 0 15px 30px rgba(0, 0, 0, 0.07); /* New hover shadow */
 }
 
 .project-img {
@@ -365,11 +397,11 @@ body {
     bottom: 0;
     left: 0;
     right: 0;
-    background: linear-gradient(transparent, rgba(29, 53, 87, 0.9));
+    background: linear-gradient(transparent, rgba(var(--primary-blue-rgb), 0.85)); /* Use new RGB variable */
     padding: 20px;
     color: var(--white);
     transform: translateY(100px);
-    transition: transform 0.3s ease;
+    transition: transform 0.3s ease-out; /* Adjusted transition */
 }
 
 .project-card:hover .project-overlay {
@@ -377,14 +409,20 @@ body {
 }
 
 .project-title {
+    /* font-family: 'Poppins', sans-serif; Inherited from h1-h6 based on usage (likely h3/h4) */
     font-size: 20px;
+    font-weight: 600; /* Poppins semi-bold */
     margin-bottom: 5px;
+    color: var(--white); /* Ensure white color on overlay */
 }
 
 .project-description {
+    /* font-family: 'Roboto', sans-serif; Inherited from p */
     font-size: 14px;
+    /* font-weight: 400; Inherited from p */
     opacity: 0;
     transition: opacity 0.3s ease;
+    color: var(--white); /* Ensure white color on overlay */
 }
 
 .project-card:hover .project-description {
@@ -394,10 +432,7 @@ body {
 /* Testimonios */
 .testimonials {
     padding: 100px 20px;
-    background: linear-gradient(rgba(248, 249, 250, 0.85), rgba(248, 249, 250, 0.85)), url('../images/fondo-clientes.jpg?v=2');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background: var(--light-gray); /* Changed from image to solid color */
     text-align: center;
     position: relative;
 }
@@ -414,7 +449,7 @@ body {
     padding: 30px;
     margin: 0 auto;
     max-width: 800px;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05); /* New shadow */
     text-align: center;
     display: none;
 }
@@ -425,10 +460,11 @@ body {
 }
 
 .testimonial-text {
+    font-family: 'Roboto', sans-serif; /* Ensure Roboto */
     font-style: italic;
-    font-size: 18px;
-    line-height: 1.6;
-    color: #555;
+    font-size: 17px; /* Adjusted */
+    line-height: 1.6; /* Keep existing or inherit from p */
+    color: #555; /* Keep specific color */
     margin-bottom: 20px;
 }
 
@@ -442,13 +478,15 @@ body {
 }
 
 .testimonial-name {
-    font-weight: bold;
+    font-family: 'Poppins', sans-serif; /* Poppins for names */
+    font-weight: 600; /* Poppins semi-bold */
     color: var(--primary-blue);
     font-size: 18px;
 }
 
 .testimonial-position {
-    color: #777;
+    font-family: 'Roboto', sans-serif; /* Ensure Roboto */
+    color: #777; /* Keep specific color */
     font-size: 14px;
 }
 
@@ -475,10 +513,7 @@ body {
 /* Formulario de contacto */
 .contact {
     padding: 100px 20px;
-    background: linear-gradient(rgba(241, 250, 238, 0.85), rgba(241, 250, 238, 0.85)), url('../images/fondo-contacto.jpg?v=2');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background: linear-gradient(135deg, var(--white), var(--light-gray)); /* Changed from image to gradient */
     text-align: center;
     position: relative;
     overflow: visible;
@@ -525,7 +560,9 @@ body {
 }
 
 .contact-info h3 {
-    font-size: 24px;
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-size: 22px; /* Adjusted */
+    font-weight: 600; /* Poppins semi-bold */
     margin-bottom: 20px;
     color: var(--primary-blue);
 }
@@ -534,7 +571,9 @@ body {
     display: flex;
     align-items: center;
     margin-bottom: 20px;
-    color: #555;
+    color: #555; /* Keep specific color */
+    font-family: 'Roboto', sans-serif; /* Ensure Roboto */
+    font-size: 16px; /* Consistent with body */
 }
 
 .contact-detail i {
@@ -557,8 +596,10 @@ body {
 .form-group label {
     display: block;
     margin-bottom: 5px;
-    color: var(--primary-blue);
-    font-weight: bold;
+    color: var(--primary-blue); /* Keep specific color */
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 15px;
 }
 
 .form-control {
@@ -566,6 +607,7 @@ body {
     padding: 12px;
     border: 1px solid #ddd;
     border-radius: 5px;
+    font-family: 'Roboto', sans-serif; /* Form inputs with Roboto */
     font-size: 16px;
     transition: border-color 0.3s;
 }
@@ -587,8 +629,9 @@ textarea.form-control {
     padding: 12px 30px;
     border-radius: 5px;
     cursor: pointer;
+    font-family: 'Poppins', sans-serif; /* Button font */
     font-size: 16px;
-    font-weight: bold;
+    font-weight: 600; /* Poppins semi-bold */
     transition: background-color 0.3s;
 }
 
@@ -599,10 +642,7 @@ textarea.form-control {
 /* Sección Redes Sociales */
 .social-section {
     padding: 60px 20px;
-    background: linear-gradient(rgba(29, 53, 87, 0.92), rgba(29, 53, 87, 0.92)), url('../images/fondo-rs.jpg?v=2');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
+    background: linear-gradient(135deg, var(--primary-blue), var(--primary-blue-dark)); /* Changed from image to gradient */
     color: var(--white);
     text-align: center;
     position: relative;
@@ -613,6 +653,7 @@ textarea.form-control {
     position: relative;
     z-index: 2;
     text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    color: var(--white); /* Ensure white text on dark background */
 }
 
 .social-icons {
@@ -667,10 +708,13 @@ footer {
 }
 
 .footer-column h3 {
+    /* font-family: 'Poppins', sans-serif; Inherited */
     font-size: 18px;
+    font-weight: 600; /* Poppins semi-bold for footer headings */
     margin-bottom: 15px;
     position: relative;
     padding-bottom: 10px;
+    color: var(--white); /* Ensure white text on dark background */
 }
 
 .footer-column h3::after {
@@ -728,9 +772,10 @@ footer {
     margin-top: 30px;
     border-radius: 50px;
     text-decoration: none;
-    font-weight: bold;
+    font-family: 'Poppins', sans-serif; /* CTA button font */
+    font-weight: 600; /* Poppins semi-bold */
     transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 10px 20px rgba(230, 57, 70, 0.3);
+    box-shadow: 0 10px 20px rgba(214, 40, 40, 0.3); /* Adjusted primary-red to direct hex for this shadow */
     position: relative;
     overflow: hidden;
     z-index: 1;
@@ -1041,8 +1086,9 @@ footer {
 
 .about-content p {
     margin-bottom: 20px;
-    line-height: 1.8;
-    font-size: 18px;
+    line-height: 1.7; /* Adjusted */
+    font-size: 16px; /* Adjusted, Roboto will be inherited */
+    /* color: var(--dark-gray); Inherited from p */
 }
 
 .benefits {
@@ -1062,12 +1108,13 @@ footer {
     border-radius: 10px;
     padding: 30px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05); /* New shadow */
+    transition: all 0.3s ease-out; /* Adjusted transition */
 }
 
 .benefit-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07), 0 15px 30px rgba(0, 0, 0, 0.07); /* New hover shadow */
 }
 
 .benefit-card i {
@@ -1078,6 +1125,9 @@ footer {
 
 .benefit-card h3 {
     margin-bottom: 15px;
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 19px; /* Adjusted for card context */
     color: var(--primary-blue);
 }
 
@@ -1104,6 +1154,7 @@ footer {
     border-bottom: 3px solid transparent;
     padding: 10px 20px;
     margin: 0 10px;
+    font-family: 'Poppins', sans-serif; /* Tab button font */
     font-size: 16px;
     font-weight: 600;
     color: var(--primary-blue);
@@ -1130,16 +1181,22 @@ footer {
 
 .tab-pane h3 {
     margin-bottom: 20px;
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 19px;
     color: var(--primary-blue);
 }
 
 .tab-pane ul {
     padding-left: 20px;
+    /* Font for li will be inherited from p or body (Roboto) */
 }
 
 .tab-pane li {
     margin-bottom: 15px;
-    line-height: 1.6;
+    /* line-height: 1.6; Inherited from p */
+    font-family: 'Roboto', sans-serif; /* Ensure li uses Roboto */
+    font-size: 16px; /* Ensure base size */
 }
 
 .technologies {
@@ -1159,12 +1216,13 @@ footer {
     border-radius: 10px;
     padding: 30px;
     text-align: center;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05); /* New shadow */
+    transition: all 0.3s ease-out; /* Adjusted transition */
 }
 
 .tech-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07), 0 15px 30px rgba(0, 0, 0, 0.07); /* New hover shadow */
 }
 
 .tech-card img {
@@ -1175,6 +1233,9 @@ footer {
 
 .tech-card h3 {
     margin-bottom: 15px;
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 18px;
     color: var(--primary-blue);
 }
 
@@ -1213,8 +1274,11 @@ footer {
     flex-grow: 1;
 }
 
-.step-content h3 {
+.step-content h3 { /* Applies to .methodology .step-content h3 */
     margin-bottom: 10px;
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 19px;
     color: var(--primary-blue);
 }
 
@@ -1235,9 +1299,15 @@ footer {
     background-color: var(--white);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05); /* New shadow */
     width: 100%;
     max-width: 500px;
+    transition: all 0.3s ease-out; /* Added transition */
+}
+
+.case-study-card:hover {
+    transform: translateY(-5px); /* Added hover effect */
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07), 0 15px 30px rgba(0, 0, 0, 0.07); /* New hover shadow */
 }
 
 .case-study-content {
@@ -1246,18 +1316,26 @@ footer {
 
 .case-study-content h3 {
     margin-bottom: 10px;
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 20px;
     color: var(--primary-blue);
 }
 
 .case-study-subtitle {
     color: var(--primary-red);
+    font-family: 'Poppins', sans-serif; /* Subtitles also Poppins */
     font-weight: 600;
+    font-size: 16px; /* Example size */
     margin-bottom: 20px;
 }
 
 .case-study-description {
     margin-bottom: 30px;
-    line-height: 1.8;
+    /* font-family: 'Roboto', sans-serif; Inherited */
+    line-height: 1.7; /* Adjusted */
+    font-size: 16px; /* Adjusted */
+    /* color: var(--dark-gray); Inherited from p */
 }
 
 .case-study-results {
@@ -1280,8 +1358,9 @@ footer {
 }
 
 .result-label {
+    font-family: 'Roboto', sans-serif; /* Ensure Roboto */
     font-size: 14px;
-    color: var(--primary-blue);
+    color: var(--primary-blue); /* Keep specific color */
 }
 
 .cta-section {
@@ -1293,6 +1372,8 @@ footer {
 
 .cta-section h2 {
     margin-bottom: 20px;
+    color: var(--white); /* Ensure white text on dark background */
+    /* font-family: 'Poppins', sans-serif; Inherited */
 }
 
 .cta-section p {
@@ -1300,6 +1381,10 @@ footer {
     max-width: 700px;
     margin-left: auto;
     margin-right: auto;
+    color: var(--white); /* Ensure white for this section paragraph */
+    font-family: 'Roboto', sans-serif; /* Ensure Roboto */
+    font-size: 17px; /* Slightly larger for emphasis */
+    line-height: 1.7;
 }
 
 /* Responsive styling for the predictive models page */
@@ -1378,13 +1463,19 @@ footer {
 }
 
 .video-placeholder h3 {
-    font-size: 24px;
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-size: 22px; /* Adjusted */
+    font-weight: 600; /* Poppins semi-bold */
     margin-bottom: 15px;
+    color: var(--primary-blue); /* Ensure color if not inherited as expected */
 }
 
 .video-placeholder p {
     max-width: 600px;
     margin: 0 auto;
+    font-family: 'Roboto', sans-serif; /* Ensure Roboto */
+    font-size: 16px; /* Ensure base size */
+    /* color: var(--dark-gray); Inherited from p */
 }
 
 /* Capacidades de los agentes */
@@ -1405,13 +1496,14 @@ footer {
     padding: 30px;
     border-radius: 10px;
     text-align: center;
-    transition: transform 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease-out; /* Updated transition */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05); /* New shadow */
     border-bottom: 3px solid transparent;
 }
 
 .capability-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07), 0 15px 30px rgba(0, 0, 0, 0.07); /* New hover shadow */
     border-bottom: 3px solid var(--primary-red);
 }
 
@@ -1423,6 +1515,9 @@ footer {
 
 .capability-card h3 {
     margin-bottom: 15px;
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 19px;
     color: var(--primary-blue);
 }
 
@@ -1444,12 +1539,13 @@ footer {
     background-color: var(--white);
     border-radius: 10px;
     overflow: hidden;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.1);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05); /* New shadow */
+    transition: all 0.3s ease-out; /* Updated transition */
 }
 
 .type-card:hover {
     transform: translateY(-5px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07), 0 15px 30px rgba(0, 0, 0, 0.07); /* New hover shadow */
 }
 
 .type-icon {
@@ -1469,12 +1565,18 @@ footer {
 }
 
 .type-content h3 {
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 20px;
     color: var(--primary-blue);
     margin-bottom: 10px;
 }
 
 .type-content p {
     margin-bottom: 20px;
+    font-family: 'Roboto', sans-serif; /* Ensure Roboto */
+    font-size: 16px; /* Ensure base size */
+    /* color: var(--dark-gray); Inherited from p */
 }
 
 .type-content ul {
@@ -1486,6 +1588,8 @@ footer {
 
 .type-content li {
     margin-bottom: 10px;
+    font-family: 'Roboto', sans-serif; /* Ensure li uses Roboto */
+    font-size: 16px; /* Ensure base size */
 }
 
 /* Proceso de implementación */
@@ -1535,6 +1639,9 @@ footer {
 }
 
 .timeline-content h3 {
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 19px;
     color: var(--primary-blue);
     margin-bottom: 10px;
 }
@@ -1569,24 +1676,31 @@ footer {
     min-width: 300px;
 }
 
-.case-text h3 {
+.case-text h3 { /* AI Agents Page specific */
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 22px; /* Adjusted */
     color: var(--primary-blue);
     margin-bottom: 15px;
-    font-size: 24px;
 }
 
-.case-quote {
+.case-quote { /* AI Agents Page specific */
+    font-family: 'Roboto', sans-serif; /* Ensure quote uses body font */
     font-style: italic;
     color: var(--primary-red);
     font-size: 18px;
+    line-height: 1.6; /* Added for consistency */
     margin-bottom: 20px;
     padding-left: 15px;
     border-left: 3px solid var(--primary-red);
 }
 
-.case-description {
+.case-description { /* AI Agents Page specific */
     margin-bottom: 30px;
-    line-height: 1.8;
+    font-family: 'Roboto', sans-serif; /* Ensure Roboto */
+    line-height: 1.7; /* Adjusted */
+    font-size: 16px; /* Adjusted */
+    /* color: var(--dark-gray); Inherited from p */
 }
 
 /* Responsive para la página de agentes de IA */
@@ -1655,12 +1769,13 @@ footer {
     padding: 30px;
     border-radius: 10px;
     text-align: center;
-    transition: transform 0.3s ease;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+    transition: all 0.3s ease-out; /* Updated transition */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05); /* New shadow */
 }
 
 .service-item:hover {
     transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07), 0 15px 30px rgba(0, 0, 0, 0.07); /* New hover shadow */
 }
 
 .service-item i {
@@ -1670,12 +1785,15 @@ footer {
 }
 
 .service-item h3 {
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 19px;
     color: var(--primary-blue);
     margin-bottom: 15px;
 }
 
 /* Metodología */
-.methodology-steps {
+.methodology-steps { /* This class is used in both Predictive Models and Consulting pages */
     max-width: 800px;
     margin: 40px auto 0;
 }
@@ -1709,7 +1827,10 @@ footer {
     flex-grow: 1;
 }
 
-.step-content h3 {
+.step-content h3 { /* Also applies to Consulting page's .methodology-steps .step-content h3 */
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 19px; /* Consistent with other step-content h3 */
     color: var(--primary-blue);
     margin-bottom: 10px;
 }
@@ -1727,16 +1848,17 @@ footer {
     margin-top: 40px;
 }
 
-.case-card {
+.case-card { /* Specific to .success-cases .case-card */
     background-color: var(--white);
     padding: 30px;
     border-radius: 10px;
-    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
-    transition: transform 0.3s ease;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05), 0 10px 20px rgba(0, 0, 0, 0.05); /* New shadow */
+    transition: all 0.3s ease-out; /* Updated transition */
 }
 
 .case-card:hover {
     transform: translateY(-10px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.07), 0 15px 30px rgba(0, 0, 0, 0.07); /* New hover shadow */
 }
 
 .case-header {
@@ -1751,7 +1873,10 @@ footer {
     margin-right: 15px;
 }
 
-.case-header h3 {
+.case-header h3 { /* Consulting Page specific */
+    /* font-family: 'Poppins', sans-serif; Inherited */
+    font-weight: 600; /* Poppins semi-bold */
+    font-size: 20px;
     color: var(--primary-blue);
     margin: 0;
 }
