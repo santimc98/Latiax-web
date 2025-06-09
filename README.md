@@ -7,7 +7,7 @@ Este repositorio contiene el código fuente para el sitio web de LATIAX, una emp
 El proyecto está estructurado de la siguiente manera:
 
 - `index.html` - Archivo principal HTML
-- `styles.css` - Estilos CSS
+- `css/styles.css` - Estilos CSS principales
 - `scripts.js` - Funcionalidades JavaScript
 - `README.md` - Este archivo de documentación
 
@@ -50,7 +50,7 @@ git clone https://github.com/tu-usuario/latiax-website.git
 
 Para personalizar el sitio según tus necesidades:
 
-- **Colores**: Modifica las variables CSS en `:root` dentro de `styles.css`
+- **Colores**: Modifica las variables CSS en `:root` dentro de `css/styles.css`
 - **Contenido**: Actualiza textos e imágenes en `index.html`
 - **Funcionalidades**: Ajusta el comportamiento en `scripts.js`
 
